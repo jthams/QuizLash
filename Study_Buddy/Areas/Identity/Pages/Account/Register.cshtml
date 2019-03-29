@@ -29,14 +29,9 @@
             </div>
             <button type="submit" class="btn btn-primary">Register</button>
         </form>
+        <text style="color:crimson">Check your email after registering to confirm your account</text>
     </div>
 </div>
-@if (ModelState.IsValid)
-{
-<div>
-    <h1>An email has been sent to @Model.Input.Email please check your email and confirm your account to login</h1>
-</div>
-}
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

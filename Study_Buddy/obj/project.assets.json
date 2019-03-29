@@ -13585,11 +13585,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\hamel\\source\\Repos\\Study_Buddy_Dev\\Study_Buddy\\Study_Buddy.csproj",
+      "projectUniqueName": "C:\\Users\\hamel\\Source\\Repos\\jthams\\StudyBuddy\\Study_Buddy\\Study_Buddy.csproj",
       "projectName": "Study_Buddy",
-      "projectPath": "C:\\Users\\hamel\\source\\Repos\\Study_Buddy_Dev\\Study_Buddy\\Study_Buddy.csproj",
+      "projectPath": "C:\\Users\\hamel\\Source\\Repos\\jthams\\StudyBuddy\\Study_Buddy\\Study_Buddy.csproj",
       "packagesPath": "C:\\Users\\hamel\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\hamel\\source\\Repos\\Study_Buddy_Dev\\Study_Buddy\\obj\\",
+      "outputPath": "C:\\Users\\hamel\\Source\\Repos\\jthams\\StudyBuddy\\Study_Buddy\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
