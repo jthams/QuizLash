@@ -33,6 +33,9 @@ namespace Study_Buddy
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //Obscures the password with user secrets 
+            //to protect the account in source control
+
             var builder = new SqlConnectionStringBuilder(
             Configuration.GetConnectionString("DefaultConnection"));
             builder.Password = Configuration["dbPassword"];
@@ -47,10 +50,12 @@ namespace Study_Buddy
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
-
+            
+            // Set the DB Context to the protected string
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(_connection));
 
+            // Requires the user to confirm their email to login to the app.
             services.AddDefaultIdentity<IdentityUser>(config =>
             {
                 config.SignIn.RequireConfirmedEmail = true;
@@ -58,10 +63,11 @@ namespace Study_Buddy
                 .AddDefaultUI(UIFramework.Bootstrap4)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
-
+            // Changes the security token lifespan to 3 hours to protect accounts 
             services.Configure<DataProtectionTokenProviderOptions>(o =>
                o.TokenLifespan = TimeSpan.FromHours(3));
 
+           // Sets the properties of the <class> to the matching Configuration Key Values
             services.Configure<AuthMessageSenderOptions>(Configuration);
             services.AddTransient<IEmailSender,EmailSender>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);

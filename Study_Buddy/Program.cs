@@ -19,7 +19,13 @@ namespace Study_Buddy
         {
             CreateWebHostBuilder(args).Build().Run();
         }
-
+        /* The Following code block changes the default secret manager to the Azure Key Vault
+         * Without it deployment to a production enviornment **such as azure** is not possible
+         * this is because when you change the working enviornment. 
+         * Microsoft.Extensions.Configuration cannot find the key
+         * values that are associated with the calls to Configuration[key].
+         * the Azure Key names must be identical to those in your secrets.json file
+         */
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args).ConfigureAppConfiguration((context, config) =>
             {

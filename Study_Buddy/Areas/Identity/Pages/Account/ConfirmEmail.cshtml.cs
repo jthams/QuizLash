@@ -13,6 +13,7 @@ namespace Study_Buddy.Areas.Identity.Pages.Account
     [AllowAnonymous]
     public class ConfirmEmailModel : PageModel
     {
+        // Add Signin manager property to automatically sign the user in when email is confirmed
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
 
@@ -39,6 +40,9 @@ namespace Study_Buddy.Areas.Identity.Pages.Account
             var result = await _userManager.ConfirmEmailAsync(user, code);
             if (result.Succeeded)
             {
+                // Force Signs the user in after security token is confirmed
+                // This SignInAsync methods overrides the password requirement
+
                 await _signInManager.SignInAsync(user, isPersistent: false);
                 return  Page();
             }
