@@ -32,4 +32,4 @@ CURRENTLY IMPLEMENTED TECHNOLOGIES
   If a user desires they may attach an authenticator to their account through a JavaScript generated QR code.
 
 **Azure BLOB Storage - 
-  Used to provide hyper links to the documentation PDFs of all the technologies used in this application.
+  Used to provide hyper links to the documentation PDFs of some technologies used in this application, will also be used for image storage.
