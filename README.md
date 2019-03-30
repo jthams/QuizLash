@@ -30,3 +30,6 @@ CURRENTLY IMPLEMENTED TECHNOLOGIES
   
 **Two Factor Authentication - 
   If a user desires they may attach an authenticator to their account through a JavaScript generated QR code.
+
+**Azure BLOB Storage - 
+  Used to provide hyper links to the documentation PDFs of all the technologies used in this application.
