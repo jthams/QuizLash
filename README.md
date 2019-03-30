@@ -8,25 +8,25 @@ The intended purpose of this application is for me to implement and familiarize 
 ******************************************************************************************************************************************
 CURRENTLY IMPLEMENTED TECHNOLOGIES
 
-**Azure SQL Database
+**Azure SQL Database - 
   Encrypted data at rest to safeguard application data.
   
-**Entity Framework Core
+**Entity Framework Core - 
   Database first model scaffolding to keep precise entity relationships.
   Grants users permission to utilize CRUD operations in order to store their customized questions and quizzes through the use of forms.
 
-**User-Secrets Manager
+**User-Secrets Manager - 
   Protect application secrets in the development environment.
 
-**Azure Key Vault
+**Azure Key Vault - 
   Protect application secrets in the production environment. 
   
-**ASP.NET IDENTITY (full UI scaffolded to add further constraints to account behavior)
+**ASP.NET IDENTITY (full UI scaffolded to add further constraints to account behavior) - 
   Safe user account management as to avoid writing my own hash algorithms and improperly storing user passwords.
   The full suite of functions is not currently being utilized, future implementations may occur as needed.
  
-**SendGrid API
+**SendGrid API - 
   Allows accounts to be confirmed through email confirmation.
   
-**Two Factor Authentication
+**Two Factor Authentication - 
   If a user desires they may attach an authenticator to their account through a JavaScript generated QR code.
