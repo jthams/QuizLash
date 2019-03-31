@@ -2,9 +2,9 @@
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Study_Buddy.Data.Migrations
+namespace Study_Buddy.Migrations
 {
-    public partial class CreateIdentitySchema : Migration
+    public partial class _00000000000000_CreateIdentitySchema : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

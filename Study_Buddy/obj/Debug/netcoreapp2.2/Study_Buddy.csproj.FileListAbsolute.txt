@@ -128,3 +128,9 @@ C:\Users\hamel\Source\Repos\jthams\StudyBuddy\Study_Buddy\obj\Debug\netcoreapp2.
 C:\Users\hamel\Source\Repos\jthams\StudyBuddy\Study_Buddy\obj\Debug\netcoreapp2.2\Study_Buddy.dll
 C:\Users\hamel\Source\Repos\jthams\StudyBuddy\Study_Buddy\obj\Debug\netcoreapp2.2\Study_Buddy.pdb
 C:\Users\hamel\Source\Repos\jthams\StudyBuddy\Study_Buddy\obj\Debug\netcoreapp2.2\Study_Buddy.csproj.CopyComplete
+C:\Users\hamel\Source\Repos\jthams\StudyBuddy\Study_Buddy\obj\Debug\netcoreapp2.2\Razor\Views\Home\About.g.cshtml.cs
+C:\Users\hamel\Source\Repos\jthams\StudyBuddy\Study_Buddy\obj\Debug\netcoreapp2.2\Razor\Views\Quizs\Create.g.cshtml.cs
+C:\Users\hamel\Source\Repos\jthams\StudyBuddy\Study_Buddy\obj\Debug\netcoreapp2.2\Razor\Views\Quizs\Delete.g.cshtml.cs
+C:\Users\hamel\Source\Repos\jthams\StudyBuddy\Study_Buddy\obj\Debug\netcoreapp2.2\Razor\Views\Quizs\Details.g.cshtml.cs
+C:\Users\hamel\Source\Repos\jthams\StudyBuddy\Study_Buddy\obj\Debug\netcoreapp2.2\Razor\Views\Quizs\Edit.g.cshtml.cs
+C:\Users\hamel\Source\Repos\jthams\StudyBuddy\Study_Buddy\obj\Debug\netcoreapp2.2\Razor\Views\Quizs\Index.g.cshtml.cs

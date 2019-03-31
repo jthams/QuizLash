@@ -21,7 +21,8 @@ namespace Study_Buddy
 {
     public class Startup
     {
-        private string _connection = null;
+        private string _AuthenticationConnection;
+        private string _ApplicationDataConnection;
 
         public Startup(IConfiguration configuration)
         {
@@ -37,10 +38,16 @@ namespace Study_Buddy
             //to protect the account in source control
 
             var builder = new SqlConnectionStringBuilder(
-            Configuration.GetConnectionString("DefaultConnection"));
+            Configuration.GetConnectionString("UserAuthentication"));
             builder.Password = Configuration["dbPassword"];
 
-            _connection = builder.ConnectionString;
+            _AuthenticationConnection = builder.ConnectionString;
+
+            var builder2 = new SqlConnectionStringBuilder(
+            Configuration.GetConnectionString("ApplicationData"));
+            builder2.Password = Configuration["dbPassword"];
+
+            _ApplicationDataConnection = builder2.ConnectionString;
 
 
 
@@ -50,10 +57,14 @@ namespace Study_Buddy
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
-            
-            // Set the DB Context to the protected string
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(_connection));
+
+            // Set the Authentication DB Context to the protected string
+            services.AddDbContext<UserAuthenticationDbContext>(options =>
+            options.UseSqlServer(_AuthenticationConnection));
+
+            // Set the Application data DB Context to the protected string
+            services.AddDbContext<ApplicationDataContext>(options =>
+            options.UseSqlServer(_ApplicationDataConnection));
 
             // Requires the user to confirm their email to login to the app.
             services.AddDefaultIdentity<IdentityUser>(config =>
@@ -61,7 +72,7 @@ namespace Study_Buddy
                 config.SignIn.RequireConfirmedEmail = true;
             })
                 .AddDefaultUI(UIFramework.Bootstrap4)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+                .AddEntityFrameworkStores<UserAuthenticationDbContext>();
 
             // Changes the security token lifespan to 3 hours to protect accounts 
             services.Configure<DataProtectionTokenProviderOptions>(o =>

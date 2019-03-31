@@ -128,3 +128,4 @@ C:\Users\hamel\source\Repos\jthams\StudyBuddy\Study_Buddy\obj\Release\netcoreapp
 C:\Users\hamel\source\Repos\jthams\StudyBuddy\Study_Buddy\obj\Release\netcoreapp2.2\Study_Buddy.dll
 C:\Users\hamel\source\Repos\jthams\StudyBuddy\Study_Buddy\obj\Release\netcoreapp2.2\Study_Buddy.pdb
 C:\Users\hamel\source\Repos\jthams\StudyBuddy\Study_Buddy\obj\Release\netcoreapp2.2\Study_Buddy.csproj.CopyComplete
+C:\Users\hamel\Source\Repos\jthams\StudyBuddy\Study_Buddy\obj\Release\netcoreapp2.2\Razor\Views\Home\About.g.cshtml.cs

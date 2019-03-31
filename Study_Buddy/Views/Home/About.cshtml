@@ -1,0 +1,74 @@
+﻿
+@{
+    ViewData["Title"] = "About";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<head>
+    <title class="alert-info">This application is under development</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="flex-container">
+        <h2>Currently Implemented Technologies</h2>
+        <p>The following table provides insight to the code behind in this application</p>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Technology</th>
+                    <th>Implementation</th>
+                    <th>Documentation</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Azure SQL Database</td>
+                    <td>Used as the applications database context, data at rest is encrypted to safeguard application data and user information.</td>
+                    <td><a href="https://theblobthestorageaccount.blob.core.windows.net/myblob/AzureSQLDocumentation.pdf">Azure SQL</a></td>
+                </tr>
+                <tr>
+                    <td>Entity Framework Core</td>
+                    <td>Database first model scaffolding to keep precise entity relationships. Grants users permission to utilize CRUD operations in order to store their customized questions and quizzes through the use of forms.</td>
+                    <td><a href="https://theblobthestorageaccount.blob.core.windows.net/myblob/EFCoreDocumentation.pdf">EF Core</a></td>
+                </tr>
+                <tr>
+                    <td>User-Secrets Manager</td>
+                    <td>Protect application secrets in the development environment</td>
+                    <td><a href="https://docs.microsoft.com/en-us/aspnet/core/security/app-secrets?view=aspnetcore-2.2">User Secrets</a></td>
+                </tr>
+                <tr>
+                    <td>Azure Key Vault</td>
+                    <td>Protect application secrets in the production environment</td>
+                    <td><a href="https://docs.microsoft.com/en-us/azure/key-vault/">Azure Key Vault</a></td>
+                </tr>
+                <tr>
+                    <td>ASP.Net Identity</td>
+                    <td>Full UI scaffolded to add further constraints to account behavior</td>
+                    <td><a href="https://docs.microsoft.com/en-us/aspnet/identity/overview/getting-started/introduction-to-aspnet-identity">ASP.Net Identity</a></td>
+                </tr>
+                <tr>
+                    <td>SendGrid API</td>
+                    <td>Allows accounts to be confirmed through email confirmation</td>
+                    <td><a href="https://sendgrid.com/docs/API_Reference/api_v3.html"> SendGrid</a></td>
+                </tr>
+                <tr>
+                    <td>Two Factor Authentication</td>
+                    <td>Optional 2FA with TOTP Authenticator apps</td>
+                    <td><a href="https://docs.microsoft.com/en-us/aspnet/core/security/authentication/identity-enable-qrcodes?view=aspnetcore-2.2"> QR Codes</a></td>
+                </tr>
+                <tr>
+                    <td>Azure BLOB Storage</td>
+                    <td>Provide links directly to PDF's</td>
+                    <td><a href="https://theblobthestorageaccount.blob.core.windows.net/myblob/BLOBDocumentation.pdf">Azure BLOB Storage</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+
+

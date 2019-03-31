@@ -6,6 +6,7 @@
     <title>@ViewData["Title"] - Study Buddy</title>
 
     <environment include="Development">
+        <link rel="stylesheet" href="~/css/site.css" />
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
     </environment>
     <environment exclude="Development">
@@ -30,7 +31,10 @@
                     <partial name="_LoginPartial"/>
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Quizs" asp-action="Index">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="About">About</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
@@ -47,9 +51,9 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted ">
+    <footer class="border-top footer text-muted">
         <div class="container flex-column">
-            &copy; 2019 - Study Buddy - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a> &emsp; All documentation hyperlinks are brought to you with <a href="https://theblobthestorageaccount.blob.core.windows.net/myblob/BLOBDocumentation.pdf"> Azure BLOB Storage</a>
+            &copy; 2019 - Study Buddy - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
 

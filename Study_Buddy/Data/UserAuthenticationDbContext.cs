@@ -6,11 +6,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Study_Buddy.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class UserAuthenticationDbContext : IdentityDbContext
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+        public UserAuthenticationDbContext(DbContextOptions<UserAuthenticationDbContext> options)
             : base(options)
         {
         }
-    }
+    }   
 }
+
