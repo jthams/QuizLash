@@ -23,13 +23,6 @@ namespace Study_Buddy.Data
         public virtual DbSet<Questions> Questions { get; set; }
         public virtual DbSet<Quiz> Quiz { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-                optionsBuilder.UseSqlServer("Data Source=study-buddy.database.windows.net;Initial Catalog=ApplicationData;Persist Security Info=True;User ID=SBAdmin;Password=asAS1!qwe");
-            }
-        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
