@@ -1,18 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Study_Buddy.Models
 {
-    public partial class Quiz
+    
+    public class Quiz
     {
-        public Quiz()
-        {
-            Questions = new HashSet<Questions>();
-        }
+        public int ID { get; set; }
+        public string OwnerID { get; set; }
+        public string Topic { get; set; }
+        
+        public ICollection<Question> Questions { get; set; }
 
-        public int QuizId { get; set; }
-        public string QuizName { get; set; }
+        public decimal? Score { get; set; }
 
-        public virtual ICollection<Questions> Questions { get; set; }
+
     }
 }

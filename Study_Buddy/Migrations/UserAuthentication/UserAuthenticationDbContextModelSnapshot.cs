@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Study_Buddy.Data;
 
-namespace Study_Buddy.Migrations
+namespace Study_Buddy.Migrations.UserAuthentication
 {
     [DbContext(typeof(UserAuthenticationDbContext))]
     partial class UserAuthenticationDbContextModelSnapshot : ModelSnapshot

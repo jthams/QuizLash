@@ -10,23 +10,22 @@ using Study_Buddy.Models;
 
 namespace Study_Buddy.Controllers
 {
-    
-    public class QuizsController : Controller
+    public class QuestionsController : Controller
     {
         private readonly ApplicationDataContext _context;
-        
-        public QuizsController(ApplicationDataContext context)
+
+        public QuestionsController(ApplicationDataContext context)
         {
             _context = context;
         }
 
-        // GET: Quizs
+        // GET: Questions
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Quizs.ToListAsync());
+            return View(await _context.Questions.ToListAsync());
         }
 
-        // GET: Quizs/Details/5
+        // GET: Questions/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -34,39 +33,39 @@ namespace Study_Buddy.Controllers
                 return NotFound();
             }
 
-            var quiz = await _context.Quizs
+            var question = await _context.Questions
                 .FirstOrDefaultAsync(m => m.ID == id);
-            if (quiz == null)
+            if (question == null)
             {
                 return NotFound();
             }
 
-            return View(quiz);
+            return View(question);
         }
 
-        // GET: Quizs/Create
+        // GET: Questions/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Quizs/Create
+        // POST: Questions/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,OwnerID,Topic,Score")] Quiz quiz)
+        public async Task<IActionResult> Create([Bind("ID,QuizID,Type,Body,Answer")] Question question)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(quiz);
+                _context.Add(question);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(quiz);
+            return View(question);
         }
 
-        // GET: Quizs/Edit/5
+        // GET: Questions/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -74,22 +73,22 @@ namespace Study_Buddy.Controllers
                 return NotFound();
             }
 
-            var quiz = await _context.Quizs.FindAsync(id);
-            if (quiz == null)
+            var question = await _context.Questions.FindAsync(id);
+            if (question == null)
             {
                 return NotFound();
             }
-            return View(quiz);
+            return View(question);
         }
 
-        // POST: Quizs/Edit/5
+        // POST: Questions/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,OwnerID,Topic,Score")] Quiz quiz)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,QuizID,Type,Body,Answer")] Question question)
         {
-            if (id != quiz.ID)
+            if (id != question.ID)
             {
                 return NotFound();
             }
@@ -98,12 +97,12 @@ namespace Study_Buddy.Controllers
             {
                 try
                 {
-                    _context.Update(quiz);
+                    _context.Update(question);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!QuizExists(quiz.ID))
+                    if (!QuestionExists(question.ID))
                     {
                         return NotFound();
                     }
@@ -114,10 +113,10 @@ namespace Study_Buddy.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(quiz);
+            return View(question);
         }
 
-        // GET: Quizs/Delete/5
+        // GET: Questions/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -125,30 +124,30 @@ namespace Study_Buddy.Controllers
                 return NotFound();
             }
 
-            var quiz = await _context.Quizs
+            var question = await _context.Questions
                 .FirstOrDefaultAsync(m => m.ID == id);
-            if (quiz == null)
+            if (question == null)
             {
                 return NotFound();
             }
 
-            return View(quiz);
+            return View(question);
         }
 
-        // POST: Quizs/Delete/5
+        // POST: Questions/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var quiz = await _context.Quizs.FindAsync(id);
-            _context.Quizs.Remove(quiz);
+            var question = await _context.Questions.FindAsync(id);
+            _context.Questions.Remove(question);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool QuizExists(int id)
+        private bool QuestionExists(int id)
         {
-            return _context.Quizs.Any(e => e.ID == id);
+            return _context.Questions.Any(e => e.ID == id);
         }
     }
 }

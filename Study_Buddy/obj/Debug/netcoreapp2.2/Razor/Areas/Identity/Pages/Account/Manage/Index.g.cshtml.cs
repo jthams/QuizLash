@@ -13,13 +13,13 @@ namespace Study_Buddy.Areas.Identity.Pages.Account.Manage
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Rendering;
     using Microsoft.AspNetCore.Mvc.ViewFeatures;
-#line 2 "C:\Users\hamel\Source\Repos\jthams\StudyBuddy\Study_Buddy\Areas\Identity\Pages\_ViewImports.cshtml"
-using Study_Buddy.Areas.Identity;
+#line 1 "C:\Users\hamel\Source\Repos\jthams\StudyBuddy\Study_Buddy\Areas\Identity\Pages\_ViewImports.cshtml"
+using Microsoft.AspNetCore.Identity;
 
 #line default
 #line hidden
-#line 3 "C:\Users\hamel\Source\Repos\jthams\StudyBuddy\Study_Buddy\Areas\Identity\Pages\_ViewImports.cshtml"
-using Microsoft.AspNetCore.Identity;
+#line 2 "C:\Users\hamel\Source\Repos\jthams\StudyBuddy\Study_Buddy\Areas\Identity\Pages\_ViewImports.cshtml"
+using Study_Buddy.Areas.Identity;
 
 #line default
 #line hidden
@@ -34,7 +34,7 @@ using Study_Buddy.Areas.Identity.Pages.Account.Manage;
 #line default
 #line hidden
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"fbe09a8dc22eae63227942194d8ebc442a0de303", @"/Areas/Identity/Pages/Account/Manage/Index.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"9a03dcd0c2e6fb17d149a878bdc88960a325a0b6", @"/Areas/Identity/Pages/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"074c8066147116f5c379a0ce204ab04874c46fdf", @"/Areas/Identity/Pages/_ViewImports.cshtml")]
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"2ebe36500e558256a3a424bf442c947b7bf8284f", @"/Areas/Identity/Pages/Account/_ViewImports.cshtml")]
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"fe641247b93b596e1af43aa9040d83df59993736", @"/Areas/Identity/Pages/Account/Manage/_ViewImports.cshtml")]
     public class Areas_Identity_Pages_Account_Manage_Index : global::Microsoft.AspNetCore.Mvc.RazorPages.Page

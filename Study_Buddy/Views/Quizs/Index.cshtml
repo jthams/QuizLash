@@ -1,11 +1,11 @@
 ﻿@model IEnumerable<Study_Buddy.Models.Quiz>
 
 @{
-    ViewData["Title"] = "Your Quizes";
+    ViewData["Title"] = "Quizs";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<h1>Your Quizes</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -14,7 +14,13 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.QuizName)
+                @Html.DisplayNameFor(model => model.OwnerID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Topic)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Score)
             </th>
             <th></th>
         </tr>
@@ -23,12 +29,18 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.QuizName)
+                @Html.DisplayFor(modelItem => item.OwnerID)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.QuizId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.QuizId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.QuizId">Delete</a>
+                @Html.DisplayFor(modelItem => item.Topic)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Score)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
             </td>
         </tr>
 }
