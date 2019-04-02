@@ -19,9 +19,26 @@ namespace Study_Buddy.Migrations.ApplicationData
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Study_Buddy.Models.Question", b =>
+            modelBuilder.Entity("Study_Buddy.Models.Choices", b =>
                 {
                     b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("QuestionRefID");
+
+                    b.Property<string>("Text");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("QuestionRefID");
+
+                    b.ToTable("Choices");
+                });
+
+            modelBuilder.Entity("Study_Buddy.Models.Question", b =>
+                {
+                    b.Property<int>("QuestionID")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -29,39 +46,49 @@ namespace Study_Buddy.Migrations.ApplicationData
 
                     b.Property<string>("Body");
 
-                    b.Property<int>("QuizID");
+                    b.Property<int>("QuizRefID");
 
                     b.Property<int>("Type");
 
-                    b.HasKey("ID");
+                    b.HasKey("QuestionID");
 
-                    b.HasIndex("QuizID");
+                    b.HasIndex("QuizRefID");
 
                     b.ToTable("Question");
                 });
 
             modelBuilder.Entity("Study_Buddy.Models.Quiz", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("QuizID")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("OwnerID");
+                    b.Property<bool>("IsComplete");
+
+                    b.Property<string>("Owner");
 
                     b.Property<decimal?>("Score");
 
                     b.Property<string>("Topic");
 
-                    b.HasKey("ID");
+                    b.HasKey("QuizID");
 
                     b.ToTable("Quiz");
                 });
 
+            modelBuilder.Entity("Study_Buddy.Models.Choices", b =>
+                {
+                    b.HasOne("Study_Buddy.Models.Question", "Question")
+                        .WithMany("Choices")
+                        .HasForeignKey("QuestionRefID")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("Study_Buddy.Models.Question", b =>
                 {
-                    b.HasOne("Study_Buddy.Models.Quiz")
+                    b.HasOne("Study_Buddy.Models.Quiz", "Quiz")
                         .WithMany("Questions")
-                        .HasForeignKey("QuizID")
+                        .HasForeignKey("QuizRefID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

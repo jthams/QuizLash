@@ -10,11 +10,10 @@ using Study_Buddy.Models;
 
 namespace Study_Buddy.Controllers
 {
-    
     public class QuizsController : Controller
     {
         private readonly ApplicationDataContext _context;
-        
+
         public QuizsController(ApplicationDataContext context)
         {
             _context = context;
@@ -35,7 +34,7 @@ namespace Study_Buddy.Controllers
             }
 
             var quiz = await _context.Quizs
-                .FirstOrDefaultAsync(m => m.ID == id);
+                .FirstOrDefaultAsync(m => m.QuizID == id);
             if (quiz == null)
             {
                 return NotFound();
@@ -55,7 +54,7 @@ namespace Study_Buddy.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,OwnerID,Topic,Score")] Quiz quiz)
+        public async Task<IActionResult> Create([Bind("QuizID,Owner,Topic,IsComplete,Score")] Quiz quiz, [Bind("QuestionID")]Question question)
         {
             if (ModelState.IsValid)
             {
@@ -87,9 +86,9 @@ namespace Study_Buddy.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,OwnerID,Topic,Score")] Quiz quiz)
+        public async Task<IActionResult> Edit(int id, [Bind("QuizID,Owner,Topic,IsComplete,Score")] Quiz quiz)
         {
-            if (id != quiz.ID)
+            if (id != quiz.QuizID)
             {
                 return NotFound();
             }
@@ -103,7 +102,7 @@ namespace Study_Buddy.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!QuizExists(quiz.ID))
+                    if (!QuizExists(quiz.QuizID))
                     {
                         return NotFound();
                     }
@@ -126,7 +125,7 @@ namespace Study_Buddy.Controllers
             }
 
             var quiz = await _context.Quizs
-                .FirstOrDefaultAsync(m => m.ID == id);
+                .FirstOrDefaultAsync(m => m.QuizID == id);
             if (quiz == null)
             {
                 return NotFound();
@@ -148,7 +147,7 @@ namespace Study_Buddy.Controllers
 
         private bool QuizExists(int id)
         {
-            return _context.Quizs.Any(e => e.ID == id);
+            return _context.Quizs.Any(e => e.QuizID == id);
         }
     }
 }

@@ -15,11 +15,15 @@ namespace Study_Buddy.Data
 
         public DbSet<Quiz> Quizs { get; set; }
         public DbSet<Question> Questions { get; set; }
+        public DbSet<Choices> Choices { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Quiz>().ToTable("Quiz");
             modelBuilder.Entity<Question>().ToTable("Question");
+            modelBuilder.Entity<Choices>().ToTable("Choices");
         }
+
+        
     }
 }

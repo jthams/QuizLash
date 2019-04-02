@@ -3,22 +3,38 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome To Study Buddy</h1>
-    <h2 class="alert-info">The application is currently under going some changes</h2>
+    <header class="display-4">Welcome To Study Buddy</header>
+    <i>Create your own quizzes to personalize your study time</i>
 </div>
 <hr />
 
 <body>
-    <div class="card">
-        <div class="card-body">
-            <h5 class="card-title">Development Steps</h5>
-            <div class="card-text">
-                <p>
-                    For more information about this project please visit the About page.<br />
-                    If you are interested in more detailed information please visit my Github by clicking the button below
-                </p>
+    <div class="card-deck justify-content-around">
+        <div class="card">
+            <div class="card-header">
+                <b>Getting Started</b>
             </div>
-            <a href="https://github.com/jthams/" class="btn btn-primary">To Github!</a>
+            <div class="card-body">
+                Make your first quiz in three easy steps
+                <ol>
+                    <li>Register an account.</li>
+                    <li>Check your email to confirm your account</li>
+                    <li>Refresh the page and click the "Quizzes" tab</li>
+                </ol>
+                <a class="btn btn-primary border-white stretched-link" asp-area="Identity" asp-page="/Account/Register">Let us begin</a>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                <b>Development Steps</b>
+            </div>
+            <div class="card-body">
+                <p class="card-text">
+                    For more information about this project please visit the About page.<br />
+                    If you are interested in more detailed information please visit my Github profile.
+                </p>
+                <a href="https://github.com/jthams/" class="btn btn-primary border-white stretched-link">To Github</a>
+            </div>
         </div>
     </div>
 </body>

@@ -1,23 +1,24 @@
 ﻿@model IEnumerable<Study_Buddy.Models.Quiz>
 
 @{
-    ViewData["Title"] = "Quizs";
+    ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Your Quizzes</h1>
+<h1 class="text-center">Your Quizzes</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a class="btn btn-primary" asp-action="Create">Create New</a>
 </p>
+<br />
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.OwnerID)
+                @Html.DisplayNameFor(model => model.Topic)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Topic)
+                Completed
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Score)
@@ -29,18 +30,18 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.OwnerID)
+                @Html.DisplayFor(modelItem => item.Topic)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Topic)
+                @Html.DisplayFor(modelItem => item.IsComplete)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Score)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.QuizID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.QuizID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.QuizID">Delete</a>
             </td>
         </tr>
 }

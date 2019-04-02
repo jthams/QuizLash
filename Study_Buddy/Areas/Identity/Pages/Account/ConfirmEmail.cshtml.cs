@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.ComponentModel.DataAnnotations;
+
 
 namespace Study_Buddy.Areas.Identity.Pages.Account
 {
@@ -44,7 +46,8 @@ namespace Study_Buddy.Areas.Identity.Pages.Account
                 // This SignInAsync methods overrides the password requirement
 
                 await _signInManager.SignInAsync(user, isPersistent: false);
-                return  Page();
+                return Page();
+
             }
             else
             {
