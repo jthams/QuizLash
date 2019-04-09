@@ -1,0 +1,53 @@
+﻿@model IEnumerable<Domain.Entities.Question>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    
+    
+
+}
+
+<h1>Your Questions</h1>
+
+<p>
+    <a class="btn btn-primary" asp-action="Create">Create New Question</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Body)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Answer)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Topic)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        if (ViewBag.UserQuestions.Contains(item))
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Body)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Answer)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Topic.Description)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.QuestionID">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.QuestionID">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.QuestionID">Delete</a>
+                </td>
+            </tr>
+        }
+    }
+    </tbody>
+</table>

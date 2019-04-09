@@ -7,7 +7,7 @@ using SendGrid.Helpers.Mail;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.Extensions.Options;
 
-namespace Study_Buddy.Services
+namespace WebUI.Services
 {
     public class EmailSender : IEmailSender
     {

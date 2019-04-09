@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 
-namespace Study_Buddy.Areas.Identity.Pages.Account.Manage
+namespace WebUI.Areas.Identity.Pages.Account.Manage
 {
     public class EnableAuthenticatorModel : PageModel
     {
@@ -148,7 +148,7 @@ namespace Study_Buddy.Areas.Identity.Pages.Account.Manage
         {
             return string.Format(
                 AuthenticatorUriFormat,
-                _urlEncoder.Encode("Study_Buddy"),
+                _urlEncoder.Encode("WebUI"),
                 _urlEncoder.Encode(email),
                 unformattedKey);
         }

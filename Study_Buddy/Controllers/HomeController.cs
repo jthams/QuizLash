@@ -4,9 +4,9 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Study_Buddy.Models;
+using WebUI.ViewModels;
 
-namespace Study_Buddy.Controllers
+namespace WebUI.Controllers
 {
     public class HomeController : Controller
     {

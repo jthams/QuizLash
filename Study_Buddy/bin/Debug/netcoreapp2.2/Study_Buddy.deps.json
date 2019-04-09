@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.2",
-    "signature": "d72c50be85435722a7247e79799a370a94d5802b"
+    "signature": "b29d450e55cc14b2482b527eb5ca26561a8b2b3d"
   },
   "compilationOptions": {
     "defines": [
@@ -10,7 +10,7 @@
       "NETCOREAPP",
       "NETCOREAPP2_2"
     ],
-    "languageVersion": "",
+    "languageVersion": "latest",
     "platform": "",
     "allowUnsafe": false,
     "warningsAsErrors": false,
@@ -35,6 +35,7 @@
           "Microsoft.Extensions.Configuration.AzureKeyVault": "2.2.0",
           "Microsoft.NETCore.App": "2.2.0",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "2.2.3",
+          "Microsoft.jQuery.Unobtrusive.Ajax": "3.2.6",
           "Sendgrid": "9.10.0"
         },
         "runtime": {
@@ -62,6 +63,7 @@
           "lib/netstandard2.0/AspNetCore.KeyVault.dll": {}
         }
       },
+      "jQuery/1.8.0": {},
       "Microsoft.AspNetCore.AzureKeyVault.HostingStartup/2.0.2": {
         "dependencies": {
           "Microsoft.AspNetCore.Hosting.Abstractions": "2.2.0",
@@ -270,6 +272,11 @@
         "compile": {
           "lib/netstandard1.3/Microsoft.IdentityModel.Clients.ActiveDirectory.Platform.dll": {},
           "lib/netstandard1.3/Microsoft.IdentityModel.Clients.ActiveDirectory.dll": {}
+        }
+      },
+      "Microsoft.jQuery.Unobtrusive.Ajax/3.2.6": {
+        "dependencies": {
+          "jQuery": "1.8.0"
         }
       },
       "Microsoft.Rest.ClientRuntime/2.3.18": {
@@ -3818,6 +3825,13 @@
       "path": "aspnetcore.keyvault/1.0.6",
       "hashPath": "aspnetcore.keyvault.1.0.6.nupkg.sha512"
     },
+    "jQuery/1.8.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-laDFQRJrIRHT0Z0GVYklMt3bE0iu0MZFJwHwg21kt3SHb7Bj8TdNiM3K+ZdK1DzB8ZxKy8z7NkJvwMas+dmHBw==",
+      "path": "jquery/1.8.0",
+      "hashPath": "jquery.1.8.0.nupkg.sha512"
+    },
     "Microsoft.AspNetCore.AzureKeyVault.HostingStartup/2.0.2": {
       "type": "package",
       "serviceable": true,
@@ -3908,6 +3922,13 @@
       "sha512": "sha512-TNsJJMiRnkeby1ovThVoV9yFsPWjAdluwOA+Nf0LtSsBVVrKQv8Qp4kYOgyNwMVj+pDwbhXISySk+4HyHVWNZQ==",
       "path": "microsoft.identitymodel.clients.activedirectory/3.14.2",
       "hashPath": "microsoft.identitymodel.clients.activedirectory.3.14.2.nupkg.sha512"
+    },
+    "Microsoft.jQuery.Unobtrusive.Ajax/3.2.6": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-udg7ZBszgqxloQ+ShJRONKQAzPnJIlUhKZB+AIvZdKh7CDc5Nms69T9X0hN5i+NqMmQE6njkzdCcEb16lPdJTw==",
+      "path": "microsoft.jquery.unobtrusive.ajax/3.2.6",
+      "hashPath": "microsoft.jquery.unobtrusive.ajax.3.2.6.nupkg.sha512"
     },
     "Microsoft.Rest.ClientRuntime/2.3.18": {
       "type": "package",

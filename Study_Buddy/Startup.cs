@@ -14,12 +14,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Study_Buddy.Data;
-using Study_Buddy.Models;
-using Study_Buddy.Services;
+using Domain.Data;
+using Domain.Entities;
+using WebUI.Services;
 
 
-namespace Study_Buddy
+namespace WebUI
 {
     public class Startup
     {
@@ -50,7 +50,6 @@ namespace Study_Buddy
             builder2.Password = Configuration["dbPassword"];
 
             _ApplicationDataConnection = builder2.ConnectionString;
-
 
 
             services.Configure<CookiePolicyOptions>(options =>

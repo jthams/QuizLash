@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 
-namespace Study_Buddy.Areas.Identity.Pages.Account
+namespace WebUI.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
     public class LoginWithRecoveryCodeModel : PageModel

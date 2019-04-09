@@ -18,6 +18,35 @@
           "lib/netstandard2.0/AspNetCore.KeyVault.dll": {}
         }
       },
+      "AutoMapper/8.0.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.CSharp": "4.5.0",
+          "System.Reflection.Emit": "4.3.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/AutoMapper.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/AutoMapper.dll": {}
+        }
+      },
+      "AutoMapper.Extensions.Microsoft.DependencyInjection/6.0.0": {
+        "type": "package",
+        "dependencies": {
+          "AutoMapper": "8.0.0",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "2.0.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/AutoMapper.Extensions.Microsoft.DependencyInjection.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/AutoMapper.Extensions.Microsoft.DependencyInjection.dll": {}
+        }
+      },
+      "jQuery/1.8.0": {
+        "type": "package"
+      },
       "Microsoft.AspNet.WebApi.Client/5.2.6": {
         "type": "package",
         "dependencies": {
@@ -426,13 +455,13 @@
           "lib/netstandard2.0/Microsoft.AspNetCore.Authorization.Policy.dll": {}
         }
       },
-      "Microsoft.AspNetCore.AzureKeyVault.HostingStartup/2.0.2": {
+      "Microsoft.AspNetCore.AzureKeyVault.HostingStartup/2.0.4": {
         "type": "package",
         "dependencies": {
-          "Microsoft.AspNetCore.Hosting.Abstractions": "2.0.1",
-          "Microsoft.Azure.Services.AppAuthentication": "1.0.0",
-          "Microsoft.Extensions.Configuration.AzureKeyVault": "2.0.0",
-          "Microsoft.Extensions.Configuration.EnvironmentVariables": "2.0.0"
+          "Microsoft.AspNetCore.Hosting.Abstractions": "2.0.3",
+          "Microsoft.Azure.Services.AppAuthentication": "1.0.1",
+          "Microsoft.Extensions.Configuration.AzureKeyVault": "2.0.2",
+          "Microsoft.Extensions.Configuration.EnvironmentVariables": "2.0.2"
         },
         "compile": {
           "lib/netstandard2.0/Microsoft.AspNetCore.AzureKeyVault.HostingStartup.dll": {}
@@ -2636,6 +2665,12 @@
         },
         "runtime": {
           "lib/netstandard2.0/Microsoft.IdentityModel.Xml.dll": {}
+        }
+      },
+      "Microsoft.jQuery.Unobtrusive.Ajax/3.2.6": {
+        "type": "package",
+        "dependencies": {
+          "jQuery": "1.8.0"
         }
       },
       "Microsoft.Net.Http.Headers/2.2.0": {
@@ -4966,6 +5001,30 @@
         "runtime": {
           "lib/netstandard1.3/System.Xml.XPath.XDocument.dll": {}
         }
+      },
+      "Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v2.2",
+        "dependencies": {
+          "AspNetCore.KeyVault": "1.0.6",
+          "AutoMapper": "8.0.0",
+          "AutoMapper.Extensions.Microsoft.DependencyInjection": "6.0.0",
+          "Microsoft.AspNetCore.AzureKeyVault.HostingStartup": "2.0.4",
+          "Microsoft.AspNetCore.Identity": "2.2.0",
+          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "2.2.0",
+          "Microsoft.EntityFrameworkCore": "2.2.3",
+          "Microsoft.EntityFrameworkCore.SqlServer": "2.2.3",
+          "Microsoft.Extensions.Configuration.AzureKeyVault": "2.2.0",
+          "Microsoft.Extensions.DependencyInjection": "2.2.0",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "2.2.0",
+          "Microsoft.VisualStudio.Web.CodeGeneration.Design": "2.2.3"
+        },
+        "compile": {
+          "bin/placeholder/Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Domain.dll": {}
+        }
       }
     }
   },
@@ -4980,6 +5039,55 @@
         "aspnetcore.keyvault.1.0.6.nupkg.sha512",
         "aspnetcore.keyvault.nuspec",
         "lib/netstandard2.0/AspNetCore.KeyVault.dll"
+      ]
+    },
+    "AutoMapper/8.0.0": {
+      "sha512": "px8ZMtIq84dxciB29V+ZYOtsRLZP4JlflDDMW13LyeRdwsnIInzlcSHSxpWmVD6U3bbOl2FeLlgomnVtm0jvXw==",
+      "type": "package",
+      "path": "automapper/8.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "automapper.8.0.0.nupkg.sha512",
+        "automapper.nuspec",
+        "lib/net461/AutoMapper.dll",
+        "lib/net461/AutoMapper.pdb",
+        "lib/net461/AutoMapper.xml",
+        "lib/netstandard2.0/AutoMapper.dll",
+        "lib/netstandard2.0/AutoMapper.pdb",
+        "lib/netstandard2.0/AutoMapper.xml"
+      ]
+    },
+    "AutoMapper.Extensions.Microsoft.DependencyInjection/6.0.0": {
+      "sha512": "njWYKGM3FokOlo9nj8kVLYyvJrGbLItmNA2A00lDXJnxybfP7TuZEYjQRt8ne+Cp0OF4W0ZzgdgxMioHfDEpdA==",
+      "type": "package",
+      "path": "automapper.extensions.microsoft.dependencyinjection/6.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "automapper.extensions.microsoft.dependencyinjection.6.0.0.nupkg.sha512",
+        "automapper.extensions.microsoft.dependencyinjection.nuspec",
+        "lib/netstandard2.0/AutoMapper.Extensions.Microsoft.DependencyInjection.dll",
+        "lib/netstandard2.0/AutoMapper.Extensions.Microsoft.DependencyInjection.pdb"
+      ]
+    },
+    "jQuery/1.8.0": {
+      "sha512": "laDFQRJrIRHT0Z0GVYklMt3bE0iu0MZFJwHwg21kt3SHb7Bj8TdNiM3K+ZdK1DzB8ZxKy8z7NkJvwMas+dmHBw==",
+      "type": "package",
+      "path": "jquery/1.8.0",
+      "hasTools": true,
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Content/Scripts/jquery-1.8.0-vsdoc.js",
+        "Content/Scripts/jquery-1.8.0.js",
+        "Content/Scripts/jquery-1.8.0.min.js",
+        "Tools/common.ps1",
+        "Tools/install.ps1",
+        "Tools/jquery-1.8.0.intellisense.js",
+        "Tools/uninstall.ps1",
+        "jquery.1.8.0.nupkg.sha512",
+        "jquery.nuspec"
       ]
     },
     "Microsoft.AspNet.WebApi.Client/5.2.6": {
@@ -5221,10 +5329,10 @@
         "microsoft.aspnetcore.authorization.policy.nuspec"
       ]
     },
-    "Microsoft.AspNetCore.AzureKeyVault.HostingStartup/2.0.2": {
-      "sha512": "R203wXB3X4ReEI0gARt6EQn/qIWeSg1ZOvtj9/GIr6xV3owq/Rxpevn4Pye0xeOAVS5+ywK8ktvSCOtwYQEuyQ==",
+    "Microsoft.AspNetCore.AzureKeyVault.HostingStartup/2.0.4": {
+      "sha512": "bYPng59AGsjOF3UMue6UreXav4DEWHFJouiD2hQs54xwFOneZd3Bsxk60AGoF/HSYo/awbc8oLR+HW9ISj63fw==",
       "type": "package",
-      "path": "microsoft.aspnetcore.azurekeyvault.hostingstartup/2.0.2",
+      "path": "microsoft.aspnetcore.azurekeyvault.hostingstartup/2.0.4",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -5232,7 +5340,7 @@
         "contentFiles/cs/netstandard2.0/_AssembyInfo.KeyVaultHostingStartup.cs",
         "lib/netstandard2.0/Microsoft.AspNetCore.AzureKeyVault.HostingStartup.dll",
         "lib/netstandard2.0/Microsoft.AspNetCore.AzureKeyVault.HostingStartup.xml",
-        "microsoft.aspnetcore.azurekeyvault.hostingstartup.2.0.2.nupkg.sha512",
+        "microsoft.aspnetcore.azurekeyvault.hostingstartup.2.0.4.nupkg.sha512",
         "microsoft.aspnetcore.azurekeyvault.hostingstartup.nuspec"
       ]
     },
@@ -7498,6 +7606,19 @@
         "lib/netstandard2.0/Microsoft.IdentityModel.Xml.xml",
         "microsoft.identitymodel.xml.5.3.0.nupkg.sha512",
         "microsoft.identitymodel.xml.nuspec"
+      ]
+    },
+    "Microsoft.jQuery.Unobtrusive.Ajax/3.2.6": {
+      "sha512": "udg7ZBszgqxloQ+ShJRONKQAzPnJIlUhKZB+AIvZdKh7CDc5Nms69T9X0hN5i+NqMmQE6njkzdCcEb16lPdJTw==",
+      "type": "package",
+      "path": "microsoft.jquery.unobtrusive.ajax/3.2.6",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Content/Scripts/jquery.unobtrusive-ajax.js",
+        "Content/Scripts/jquery.unobtrusive-ajax.min.js",
+        "microsoft.jquery.unobtrusive.ajax.3.2.6.nupkg.sha512",
+        "microsoft.jquery.unobtrusive.ajax.nuspec"
       ]
     },
     "Microsoft.Net.Http.Headers/2.2.0": {
@@ -13561,21 +13682,34 @@
         "system.xml.xpath.xdocument.4.3.0.nupkg.sha512",
         "system.xml.xpath.xdocument.nuspec"
       ]
+    },
+    "Domain/1.0.0": {
+      "type": "project",
+      "path": "../DomainModels/Domain.csproj",
+      "msbuildProject": "../DomainModels/Domain.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.2": [
       "AspNetCore.KeyVault >= 1.0.6",
+      "AutoMapper >= 8.0.0",
+      "AutoMapper.Extensions.Microsoft.DependencyInjection >= 6.0.0",
+      "Domain >= 1.0.0",
       "Microsoft.AspNetCore.App >= 2.2.0",
-      "Microsoft.AspNetCore.AzureKeyVault.HostingStartup >= 2.0.2",
+      "Microsoft.AspNetCore.AzureKeyVault.HostingStartup >= 2.0.4",
+      "Microsoft.AspNetCore.Identity >= 2.2.0",
+      "Microsoft.AspNetCore.Identity.EntityFrameworkCore >= 2.2.0",
       "Microsoft.AspNetCore.Razor.Design >= 2.2.0",
       "Microsoft.Azure.KeyVault >= 3.0.3",
       "Microsoft.Azure.Services.AppAuthentication >= 1.0.3",
       "Microsoft.EntityFrameworkCore >= 2.2.3",
       "Microsoft.EntityFrameworkCore.SqlServer >= 2.2.3",
       "Microsoft.Extensions.Configuration.AzureKeyVault >= 2.2.0",
+      "Microsoft.Extensions.DependencyInjection >= 2.2.0",
+      "Microsoft.Extensions.DependencyInjection.Abstractions >= 2.2.0",
       "Microsoft.NETCore.App >= 2.2.0",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 2.2.3",
+      "Microsoft.jQuery.Unobtrusive.Ajax >= 3.2.6",
       "Sendgrid >= 9.10.0"
     ]
   },
@@ -13586,11 +13720,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\hamel\\Source\\Repos\\jthams\\StudyBuddy\\Study_Buddy\\Study_Buddy.csproj",
-      "projectName": "Study_Buddy",
-      "projectPath": "C:\\Users\\hamel\\Source\\Repos\\jthams\\StudyBuddy\\Study_Buddy\\Study_Buddy.csproj",
+      "projectUniqueName": "C:\\Users\\hamel\\source\\Repos\\jthams\\StudyBuddy\\Study_Buddy\\WebUI.csproj",
+      "projectName": "WebUI",
+      "projectPath": "C:\\Users\\hamel\\source\\Repos\\jthams\\StudyBuddy\\Study_Buddy\\WebUI.csproj",
       "packagesPath": "C:\\Users\\hamel\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\hamel\\Source\\Repos\\jthams\\StudyBuddy\\Study_Buddy\\obj\\",
+      "outputPath": "C:\\Users\\hamel\\source\\Repos\\jthams\\StudyBuddy\\Study_Buddy\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -13608,7 +13742,11 @@
       },
       "frameworks": {
         "netcoreapp2.2": {
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\hamel\\source\\Repos\\jthams\\StudyBuddy\\DomainModels\\Domain.csproj": {
+              "projectPath": "C:\\Users\\hamel\\source\\Repos\\jthams\\StudyBuddy\\DomainModels\\Domain.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
@@ -13624,6 +13762,14 @@
             "target": "Package",
             "version": "[1.0.6, )"
           },
+          "AutoMapper": {
+            "target": "Package",
+            "version": "[8.0.0, )"
+          },
+          "AutoMapper.Extensions.Microsoft.DependencyInjection": {
+            "target": "Package",
+            "version": "[6.0.0, )"
+          },
           "Microsoft.AspNetCore.App": {
             "suppressParent": "All",
             "target": "Package",
@@ -13632,7 +13778,15 @@
           },
           "Microsoft.AspNetCore.AzureKeyVault.HostingStartup": {
             "target": "Package",
-            "version": "[2.0.2, )"
+            "version": "[2.0.4, )"
+          },
+          "Microsoft.AspNetCore.Identity": {
+            "target": "Package",
+            "version": "[2.2.0, )"
+          },
+          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+            "target": "Package",
+            "version": "[2.2.0, )"
           },
           "Microsoft.AspNetCore.Razor.Design": {
             "suppressParent": "All",
@@ -13659,6 +13813,14 @@
             "target": "Package",
             "version": "[2.2.0, )"
           },
+          "Microsoft.Extensions.DependencyInjection": {
+            "target": "Package",
+            "version": "[2.2.0, )"
+          },
+          "Microsoft.Extensions.DependencyInjection.Abstractions": {
+            "target": "Package",
+            "version": "[2.2.0, )"
+          },
           "Microsoft.NETCore.App": {
             "suppressParent": "All",
             "target": "Package",
@@ -13668,6 +13830,10 @@
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
             "target": "Package",
             "version": "[2.2.3, )"
+          },
+          "Microsoft.jQuery.Unobtrusive.Ajax": {
+            "target": "Package",
+            "version": "[3.2.6, )"
           },
           "Sendgrid": {
             "target": "Package",

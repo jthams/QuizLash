@@ -1,0 +1,9 @@
+C:\Users\hamel\Source\Repos\jthams\StudyBuddy\DomainModels\bin\Debug\netcoreapp2.2\DomainModels.deps.json
+C:\Users\hamel\Source\Repos\jthams\StudyBuddy\DomainModels\bin\Debug\netcoreapp2.2\DomainModels.dll
+C:\Users\hamel\Source\Repos\jthams\StudyBuddy\DomainModels\bin\Debug\netcoreapp2.2\DomainModels.pdb
+C:\Users\hamel\Source\Repos\jthams\StudyBuddy\DomainModels\obj\Debug\netcoreapp2.2\DomainModels.csprojAssemblyReference.cache
+C:\Users\hamel\Source\Repos\jthams\StudyBuddy\DomainModels\obj\Debug\netcoreapp2.2\DomainModels.csproj.CoreCompileInputs.cache
+C:\Users\hamel\Source\Repos\jthams\StudyBuddy\DomainModels\obj\Debug\netcoreapp2.2\DomainModels.AssemblyInfoInputs.cache
+C:\Users\hamel\Source\Repos\jthams\StudyBuddy\DomainModels\obj\Debug\netcoreapp2.2\DomainModels.AssemblyInfo.cs
+C:\Users\hamel\Source\Repos\jthams\StudyBuddy\DomainModels\obj\Debug\netcoreapp2.2\DomainModels.dll
+C:\Users\hamel\Source\Repos\jthams\StudyBuddy\DomainModels\obj\Debug\netcoreapp2.2\DomainModels.pdb

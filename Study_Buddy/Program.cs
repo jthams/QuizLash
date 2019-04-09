@@ -11,7 +11,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Azure.KeyVault;
 using Microsoft.Extensions.Configuration.AzureKeyVault;
 
-namespace Study_Buddy
+namespace WebUI
 {
     public class Program
     {

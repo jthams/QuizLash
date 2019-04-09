@@ -6,7 +6,7 @@ using System.Configuration;
 using Microsoft.Extensions.Configuration;
 
 
-namespace Study_Buddy.Services
+namespace WebUI.Services
 {
     public class AuthMessageSenderOptions
     { 

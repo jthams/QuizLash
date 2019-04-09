@@ -6,8 +6,9 @@
     <title>@ViewData["Title"] - Study Buddy</title>
 
     <environment include="Development">
-        <link rel="stylesheet" href="~/css/site.css" />
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="~/lib/jquery-ui-bootstrap/css/custom-theme/jquery-ui-1.9.2.custom.css"/>
+        <link rel="stylesheet" href="~/css/site.css" />
     </environment>
     <environment exclude="Development">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -28,9 +29,9 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <partial name="_LoginPartial"/>
+                    <partial name="_LoginPartial" />
                     <ul class="navbar-nav flex-grow-1">
-                       
+
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="About">About</a>
                         </li>
@@ -56,6 +57,7 @@
     </footer>
 
     <environment include="Development">
+
         <script src="~/lib/jquery/dist/jquery.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
     </environment>
@@ -74,6 +76,8 @@
         </script>
     </environment>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
     @RenderSection("Scripts", required: false)
 </body>

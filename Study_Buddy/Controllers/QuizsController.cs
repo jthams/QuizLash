@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Study_Buddy.Data;
-using Study_Buddy.Models;
+using Domain.Data;
+using Domain.Entities;
 
-namespace Study_Buddy.Controllers
+namespace WebUI.Controllers
 {
     public class QuizsController : Controller
     {
@@ -22,7 +22,8 @@ namespace Study_Buddy.Controllers
         // GET: Quizs
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Quizs.ToListAsync());
+            var applicationDataContext = _context.Quizs.Include(q => q.Topic);
+            return View(await applicationDataContext.ToListAsync());
         }
 
         // GET: Quizs/Details/5
@@ -34,6 +35,7 @@ namespace Study_Buddy.Controllers
             }
 
             var quiz = await _context.Quizs
+                .Include(q => q.Topic)
                 .FirstOrDefaultAsync(m => m.QuizID == id);
             if (quiz == null)
             {
@@ -46,6 +48,7 @@ namespace Study_Buddy.Controllers
         // GET: Quizs/Create
         public IActionResult Create()
         {
+            ViewData["TopicID"] = new SelectList(_context.Topics, "TopicID", "TopicID");
             return View();
         }
 
@@ -54,7 +57,7 @@ namespace Study_Buddy.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("QuizID,Owner,Topic,IsComplete,Score")] Quiz quiz, [Bind("QuestionID")]Question question)
+        public async Task<IActionResult> Create([Bind("QuizID,Score,Owner,TopicID")] Quiz quiz)
         {
             if (ModelState.IsValid)
             {
@@ -62,6 +65,7 @@ namespace Study_Buddy.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["TopicID"] = new SelectList(_context.Topics, "TopicID", "TopicID", quiz.TopicID);
             return View(quiz);
         }
 
@@ -78,6 +82,7 @@ namespace Study_Buddy.Controllers
             {
                 return NotFound();
             }
+            ViewData["TopicID"] = new SelectList(_context.Topics, "TopicID", "TopicID", quiz.TopicID);
             return View(quiz);
         }
 
@@ -86,7 +91,7 @@ namespace Study_Buddy.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("QuizID,Owner,Topic,IsComplete,Score")] Quiz quiz)
+        public async Task<IActionResult> Edit(int id, [Bind("QuizID,Score,Owner,TopicID")] Quiz quiz)
         {
             if (id != quiz.QuizID)
             {
@@ -113,6 +118,7 @@ namespace Study_Buddy.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["TopicID"] = new SelectList(_context.Topics, "TopicID", "TopicID", quiz.TopicID);
             return View(quiz);
         }
 
@@ -125,6 +131,7 @@ namespace Study_Buddy.Controllers
             }
 
             var quiz = await _context.Quizs
+                .Include(q => q.Topic)
                 .FirstOrDefaultAsync(m => m.QuizID == id);
             if (quiz == null)
             {

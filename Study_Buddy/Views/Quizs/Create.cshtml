@@ -1,4 +1,4 @@
-﻿@model Study_Buddy.Models.Quiz
+﻿@model Domain.Entities.Quiz
 
 @{
     ViewData["Title"] = "Create";
@@ -14,24 +14,18 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
+                <label asp-for="Score" class="control-label"></label>
+                <input asp-for="Score" class="form-control" />
+                <span asp-validation-for="Score" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="Owner" class="control-label"></label>
                 <input asp-for="Owner" class="form-control" />
                 <span asp-validation-for="Owner" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Topic" class="control-label"></label>
-                <input asp-for="Topic" class="form-control" />
-                <span asp-validation-for="Topic" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsComplete" /> @Html.DisplayNameFor(model => model.IsComplete)
-                </label>
-            </div>
-            <div class="form-group">
-                <label asp-for="Score" class="control-label"></label>
-                <input asp-for="Score" class="form-control" />
-                <span asp-validation-for="Score" class="text-danger"></span>
+                <label asp-for="TopicID" class="control-label"></label>
+                <select asp-for="TopicID" class ="form-control" asp-items="ViewBag.TopicID"></select>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

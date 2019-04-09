@@ -18,6 +18,7 @@
       descriptor.configurable = true;
       if ("value" in descriptor) descriptor.writable = true;
       Object.defineProperty(target, descriptor.key, descriptor);
+      Object.defineProperty(target, descriptor.key, descriptor);
     }
   }
 

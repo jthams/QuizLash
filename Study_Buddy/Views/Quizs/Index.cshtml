@@ -1,27 +1,26 @@
-﻿@model IEnumerable<Study_Buddy.Models.Quiz>
+﻿@model IEnumerable<Domain.Entities.Quiz>
 
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1 class="text-center">Your Quizzes</h1>
+<h1>Index</h1>
 
 <p>
-    <a class="btn btn-primary" asp-action="Create">Create New</a>
+    <a asp-action="Create">Create New</a>
 </p>
-<br />
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Topic)
-            </th>
-            <th>
-                Completed
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Score)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Owner)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Topic)
             </th>
             <th></th>
         </tr>
@@ -30,13 +29,13 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Topic)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsComplete)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Score)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Owner)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Topic.TopicID)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.QuizID">Edit</a> |
