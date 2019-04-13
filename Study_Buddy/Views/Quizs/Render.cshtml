@@ -1,0 +1,54 @@
+﻿@model WebUI.ViewModels.QuizViewModel
+
+@{
+    ViewData["Title"] = "Render";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int counter = 1;
+}
+
+<h1 class="text-success text-center">Good Luck!</h1>
+
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Render">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                @foreach (var item in Model.Questions)
+                {
+                    <div class="form-group">
+                        @counter. @Html.DisplayFor(i => item.Body)
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(i => item.Guess, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    counter++;
+
+                }
+            </div>
+            <div class="form-group"style="display: none;">
+                <label asp-for="TopicID" class="control-label"></label>
+                <select asp-for="TopicID" class="form-control" asp-items="ViewBag.TopicID"></select>
+            </div>
+            <div class="form-group"style="display: none;">
+                <label asp-for="NumberOfQuestions" class="control-label"></label>
+                <input asp-for="NumberOfQuestions" class="form-control" />
+                <span asp-validation-for="NumberOfQuestions" class="text-danger"></span>
+            </div>
+            <div class="form-group" style="display: none;">
+                <label asp-for="Owner" class="control-label"></label>
+                <input asp-for="Owner" class="form-control" />
+                <span asp-validation-for="Owner" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Submit" class="btn btn-block btn-outline-success" />
+            </div>
+        </form>
+    </div>
+</div>
+<br />
+<div>
+    <a class="text-center text-warning" asp-action="Index" asp-controller="UserContent">Back to my material</a>
+</div>
+

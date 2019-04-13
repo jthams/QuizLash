@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Domain.Entities;
 
-namespace Domain.Data
+namespace Domain.DataContexts
 {
     public class UserAuthenticationDbContext : IdentityDbContext
     {

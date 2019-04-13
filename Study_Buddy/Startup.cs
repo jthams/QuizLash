@@ -14,8 +14,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Domain.Data;
-using Domain.Entities;
+using Domain.DataContexts;
+using Domain.Abstract;
+using Domain.Concrete;
 using WebUI.Services;
 
 
@@ -82,6 +83,7 @@ namespace WebUI
            // Sets the properties of the <class> to the matching Configuration Key Values
             services.Configure<AuthMessageSenderOptions>(Configuration);
             services.AddTransient<IEmailSender,EmailSender>();
+            services.AddSingleton<IDataRepository, DataRepository>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 

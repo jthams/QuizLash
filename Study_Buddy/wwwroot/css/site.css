@@ -71,3 +71,6 @@ ui-menu{
 .ui-autocomplete {
     background-color: inherit;
 }
+td{
+    word-wrap:inherit;
+}

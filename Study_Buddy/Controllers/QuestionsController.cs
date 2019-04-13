@@ -6,8 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Domain.Data;
+using Domain.DataContexts;
 using Domain.Entities;
+using WebUI.ViewModels;
 
 namespace WebUI.Controllers
 {
@@ -15,9 +16,8 @@ namespace WebUI.Controllers
     {
         private readonly ApplicationDataContext _context;
         private readonly UserManager<IdentityUser> _userManager;
-        public Dictionary<int, string> topicDictionary = new Dictionary<int, string>() { };
 
-        public QuestionsController(ApplicationDataContext context, UserManager<IdentityUser> userManager)
+        public QuestionsController(ApplicationDataContext context,UserManager<IdentityUser> userManager)
         {
             _context = context;
             _userManager = userManager;
@@ -26,24 +26,7 @@ namespace WebUI.Controllers
         // GET: Questions
         public async Task<IActionResult> Index()
         {
-            var currentUser = _userManager.GetUserId(User);
-            ICollection<Question> userQuestions = new List<Question>();
-
-            ViewData["UserQuestions"] = userQuestions;
-
-            foreach (var item in _context.Questions)
-            {
-                if (item.Creator == currentUser)
-                {
-                    userQuestions.Add(item);
-                }
-            }
-
-            foreach (var item in _context.Topics)
-            {
-                topicDictionary.TryAdd(item.TopicID,item.Description);
-            }
-
+           
             return View(await _context.Questions.ToListAsync());
         }
 
@@ -73,15 +56,12 @@ namespace WebUI.Controllers
             ViewData["TopicID"] = new SelectList(_context.Topics, "TopicID", "Description");
 
             // Set the Creator of the question to the current user
-            Question question = new Question
+            QuestionViewModel questionVM = new QuestionViewModel
             {
                 Creator = _userManager.GetUserId(User)
             };
-            if (question.Creator == null)
-            {
-                throw new ArgumentNullException();
-            }
-            return View(question);
+            
+            return View(questionVM);
         }
 
         // POST: Questions/Create
@@ -89,16 +69,51 @@ namespace WebUI.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("QuestionID,Body,Answer,TopicID,Creator")] Question question)
+        public async Task<IActionResult> Create(QuestionViewModel questionVM)
         {
-            if (ModelState.IsValid)
+            // Set the text for choices to a list of strings
+            List<string> choicesText = new List<string>();
+            choicesText.Add(questionVM.Choice1);
+            choicesText.Add(questionVM.Choice2);
+            choicesText.Add(questionVM.Choice3);
+
+            // A container for the choice objects
+            List<Choice> choices = new List<Choice>();
+
+            // Iterate through the values from the view
+            foreach (var item in choicesText)
             {
+                // Create the choice objects 
+                Choice choice = new Choice();
+                
+                // Set the choice text property to the values of the list of strings
+                choice.Text = item;
+                choices.Add(choice);
+            }
+
+            // Create a new entity object 
+            Question question = new Question();
+
+            // Set the entities properties to the values in the ViewModel
+            question.Creator = questionVM.Creator;
+            question.TopicID = questionVM.TopicID;
+            question.Body = questionVM.Body;
+            question.Answer = questionVM.Answer;
+
+            // Set Choices collection to the container created above
+            question.Choices = choices;
+
+            if (ModelState.IsValid)
+            {   
+                // Add the new object to the database
                 _context.Add(question);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+
+                //Return to the users view content after the quiz is added
+                return RedirectToAction("Index", "UserContent");
             }
-            ViewData["TopicID"] = new SelectList(_context.Topics, "TopicID", "Description", question.TopicID);
-            return View(question);
+            ViewData["TopicID"] = new SelectList(_context.Topics, "TopicID", "Description", questionVM.TopicID);
+            return View(questionVM);
         }
 
         // GET: Questions/Edit/5

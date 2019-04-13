@@ -14,7 +14,8 @@ namespace Domain.Entities
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int QuizID { get; set; }
         public decimal? Score  { get; set; }
-         
+        public int NumberOfQuestions { get; set; }
+
 
         // Logical foreign key to the identity user
         public string Owner { get; set; }

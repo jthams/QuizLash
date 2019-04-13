@@ -5,14 +5,16 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Domain.Entities;
 
-namespace Domain.Data
+namespace Domain.DataContexts
 {
     public class ApplicationDataContext : DbContext
     {
         public ApplicationDataContext(DbContextOptions<ApplicationDataContext> options) : base(options)
         {
         }
+        public ApplicationDataContext() { }
 
+        public DbSet<Choice> Choices { get; set; }
         public DbSet<Quiz> Quizs { get; set; }
         public DbSet<Question> Questions { get; set; }
         public DbSet<QuizQuestionRelation> QuizQuestionRelation { get; set; }
@@ -35,6 +37,7 @@ namespace Domain.Data
                 .HasForeignKey(qqr => qqr.QuizID)
                 .OnDelete(DeleteBehavior.Restrict);
 
+            modelBuilder.Entity<Choice>().ToTable("Choices");
             modelBuilder.Entity<Topic>().ToTable("Topics");
             modelBuilder.Entity<Quiz>().ToTable("Quizs");
             modelBuilder.Entity<Question>().ToTable("Questions");

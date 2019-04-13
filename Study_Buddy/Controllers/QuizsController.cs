@@ -3,29 +3,157 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Domain.Data;
+using Domain.DataContexts;
 using Domain.Entities;
+using Domain.Concrete;
+using Domain.Abstract;
+using WebUI.ViewModels;
 
 namespace WebUI.Controllers
 {
     public class QuizsController : Controller
     {
+        // Provide access to the data layer
         private readonly ApplicationDataContext _context;
 
-        public QuizsController(ApplicationDataContext context)
+        // Access the user information
+        private readonly UserManager<IdentityUser> _userManager;
+        
+        
+        public QuizsController(ApplicationDataContext context, UserManager<IdentityUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
+
+        //*********************** HELPER METHODS SECTION ***********************
+        private async Task<IEnumerable<Topic>> getAvailableTopics()
+        {
+            var availableTopics = await _context.Topics.Join(_context.Questions,
+                                          t => t.TopicID,
+                                          q => q.TopicID,
+                                          (t, q) => t).Distinct().ToListAsync();
+            return availableTopics;
+        }
+        
+        // Create a collection of questions specific to the topic of the quiz
+        private async Task<List<Question>> selectQuestionsForTopic(QuizViewModel quiz)
+        {
+            var topicQuestions = await _context.Questions.Where(q => q.TopicID == quiz.TopicID).ToListAsync();
+
+            return topicQuestions;
+        }
+
+        private async Task<IEnumerable<Question>> getUniqueQuestions(QuizViewModel quiz)
+        {
+            // Create a random object to seed the index reference
+            Random rand = new Random();
+
+            // Get a pool of questions to choose from
+            List<Question> questionPool = await selectQuestionsForTopic(quiz);
+
+            // Get a random collection of unique items
+            var uniqueQuestions = questionPool.OrderBy(x => rand.Next()).Take(quiz.NumberOfQuestions);
+
+            return uniqueQuestions;
+        }
+
+
+        //*********************** END OF HELPER METHODS SECTION ***********************
+
+
+        // GET: Quizs/Create
+        [HttpGet]
+        public async Task<IActionResult> Create()
+        {
+            // Populate a collection with the output from the linq statement
+            IEnumerable<Topic> AvailableTopics = await getAvailableTopics();
+
+            // Object to bind to
+            QuizViewModel quizVM = new QuizViewModel();
+
+            // Set the Owner to the current user
+            quizVM.Owner = _userManager.GetUserId(User);
+
+            // Dropdown list for the available topics
+            ViewData["TopicID"] = new SelectList(AvailableTopics, "TopicID", "Description");
+
+            // Pass the object with the owner bound
+             return View(quizVM);
+        }
+
+        // Populates the metadata to render the quiz
+        public async Task<IActionResult> PassThru(QuizViewModel quizVM)
+        {
+            // Populate a collection with the output from the linq statement
+            IEnumerable<Topic> AvailableTopics = await getAvailableTopics();
+            ViewData["TopicID"] = new SelectList(AvailableTopics, "TopicID", "Description",quizVM.TopicID);
+
+            var questions = await getUniqueQuestions(quizVM);
+
+            quizVM.Questions = questions;
+            
+            // Pass the object with the owner bound
+            return  View("Render",quizVM);
+        }
+
+        // Adds the quiz to the database
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Render(QuizViewModel quizVM)
+        {
+            IEnumerable<Topic> AvailableTopics = await getAvailableTopics();
+            ViewData["TopicID"] = new SelectList(AvailableTopics, "TopicID", "Description", quizVM.TopicID);
+            
+            // Create instance of an object to bind to the Quiz object
+            List<QuizQuestionRelation> quizQuestions = new List<QuizQuestionRelation>();
+
+            // Running total
+            decimal score = 0;
+
+            // value to add to score
+            decimal questionValue = 100 / quizVM.NumberOfQuestions;
+
+            // Populate the many to many composite table
+            foreach (var item in quizVM.Questions ?? new List<Question>())
+            {
+                // Disable case sensitivity and accomdate for extra words
+                if (item.Answer.ToLower().Contains(item.Guess.ToLower()))
+                {
+                    score += questionValue;
+                }
+                QuizQuestionRelation quizQuestionRelation = new QuizQuestionRelation();
+                quizQuestionRelation.QuestionID = item.QuestionID;
+                quizQuestions.Add(quizQuestionRelation);
+            }
+
+            // Set object property values to the metadata values
+            Quiz Quiz = new Quiz();
+            Quiz.TopicID = quizVM.TopicID;
+            Quiz.Owner = quizVM.Owner;
+            Quiz.NumberOfQuestions = quizVM.NumberOfQuestions;
+            Quiz.Score = score;
+            Quiz.QuizQuestionRelation = quizQuestions;
+
+            if (ModelState.IsValid)
+            {
+                _context.Add(Quiz);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Index", "UserContent");
+            }
+            return View(Quiz);
+        }
+
+        
         // GET: Quizs
         public async Task<IActionResult> Index()
         {
             var applicationDataContext = _context.Quizs.Include(q => q.Topic);
             return View(await applicationDataContext.ToListAsync());
         }
-
         // GET: Quizs/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -41,34 +169,8 @@ namespace WebUI.Controllers
             {
                 return NotFound();
             }
-
             return View(quiz);
         }
-
-        // GET: Quizs/Create
-        public IActionResult Create()
-        {
-            ViewData["TopicID"] = new SelectList(_context.Topics, "TopicID", "TopicID");
-            return View();
-        }
-
-        // POST: Quizs/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("QuizID,Score,Owner,TopicID")] Quiz quiz)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(quiz);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["TopicID"] = new SelectList(_context.Topics, "TopicID", "TopicID", quiz.TopicID);
-            return View(quiz);
-        }
-
         // GET: Quizs/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -85,13 +187,10 @@ namespace WebUI.Controllers
             ViewData["TopicID"] = new SelectList(_context.Topics, "TopicID", "TopicID", quiz.TopicID);
             return View(quiz);
         }
-
         // POST: Quizs/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("QuizID,Score,Owner,TopicID")] Quiz quiz)
+        public async Task<IActionResult> Edit(int id, [Bind("QuizID,Score,NumberOfQuestions,Owner,TopicID")] Quiz quiz)
         {
             if (id != quiz.QuizID)
             {
@@ -121,7 +220,6 @@ namespace WebUI.Controllers
             ViewData["TopicID"] = new SelectList(_context.Topics, "TopicID", "TopicID", quiz.TopicID);
             return View(quiz);
         }
-
         // GET: Quizs/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -140,7 +238,6 @@ namespace WebUI.Controllers
 
             return View(quiz);
         }
-
         // POST: Quizs/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -151,7 +248,6 @@ namespace WebUI.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-
         private bool QuizExists(int id)
         {
             return _context.Quizs.Any(e => e.QuizID == id);

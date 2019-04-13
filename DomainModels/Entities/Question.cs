@@ -14,6 +14,10 @@ namespace Domain.Entities
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int QuestionID { get; set; }
         public string Body { get; set; }
+
+        [NotMapped]
+        public string Guess { get; set; }
+
         public string Answer { get; set; }
 
         // One to many
@@ -23,8 +27,12 @@ namespace Domain.Entities
         // Create a logical foreign key to the identity user
         public string Creator { get; set; }
 
+        // One to many
+        public ICollection<Choice> Choices { get; set; }
+
         // Many to many 
         public ICollection<QuizQuestionRelation> QuizQuestionRelation { get; set; }
+
 
     }
 }

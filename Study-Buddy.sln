@@ -5,7 +5,13 @@ VisualStudioVersion = 15.0.28307.489
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebUI", "Study_Buddy\WebUI.csproj", "{8C2D1B63-AC99-468C-80CA-06EFF35164D6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "DomainModels\Domain.csproj", "{47E76309-B3F5-4562-A643-43EC34202205}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "DomainModels\Domain.csproj", "{47E76309-B3F5-4562-A643-43EC34202205}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{7FE2C5D3-E677-41F7-A828-339E4DB083A7}"
+	ProjectSection(ProjectDependencies) = postProject
+		{47E76309-B3F5-4562-A643-43EC34202205} = {47E76309-B3F5-4562-A643-43EC34202205}
+		{8C2D1B63-AC99-468C-80CA-06EFF35164D6} = {8C2D1B63-AC99-468C-80CA-06EFF35164D6}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +27,10 @@ Global
 		{47E76309-B3F5-4562-A643-43EC34202205}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{47E76309-B3F5-4562-A643-43EC34202205}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{47E76309-B3F5-4562-A643-43EC34202205}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7FE2C5D3-E677-41F7-A828-339E4DB083A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7FE2C5D3-E677-41F7-A828-339E4DB083A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7FE2C5D3-E677-41F7-A828-339E4DB083A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7FE2C5D3-E677-41F7-A828-339E4DB083A7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,0 +1,113 @@
+﻿@model WebUI.ViewModels.UserContentViewModel
+@using Domain.Entities
+
+@{
+    ViewData["Title"] = "UserIndex";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="text-center">Study Material</h1>
+<h4 class="text-center text-secondary"><i>This page contains the questions you have created and the quizzes you have taken</i></h4>
+
+<hr class="text-center" />
+
+<br />
+<div class="container" id="accordion">
+    <a class="btn btn-outline-info" asp-controller="Quizs" asp-action="Create"><b>Begin a new quiz</b></a>
+    <div class="card">
+        <div class="card-header">
+            <a class="collapsed card-link" data-toggle="collapse" href="#Quizzes">
+                <h6 class="text-center text-info"><b>Your Quizzes</b></h6>
+            </a>
+        </div>
+        <div id="Quizzes" class="collapse" data-parent="#accordion">
+            <table class="table table-responsive-sm">
+                <thead>
+                    <tr>
+                        <th>
+                            QuizID
+                        </th>
+                        <th>
+                            Topic
+                        </th>
+                        <th>
+                            Score
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Quizzes)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.QuizID)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Topic.Description)
+                            </td>
+                            
+                            
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Score)
+                                </td>
+                            
+                            
+                            <td>
+                                <a asp-action="Edit" asp-controller="Quizs" asp-route-id="@item.QuizID">Edit</a> |
+                                <a asp-action="Details" asp-controller="Quizs" asp-route-id="@item.QuizID">Details</a> |
+                                <a class="text-danger" asp-controller="Quizs" asp-action="Delete" asp-route-id="@item.QuizID">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <a class="btn btn-outline-info" asp-controller="Questions" asp-action="Create"><b>Create a new question</b></a>
+    <div class="card">
+        <div class="card-header">
+            <a class="card-link" data-toggle="collapse" data-parent="#accordion" href="#Questions">
+                <h6 class="text-center text-info"><b>Your Questions</b></h6>
+            </a>
+        </div>
+        <table class="table table-responsive-sm" id="Questions">
+            <thead>
+                <tr>
+                    <th>
+                        Body
+                    </th>
+                    <th>
+                        Answer
+                    </th>
+                    <th>
+                        Topic
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody class="">
+                @foreach (var item in Model.Questions)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Body)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Answer)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Topic.Description)
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-controller="Questions" asp-route-id="@item.QuestionID">Edit</a> |
+                            <a asp-action="Details" asp-controller="Questions" asp-route-id="@item.QuestionID">Details</a> |
+                            <a class="text-danger" asp-controller="Questions" asp-action="Delete" asp-route-id="@item.QuestionID">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+</div>

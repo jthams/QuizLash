@@ -14,7 +14,7 @@ namespace WebUI.ViewModels
         {
             [Display(Name = "Multiple Choice")]
             MultipleChoice,
-            [Display(Name = "Fill in the Blank")]
+            [Display(Name = "Short Answer")]
             FillInTheBlank,
             [Display(Name = "True or False")]
             TrueOrFalse
