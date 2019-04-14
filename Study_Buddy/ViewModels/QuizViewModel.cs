@@ -2,6 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using Domain.DataContexts;
 using Domain.Entities;
 using System.ComponentModel.DataAnnotations;
 
@@ -15,8 +20,10 @@ namespace WebUI.ViewModels
         [Display(Name ="What type of questions would you like")]
         public Type type { get; set; }
 
-        [Display(Name = "How many questions would you like?")]
+        [Display(Name = "How many flashcards would you like?")]
         public int NumberOfQuestions { get; set; }
+
+        public int numCorrect { get; set; }
 
         // Logical foreign key to the identity user
         public string Owner { get; set; }
@@ -26,7 +33,8 @@ namespace WebUI.ViewModels
         public int TopicID { get; set; }
 
         // Many to many relationship
-        public IEnumerable<Question> Questions { get; set; }
+        public static QuestionViewModel Question { get; set; }
+        public List<QuestionViewModel> Questions { get; set; }
 
         public enum Type
         {
@@ -39,5 +47,7 @@ namespace WebUI.ViewModels
             //[Display(Name = "True or False")]
             //TrueOrFalse
         }
+
+        public int[] Order { get; set; }
     }
 }

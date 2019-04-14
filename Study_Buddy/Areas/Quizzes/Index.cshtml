@@ -1,0 +1,55 @@
+﻿@page
+@model WebUI.Areas.Quizzes.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Quiz[0].Score)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quiz[0].NumberOfQuestions)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quiz[0].Owner)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quiz[0].Topic)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Quiz) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Score)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumberOfQuestions)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Owner)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Topic.TopicID)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.QuizID">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.QuizID">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.QuizID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

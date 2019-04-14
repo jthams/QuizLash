@@ -1,0 +1,55 @@
+﻿@page
+@model WebUI.Areas.Questions.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Question[0].Body)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Question[0].Answer)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Question[0].Topic)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Question[0].Creator)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Question) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Body)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Answer)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Topic.TopicID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Creator)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.QuestionID">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.QuestionID">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.QuestionID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

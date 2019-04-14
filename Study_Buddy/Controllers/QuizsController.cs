@@ -21,6 +21,9 @@ namespace WebUI.Controllers
 
         // Access the user information
         private readonly UserManager<IdentityUser> _userManager;
+
+        
+        List<Question> _questions { get; set; }
         
         
         public QuizsController(ApplicationDataContext context, UserManager<IdentityUser> userManager)
@@ -62,6 +65,19 @@ namespace WebUI.Controllers
             return uniqueQuestions;
         }
 
+        // Randomize the order in which the multiple choice options are presented
+         public static string[] RandomizeOrder(string[] order)
+         {
+            Random rand = new Random();
+            int pusher = rand.Next(0,4);
+
+            for (int i = 0; i < 4; i++)
+            {
+                order[i] = order[pusher % 3];
+            }
+            return order;
+
+         }
 
         //*********************** END OF HELPER METHODS SECTION ***********************
 
@@ -87,24 +103,36 @@ namespace WebUI.Controllers
         }
 
         // Populates the metadata to render the quiz
-        public async Task<IActionResult> PassThru(QuizViewModel quizVM)
+        [HttpPost]
+        public async Task<IActionResult> Create(QuizViewModel quizVM)
         {
-            // Populate a collection with the output from the linq statement
+            // Populate a collection with the output from the linq statement and Maintain selected topic value
             IEnumerable<Topic> AvailableTopics = await getAvailableTopics();
             ViewData["TopicID"] = new SelectList(AvailableTopics, "TopicID", "Description",quizVM.TopicID);
 
-            var questions = await getUniqueQuestions(quizVM);
+            // Use helper method to populate the questions
+            var uniqueQuestions = await getUniqueQuestions(quizVM);
 
+            List<QuestionViewModel> questions = new List<QuestionViewModel>();
+
+            foreach (var item in uniqueQuestions)
+            {
+                QuestionViewModel qvm = new QuestionViewModel();
+                qvm.Body = item.Body;
+                qvm.Answer = item.Answer;
+                questions.Add(qvm);
+            }
             quizVM.Questions = questions;
-            
+
             // Pass the object with the owner bound
             return  View("Render",quizVM);
         }
 
         // Adds the quiz to the database
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Render(QuizViewModel quizVM)
+        public async Task<IActionResult> Finalize(QuizViewModel quizVM)
         {
+            // Populate a collection with the output from the linq statement and Maintain selected topic value
             IEnumerable<Topic> AvailableTopics = await getAvailableTopics();
             ViewData["TopicID"] = new SelectList(AvailableTopics, "TopicID", "Description", quizVM.TopicID);
             
@@ -117,8 +145,9 @@ namespace WebUI.Controllers
             // value to add to score
             decimal questionValue = 100 / quizVM.NumberOfQuestions;
 
+
             // Populate the many to many composite table
-            foreach (var item in quizVM.Questions ?? new List<Question>())
+            foreach (var item in quizVM.Questions)
             {
                 // Disable case sensitivity and accomdate for extra words
                 if (item.Answer.ToLower().Contains(item.Guess.ToLower()))
