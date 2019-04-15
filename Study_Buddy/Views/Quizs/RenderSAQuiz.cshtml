@@ -1,0 +1,69 @@
+﻿@model WebUI.ViewModels.QuizViewModel
+@{
+    ViewData["Title"] = "Render";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int counter = 1;
+}
+
+<h1 class="text-success text-center"> Good Luck!</h1>
+<h4 class="text-muted">Short Answer Quiz</h4>
+<hr />
+<div class="container">
+    @foreach(var question in Model.Questions)
+    {
+    <input id="answer" type="hidden" name="name" value="@Html.DisplayFor(i => question.Answer)" />
+    <div>
+        @counter .<b>@Html.DisplayFor(i => question.Body)</b>
+    </div>
+    <div>
+        <input id="guess" type="text" name="name" value="" class="form-control" />
+    </div>
+    <br />
+        counter++;
+    
+    }
+   <!-- <input type="number" id="correct" name="name" value="" />-->
+    <div id="correct"></div>
+    
+    
+</div>
+<form asp-action="Finalize">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group" style="display: none;">
+        <label asp-for="TopicID" class="control-label"></label>
+        <select asp-for="TopicID" class="form-control" asp-items="ViewBag.TopicID"></select>
+    </div>
+    <div class="form-group" style="display: none;">
+        <label asp-for="numCorrect" class="control-label"></label>
+        <input asp-for="numCorrect" class="form-control" />
+    </div>
+    <div class="form-group" style="display: none;">
+        <label asp-for="NumberOfQuestions" class="control-label"></label>
+        <input asp-for="NumberOfQuestions" class="form-control" />
+        <span asp-validation-for="NumberOfQuestions" class="text-danger"></span>
+    </div>
+    <div class="form-group" style="display: none;">
+        <label asp-for="Owner" class="control-label"></label>
+        <input asp-for="Owner" class="form-control" />
+        <span asp-validation-for="Owner" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Submit" class="btn-bar btn-outline-success disabled" />
+    </div>
+</form>
+@section Scripts{
+<script type="text/javascript">
+    function grade() {
+        var numberCorrect = 0;
+        var guess = document.getElementById("guess").value;
+        var answer = document.getElementById("answer").value;
+        if (guess.includes(answer)) {
+
+            numberCorrect = numberCorrect + 1;
+        }
+        document.getElementById("correct").innerHTML += numberCorrect;
+    }
+</script>
+
+
+}

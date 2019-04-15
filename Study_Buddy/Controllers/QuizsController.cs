@@ -21,10 +21,6 @@ namespace WebUI.Controllers
 
         // Access the user information
         private readonly UserManager<IdentityUser> _userManager;
-
-        
-        List<Question> _questions { get; set; }
-        
         
         public QuizsController(ApplicationDataContext context, UserManager<IdentityUser> userManager)
         {
@@ -82,10 +78,62 @@ namespace WebUI.Controllers
         //*********************** END OF HELPER METHODS SECTION ***********************
 
 
+        // GET: Flashcard / Create
+        [HttpGet]
+        public async Task<IActionResult> CreateFlashcard()
+        {
+            // Populate a collection with the output from the linq statement
+            IEnumerable<Topic> AvailableTopics = await getAvailableTopics();
+
+            // Object to bind to
+            QuizViewModel quizVM = new QuizViewModel();
+
+            // Dropdown list for the available topics
+            ViewData["TopicID"] = new SelectList(AvailableTopics, "TopicID", "Description");
+
+            // Pass the object with the owner bound
+            return View(quizVM);
+        }
+
+        // Populates the metadata to render the flashcards
+        [HttpPost]
+        public async Task<IActionResult> CreateFlashcard(QuizViewModel quizVM)
+        {
+            // Populate a collection with the output from the linq statement and Maintain selected topic value
+            IEnumerable<Topic> AvailableTopics = await getAvailableTopics();
+            ViewData["TopicID"] = new SelectList(AvailableTopics, "TopicID", "Description", quizVM.TopicID);
+
+            // Use helper method to populate the questions
+            var uniqueQuestions = await getUniqueQuestions(quizVM);
+
+            // Create and populate a collection for the users questions
+            List<Question> userQuestions = new List<Question>();
+            foreach (var item in uniqueQuestions)
+            {
+                if (item.Creator == _userManager.GetUserId(User))
+                {
+                    userQuestions.Add(item);
+                }
+            }
+
+            // Set the displayed questions based on the boolean from the user
+            if (quizVM.privateSource)
+            {
+                quizVM.Questions = userQuestions;
+            }
+            else
+            {
+                quizVM.Questions = uniqueQuestions.ToList();
+            }
+
+            // Pass the object with the owner bound
+            return View("RenderFlashCard",quizVM);
+        }
         // GET: Quizs/Create
         [HttpGet]
-        public async Task<IActionResult> Create()
+        public async Task<IActionResult> CreateQuiz()
         {
+             
             // Populate a collection with the output from the linq statement
             IEnumerable<Topic> AvailableTopics = await getAvailableTopics();
 
@@ -94,6 +142,7 @@ namespace WebUI.Controllers
 
             // Set the Owner to the current user
             quizVM.Owner = _userManager.GetUserId(User);
+
 
             // Dropdown list for the available topics
             ViewData["TopicID"] = new SelectList(AvailableTopics, "TopicID", "Description");
@@ -104,7 +153,7 @@ namespace WebUI.Controllers
 
         // Populates the metadata to render the quiz
         [HttpPost]
-        public async Task<IActionResult> Create(QuizViewModel quizVM)
+        public async Task<IActionResult> CreateQuiz(QuizViewModel quizVM)
         {
             // Populate a collection with the output from the linq statement and Maintain selected topic value
             IEnumerable<Topic> AvailableTopics = await getAvailableTopics();
@@ -113,24 +162,34 @@ namespace WebUI.Controllers
             // Use helper method to populate the questions
             var uniqueQuestions = await getUniqueQuestions(quizVM);
 
-            List<QuestionViewModel> questions = new List<QuestionViewModel>();
-
+            // Create and populate a collection for the users questions
+            List<Question> userQuestions = new List<Question>();
             foreach (var item in uniqueQuestions)
             {
-                QuestionViewModel qvm = new QuestionViewModel();
-                qvm.Body = item.Body;
-                qvm.Answer = item.Answer;
-                questions.Add(qvm);
+                if (item.Creator == _userManager.GetUserId(User))
+                {
+                    userQuestions.Add(item);
+                }
             }
-            quizVM.Questions = questions;
+
+            // Set the displayed questions based on the boolean from the user
+            if (quizVM.privateSource)
+            {
+                quizVM.Questions = userQuestions;
+            }
+            else
+            {
+                quizVM.Questions = uniqueQuestions.ToList();
+            }
+            
 
             // Pass the object with the owner bound
-            return  View("Render",quizVM);
+            return  View("RenderSAQuiz",quizVM);
         }
 
         // Adds the quiz to the database
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Finalize(QuizViewModel quizVM)
+        public async Task<IActionResult> FinalizeQuiz(QuizViewModel quizVM)
         {
             // Populate a collection with the output from the linq statement and Maintain selected topic value
             IEnumerable<Topic> AvailableTopics = await getAvailableTopics();
@@ -149,11 +208,7 @@ namespace WebUI.Controllers
             // Populate the many to many composite table
             foreach (var item in quizVM.Questions)
             {
-                // Disable case sensitivity and accomdate for extra words
-                if (item.Answer.ToLower().Contains(item.Guess.ToLower()))
-                {
-                    score += questionValue;
-                }
+                
                 QuizQuestionRelation quizQuestionRelation = new QuizQuestionRelation();
                 quizQuestionRelation.QuestionID = item.QuestionID;
                 quizQuestions.Add(quizQuestionRelation);

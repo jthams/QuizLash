@@ -13,7 +13,10 @@
 
 <br />
 <div class="container" id="accordion">
-    <a class="btn btn-outline-info" asp-controller="Quizs" asp-action="Create"><b>Start studying</b></a>
+    <a class="btn btn-outline-info" asp-controller="Questions" asp-action="Create"><b>Create a new question</b></a>
+    <a class="btn btn-outline-info" asp-controller="Quizs" asp-action="CreateFlashCard"><b>Start with flashcards</b></a>
+    <a class="btn btn-outline-info" asp-controller="Quizs" asp-action="CreateQuiz"><b>Begin a new quiz</b></a>
+    <br />
     <div class="card">
         <div class="card-header">
             <a class="collapsed card-link" data-toggle="collapse" href="#Quizzes">
@@ -46,13 +49,11 @@
                             <td>
                                 @Html.DisplayFor(modelItem => item.Topic.Description)
                             </td>
-                            
-                            
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Score)
-                                </td>
-                            
-                            
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Score)
+                            </td>
+
+
                             <td>
                                 <a asp-action="Edit" asp-controller="Quizs" asp-route-id="@item.QuizID">Edit</a> |
                                 <a asp-action="Details" asp-controller="Quizs" asp-route-id="@item.QuizID">Details</a> |
@@ -64,10 +65,10 @@
             </table>
         </div>
     </div>
-    <a class="btn btn-outline-info" asp-controller="Questions" asp-action="Create"><b>Create a new question</b></a>
+
     <div class="card">
         <div class="card-header">
-            <a class="card-link" data-toggle="collapse" data-parent="#accordion" href="#Questions">
+            <a class="collapsed card-link" data-toggle="collapse" href="#Questions">
                 <h6 class="text-center text-info"><b>Your Questions</b></h6>
             </a>
         </div>

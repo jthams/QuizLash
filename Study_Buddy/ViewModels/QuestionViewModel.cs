@@ -17,8 +17,7 @@ namespace WebUI.ViewModels
         [Required]
         [Display(Name ="Answer")]
         public string Answer { get; set; }
-        [Compare("Answer")]
-        public string Guess { get; set; }
+        
         [Required]
         [Display(Name ="Topic")]
         public int TopicID { get; set; }
