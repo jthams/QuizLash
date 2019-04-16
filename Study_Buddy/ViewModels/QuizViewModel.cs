@@ -54,6 +54,8 @@ namespace WebUI.ViewModels
         // Many to many relationship
         public List<Question> Questions { get; set; }
 
+        public Dictionary<int, string> QidGuess { get; set; }
+
        
 
 

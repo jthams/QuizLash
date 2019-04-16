@@ -28,10 +28,12 @@ namespace WebUI.Controllers
             _userManager = userManager;
         }
 
+        private string _currentUser => _userManager.GetUserId(User);
 
         //*********************** HELPER METHODS SECTION ***********************
         private async Task<IEnumerable<Topic>> getAvailableTopics()
         {
+            // return only topics that are referenced as FKs in the question table
             var availableTopics = await _context.Topics.Join(_context.Questions,
                                           t => t.TopicID,
                                           q => q.TopicID,
@@ -46,23 +48,54 @@ namespace WebUI.Controllers
 
             return topicQuestions;
         }
-
-        private async Task<IEnumerable<Question>> getUniqueQuestions(QuizViewModel quiz)
+        // Create distinct collection of questions with the length of numberOfQuestions and the topic of the quiz
+        private async Task<List<Question>> getUniqueQuestions(QuizViewModel quiz)
         {
             // Create a random object to seed the index reference
             Random rand = new Random();
 
-            // Get a pool of questions to choose from
+            // A pool of questions to choose from
             List<Question> questionPool = await selectQuestionsForTopic(quiz);
 
-            // Get a random collection of unique items
-            var uniqueQuestions = questionPool.OrderBy(x => rand.Next()).Take(quiz.NumberOfQuestions);
+            // A random collection of unique items
+            var uniqueQuestions = questionPool.OrderBy(x => rand.Next()).Take(quiz.NumberOfQuestions).ToList();
 
             return uniqueQuestions;
         }
 
+        // return a collection of unique questions that the user 
+        private async Task<List<Question>> getUsersQuestions(QuizViewModel quiz)
+        {
+            // A pool of questions to choose from
+            List<Question> questionPool = await selectQuestionsForTopic(quiz);
+
+            // Collection of users questions
+            List<Question> UsersQuestions = questionPool.Where(q => q.Creator == _currentUser).ToList();
+
+            return UsersQuestions;
+        }
+
+        private async Task<decimal> GradeSAQuiz(QuizViewModel quiz)
+        {
+            List<Question> questionPool = await selectQuestionsForTopic(quiz);
+            decimal score = 0;
+            decimal questionValue = 100 / quiz.NumberOfQuestions;
+
+            foreach (var item in questionPool)
+            {
+                if (quiz.QidGuess.ContainsKey(item.QuestionID))
+                {
+                    if (item.Answer.Contains(quiz.QidGuess[item.QuestionID]))
+                    {
+                        score += questionValue;
+                    }
+                }
+            }
+            return score;
+        }
+        
         // Randomize the order in which the multiple choice options are presented
-         public static string[] RandomizeOrder(string[] order)
+        public static string[] RandomizeOrder(string[] order)
          {
             Random rand = new Random();
             int pusher = rand.Next(0,4);
@@ -105,25 +138,17 @@ namespace WebUI.Controllers
 
             // Use helper method to populate the questions
             var uniqueQuestions = await getUniqueQuestions(quizVM);
+            var usersQuestions = await getUsersQuestions(quizVM);
 
-            // Create and populate a collection for the users questions
-            List<Question> userQuestions = new List<Question>();
-            foreach (var item in uniqueQuestions)
-            {
-                if (item.Creator == _userManager.GetUserId(User))
-                {
-                    userQuestions.Add(item);
-                }
-            }
-
+           
             // Set the displayed questions based on the boolean from the user
             if (quizVM.privateSource)
             {
-                quizVM.Questions = userQuestions;
+                quizVM.Questions = usersQuestions;
             }
             else
             {
-                quizVM.Questions = uniqueQuestions.ToList();
+                quizVM.Questions = uniqueQuestions;
             }
 
             // Pass the object with the owner bound
@@ -141,8 +166,7 @@ namespace WebUI.Controllers
             QuizViewModel quizVM = new QuizViewModel();
 
             // Set the Owner to the current user
-            quizVM.Owner = _userManager.GetUserId(User);
-
+            quizVM.Owner = _currentUser;
 
             // Dropdown list for the available topics
             ViewData["TopicID"] = new SelectList(AvailableTopics, "TopicID", "Description");
@@ -159,60 +183,61 @@ namespace WebUI.Controllers
             IEnumerable<Topic> AvailableTopics = await getAvailableTopics();
             ViewData["TopicID"] = new SelectList(AvailableTopics, "TopicID", "Description",quizVM.TopicID);
 
+            // Create a dictionary to help grade the quiz on server side
+            Dictionary<int, string> valuePairs = new Dictionary<int, string>();
+
             // Use helper method to populate the questions
             var uniqueQuestions = await getUniqueQuestions(quizVM);
+            var usersQuestions = await getUsersQuestions(quizVM);
 
-            // Create and populate a collection for the users questions
-            List<Question> userQuestions = new List<Question>();
-            foreach (var item in uniqueQuestions)
-            {
-                if (item.Creator == _userManager.GetUserId(User))
-                {
-                    userQuestions.Add(item);
-                }
-            }
 
             // Set the displayed questions based on the boolean from the user
+            // Populate the keys of the dictionary with the appropriate QuestionIDs
             if (quizVM.privateSource)
             {
-                quizVM.Questions = userQuestions;
+                quizVM.Questions = usersQuestions;
+                foreach (var item in usersQuestions)
+                {
+                    valuePairs.Add(item.QuestionID,null);
+                }
+                
             }
             else
             {
-                quizVM.Questions = uniqueQuestions.ToList();
+                quizVM.Questions = uniqueQuestions;
+                foreach (var item in uniqueQuestions)
+                {
+                    valuePairs.Add(item.QuestionID, null);
+                }
             }
+
             
+            // set the VM property to the new dictionary
+            quizVM.QidGuess = valuePairs;
 
             // Pass the object with the owner bound
             return  View("RenderSAQuiz",quizVM);
         }
 
         // Adds the quiz to the database
+        [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> FinalizeQuiz(QuizViewModel quizVM)
         {
             // Populate a collection with the output from the linq statement and Maintain selected topic value
             IEnumerable<Topic> AvailableTopics = await getAvailableTopics();
             ViewData["TopicID"] = new SelectList(AvailableTopics, "TopicID", "Description", quizVM.TopicID);
-            
+
+            // Grade the quiz
+            decimal score = await GradeSAQuiz(quizVM);
+
             // Create instance of an object to bind to the Quiz object
             List<QuizQuestionRelation> quizQuestions = new List<QuizQuestionRelation>();
 
-            // Running total
-            decimal score = 0;
-
-            // value to add to score
-            decimal questionValue = 100 / quizVM.NumberOfQuestions;
-
-
-            // Populate the many to many composite table
-            foreach (var item in quizVM.Questions)
-            {
+           
+          
+            
                 
-                QuizQuestionRelation quizQuestionRelation = new QuizQuestionRelation();
-                quizQuestionRelation.QuestionID = item.QuestionID;
-                quizQuestions.Add(quizQuestionRelation);
-            }
 
             // Set object property values to the metadata values
             Quiz Quiz = new Quiz();
@@ -228,7 +253,7 @@ namespace WebUI.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index", "UserContent");
             }
-            return View(Quiz);
+            return View(quizVM);
         }
 
         
