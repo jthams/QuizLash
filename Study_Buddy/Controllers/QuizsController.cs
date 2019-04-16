@@ -30,23 +30,21 @@ namespace WebUI.Controllers
 
         private string _currentUser => _userManager.GetUserId(User);
 
-        //*********************** HELPER METHODS SECTION ***********************
+        //*********************** HELPER METHODS SECTION ****************************************************
         private async Task<IEnumerable<Topic>> getAvailableTopics()
         {
             // return only topics that are referenced as FKs in the question table
-            var availableTopics = await _context.Topics.Join(_context.Questions,
+            return await _context.Topics.Join(_context.Questions,
                                           t => t.TopicID,
                                           q => q.TopicID,
                                           (t, q) => t).Distinct().ToListAsync();
-            return availableTopics;
         }
         
         // Create a collection of questions specific to the topic of the quiz
         private async Task<List<Question>> selectQuestionsForTopic(QuizViewModel quiz)
         {
-            var topicQuestions = await _context.Questions.Where(q => q.TopicID == quiz.TopicID).ToListAsync();
+            return await _context.Questions.Where(q => q.TopicID == quiz.TopicID).ToListAsync();
 
-            return topicQuestions;
         }
         // Create distinct collection of questions with the length of numberOfQuestions and the topic of the quiz
         private async Task<List<Question>> getUniqueQuestions(QuizViewModel quiz)
@@ -74,13 +72,15 @@ namespace WebUI.Controllers
 
             return UsersQuestions;
         }
-
+        
+        // Grading method for short answer quizzes
         private async Task<decimal> GradeSAQuiz(QuizViewModel quiz)
         {
             List<Question> questionPool = await selectQuestionsForTopic(quiz);
             decimal score = 0;
             decimal questionValue = 100 / quiz.NumberOfQuestions;
 
+            // TODO: add  
             foreach (var item in questionPool)
             {
                 if (quiz.QidGuess.ContainsKey(item.QuestionID))
@@ -210,8 +210,6 @@ namespace WebUI.Controllers
                     valuePairs.Add(item.QuestionID, null);
                 }
             }
-
-            
             // set the VM property to the new dictionary
             quizVM.QidGuess = valuePairs;
 

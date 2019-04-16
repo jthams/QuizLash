@@ -61,12 +61,10 @@ C:\Users\hamel\source\Repos\jthams\StudyBuddy\Study_Buddy\obj\Release\netcoreapp
 C:\Users\hamel\source\Repos\jthams\StudyBuddy\Study_Buddy\obj\Release\netcoreapp2.2\Razor\Views\Questions\Details.g.cshtml.cs
 C:\Users\hamel\source\Repos\jthams\StudyBuddy\Study_Buddy\obj\Release\netcoreapp2.2\Razor\Views\Questions\Edit.g.cshtml.cs
 C:\Users\hamel\source\Repos\jthams\StudyBuddy\Study_Buddy\obj\Release\netcoreapp2.2\Razor\Views\Questions\Index.g.cshtml.cs
-C:\Users\hamel\source\Repos\jthams\StudyBuddy\Study_Buddy\obj\Release\netcoreapp2.2\Razor\Views\Quizs\Create.g.cshtml.cs
 C:\Users\hamel\source\Repos\jthams\StudyBuddy\Study_Buddy\obj\Release\netcoreapp2.2\Razor\Views\Quizs\Delete.g.cshtml.cs
 C:\Users\hamel\source\Repos\jthams\StudyBuddy\Study_Buddy\obj\Release\netcoreapp2.2\Razor\Views\Quizs\Details.g.cshtml.cs
 C:\Users\hamel\source\Repos\jthams\StudyBuddy\Study_Buddy\obj\Release\netcoreapp2.2\Razor\Views\Quizs\Edit.g.cshtml.cs
 C:\Users\hamel\source\Repos\jthams\StudyBuddy\Study_Buddy\obj\Release\netcoreapp2.2\Razor\Views\Quizs\Index.g.cshtml.cs
-C:\Users\hamel\source\Repos\jthams\StudyBuddy\Study_Buddy\obj\Release\netcoreapp2.2\Razor\Views\Quizs\Render.g.cshtml.cs
 C:\Users\hamel\source\Repos\jthams\StudyBuddy\Study_Buddy\obj\Release\netcoreapp2.2\Razor\Views\Shared\Error.g.cshtml.cs
 C:\Users\hamel\source\Repos\jthams\StudyBuddy\Study_Buddy\obj\Release\netcoreapp2.2\Razor\Views\Shared\_CookieConsentPartial.g.cshtml.cs
 C:\Users\hamel\source\Repos\jthams\StudyBuddy\Study_Buddy\obj\Release\netcoreapp2.2\Razor\Views\Shared\_Layout.g.cshtml.cs
@@ -81,3 +79,7 @@ C:\Users\hamel\source\Repos\jthams\StudyBuddy\Study_Buddy\obj\Release\netcoreapp
 C:\Users\hamel\source\Repos\jthams\StudyBuddy\Study_Buddy\obj\Release\netcoreapp2.2\WebUI.csproj.CopyComplete
 C:\Users\hamel\source\Repos\jthams\StudyBuddy\Study_Buddy\obj\Release\netcoreapp2.2\WebUI.dll
 C:\Users\hamel\source\Repos\jthams\StudyBuddy\Study_Buddy\obj\Release\netcoreapp2.2\WebUI.pdb
+C:\Users\hamel\source\Repos\jthams\StudyBuddy\Study_Buddy\obj\Release\netcoreapp2.2\Razor\Views\Quizs\CreateFlashCard.g.cshtml.cs
+C:\Users\hamel\source\Repos\jthams\StudyBuddy\Study_Buddy\obj\Release\netcoreapp2.2\Razor\Views\Quizs\CreateQuiz.g.cshtml.cs
+C:\Users\hamel\source\Repos\jthams\StudyBuddy\Study_Buddy\obj\Release\netcoreapp2.2\Razor\Views\Quizs\RenderFlashCard.g.cshtml.cs
+C:\Users\hamel\source\Repos\jthams\StudyBuddy\Study_Buddy\obj\Release\netcoreapp2.2\Razor\Views\Quizs\RenderSAQuiz.g.cshtml.cs
