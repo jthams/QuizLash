@@ -1,17 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Domain.DataContexts;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Domain.Entities;
+using Domain.DataContexts;
 using WebUI.ViewModels;
 
+
 namespace WebUI.Controllers
-{
+{   
+    [Authorize]
     public class QuestionsController : Controller
     {
         private readonly ApplicationDataContext _context;

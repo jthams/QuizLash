@@ -1,19 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Domain.DataContexts;
 using Domain.Entities;
-using Domain.Concrete;
-using Domain.Abstract;
 using WebUI.ViewModels;
 
 namespace WebUI.Controllers
 {
+    [Authorize]
     public class QuizsController : Controller
     {
         // Provide access to the data layer
