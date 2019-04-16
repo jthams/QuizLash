@@ -11,7 +11,7 @@ The intended purpose of this application is to implement and familiarize myself 
 <ol>
   <li>Secure user passwords</li>
   <li>Allow multi-factor authentication</li>
-  <li>Confirm accounts via e-Mail</li>
+  <li>Confirm accounts via eMail</li>
   <li>Encrypt user data at rest</li>
 </ol>
 <h5>2. Allow users to create content</h5>
@@ -49,10 +49,10 @@ The intended purpose of this application is to implement and familiarize myself 
 
 <h5>Azure SQL Server with 2 databases</h5>
   <h6>1.Application Database</h6>
-  <p>Used to store user created data such as questions and quizzes. Contains all data and tables required for buisness logic.</p>
+  <p>Used to store user created data such as questions and quizzes. Contains all data and tables required for business logic.</p>
   <i>Supports requirement : 2-2 | 2-3 | 5-1 | 5-2 </i>
   <h6>2.User Authentication Database</h6>
-  <p>Contains all the ASP.NET Identity tables and user information, maintained seperately from the application database to reduce how often user data is in transit.</p>
+  <p>Contains all the ASP.NET Identity tables and user information, maintained separately from the application database to reduce how often user data is in transit.</p>
   <i>Supports requirement : 1-1 | 1-4 | 4-1 | 4-2 | 4-3 | 5-1 </i>
   
 <h5>Entity Framework Core</h5>
@@ -83,7 +83,7 @@ The intended purpose of this application is to implement and familiarize myself 
   <i>Supports requirement : 1-2 </i>
 
 <h5>Azure BLOB Storage</h5>
-  <p>Used to provide hyper links to the documentation PDFs of some technologies used in this application, will also be used for image storage.</p>
+  <p>Used to provide hyperlinks to the documentation PDFs of some technologies used in this application, will also be used for image storage.</p>
   
 
 <h5>BootStrap 4</h5>
