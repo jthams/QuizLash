@@ -7,8 +7,9 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Domain.DataContexts;
+using Domain.Concrete;
 using Domain.Entities;
+using Domain.Abstract;
 using WebUI.ViewModels;
 
 namespace WebUI.Controllers
@@ -17,35 +18,29 @@ namespace WebUI.Controllers
     public class QuizsController : Controller
     {
         // Provide access to the data layer
-        private readonly ApplicationDataContext _context;
+        private readonly QuizRepository _quizData;
+
+        private readonly QuestionRepository _questionData;
 
         // Access the user information
         private readonly UserManager<IdentityUser> _userManager;
         
-        public QuizsController(ApplicationDataContext context, UserManager<IdentityUser> userManager)
+        public QuizsController(IDataRepository<Quiz> QuizData, IDataRepository<Question> QuestionData, UserManager<IdentityUser> userManager)
         {
-            _context = context;
+
+            _quizData = (QuizRepository)QuizData;
+            _questionData = (QuestionRepository)QuestionData;
             _userManager = userManager;
         }
 
-        private string _currentUser => _userManager.GetUserId(User);
-
         //*********************** HELPER METHODS SECTION ****************************************************
-        private async Task<IEnumerable<Topic>> getAvailableTopics()
-        {
-            // return only topics that are referenced as FKs in the question table
-            return await _context.Topics.Join(_context.Questions,
-                                          t => t.TopicID,
-                                          q => q.TopicID,
-                                          (t, q) => t).Distinct().ToListAsync();
-        }
-        
-        // Create a collection of questions specific to the topic of the quiz
-        private async Task<List<Question>> selectQuestionsForTopic(QuizViewModel quiz)
-        {
-            return await _context.Questions.Where(q => q.TopicID == quiz.TopicID).ToListAsync();
 
-        }
+        // Get the current user Id
+        private string _currentUser { get { return _userManager.GetUserId(User); } }
+
+        private IEnumerable<Topic> AvailableTopics { get { return _questionData.QuestionTopics(); } }
+        
+
         // Create distinct collection of questions with the length of numberOfQuestions and the topic of the quiz
         private async Task<List<Question>> getUniqueQuestions(QuizViewModel quiz)
         {
@@ -53,7 +48,7 @@ namespace WebUI.Controllers
             Random rand = new Random();
 
             // A pool of questions to choose from
-            List<Question> questionPool = await selectQuestionsForTopic(quiz);
+            List<Question> questionPool = _questionData.SelectQuestionsForTopic(quiz.TopicID).ToList();
 
             // A random collection of unique items
             var uniqueQuestions = questionPool.OrderBy(x => rand.Next()).Take(quiz.NumberOfQuestions).ToList();
@@ -65,7 +60,7 @@ namespace WebUI.Controllers
         private async Task<List<Question>> getUsersQuestions(QuizViewModel quiz)
         {
             // A pool of questions to choose from
-            List<Question> questionPool = await selectQuestionsForTopic(quiz);
+            List<Question> questionPool = _questionData.SelectQuestionsForTopic(quiz.TopicID).ToList();
 
             // Collection of users questions
             List<Question> UsersQuestions = questionPool.Where(q => q.Creator == _currentUser).ToList();
@@ -76,16 +71,16 @@ namespace WebUI.Controllers
         // Grading method for short answer quizzes
         private async Task<decimal> GradeSAQuiz(QuizViewModel quiz)
         {
-            List<Question> questionPool = await selectQuestionsForTopic(quiz);
+            List<Question> questionPool = _questionData.SelectQuestionsForTopic(quiz.TopicID).ToList();
             decimal score = 0;
             decimal questionValue = 100 / quiz.NumberOfQuestions;
 
-            // TODO: add  
+            // TODO: add more inclusive grading logic including accounting for acronyms
             foreach (var item in questionPool)
             {
                 if (quiz.QidGuess.ContainsKey(item.QuestionID))
                 {
-                    if (item.Answer.Contains(quiz.QidGuess[item.QuestionID]))
+                    if (item.Answer.ToLower().Contains(quiz.QidGuess[item.QuestionID].ToLower()))
                     {
                         score += questionValue;
                     }
@@ -110,39 +105,31 @@ namespace WebUI.Controllers
 
         //*********************** END OF HELPER METHODS SECTION ***********************
 
-
-        // GET: Flashcard / Create
-        [HttpGet]
+        [HttpGet] // GET: Flashcard / Create
         public async Task<IActionResult> CreateFlashcard()
         {
-            // Populate a collection with the output from the linq statement
-            IEnumerable<Topic> AvailableTopics = await getAvailableTopics();
+            // Populate a collection with the output from the linq statement and provide it to the select list
+          
+            ViewData["TopicID"] = new SelectList(AvailableTopics, "TopicID", "Description");
 
             // Object to bind to
             QuizViewModel quizVM = new QuizViewModel();
 
-            // Dropdown list for the available topics
-            ViewData["TopicID"] = new SelectList(AvailableTopics, "TopicID", "Description");
-
-            // Pass the object with the owner bound
             return View(quizVM);
         }
 
-        // Populates the metadata to render the flashcards
-        [HttpPost]
+        [HttpPost] // Populates the metadata to render the flashcards
         public async Task<IActionResult> CreateFlashcard(QuizViewModel quizVM)
         {
             // Populate a collection with the output from the linq statement and Maintain selected topic value
-            IEnumerable<Topic> AvailableTopics = await getAvailableTopics();
             ViewData["TopicID"] = new SelectList(AvailableTopics, "TopicID", "Description", quizVM.TopicID);
 
             // Use helper method to populate the questions
             var uniqueQuestions = await getUniqueQuestions(quizVM);
             var usersQuestions = await getUsersQuestions(quizVM);
 
-           
             // Set the displayed questions based on the boolean from the user
-            if (quizVM.privateSource)
+            if (quizVM.PrivateSource)
             {
                 quizVM.Questions = usersQuestions;
             }
@@ -150,17 +137,14 @@ namespace WebUI.Controllers
             {
                 quizVM.Questions = uniqueQuestions;
             }
-
-            // Pass the object with the owner bound
             return View("RenderFlashCard",quizVM);
         }
-        // GET: Quizs/Create
-        [HttpGet]
+
+        [HttpGet]// GET: Quizs/Create
         public async Task<IActionResult> CreateQuiz()
         {
-             
-            // Populate a collection with the output from the linq statement
-            IEnumerable<Topic> AvailableTopics = await getAvailableTopics();
+           
+            ViewData["TopicID"] = new SelectList(AvailableTopics, "TopicID", "Description");
 
             // Object to bind to
             QuizViewModel quizVM = new QuizViewModel();
@@ -168,19 +152,13 @@ namespace WebUI.Controllers
             // Set the Owner to the current user
             quizVM.Owner = _currentUser;
 
-            // Dropdown list for the available topics
-            ViewData["TopicID"] = new SelectList(AvailableTopics, "TopicID", "Description");
-
-            // Pass the object with the owner bound
-             return View(quizVM);
+            return View(quizVM);
         }
 
-        // Populates the metadata to render the quiz
-        [HttpPost]
+        [HttpPost] // Populates the metadata to render the quiz
         public async Task<IActionResult> CreateQuiz(QuizViewModel quizVM)
         {
-            // Populate a collection with the output from the linq statement and Maintain selected topic value
-            IEnumerable<Topic> AvailableTopics = await getAvailableTopics();
+            // Populate a collection with the output from the linq statement and Maintain selection
             ViewData["TopicID"] = new SelectList(AvailableTopics, "TopicID", "Description",quizVM.TopicID);
 
             // Create a dictionary to help grade the quiz on server side
@@ -190,17 +168,15 @@ namespace WebUI.Controllers
             var uniqueQuestions = await getUniqueQuestions(quizVM);
             var usersQuestions = await getUsersQuestions(quizVM);
 
-
             // Set the displayed questions based on the boolean from the user
             // Populate the keys of the dictionary with the appropriate QuestionIDs
-            if (quizVM.privateSource)
+            if (quizVM.PrivateSource)
             {
                 quizVM.Questions = usersQuestions;
                 foreach (var item in usersQuestions)
                 {
                     valuePairs.Add(item.QuestionID,null);
                 }
-                
             }
             else
             {
@@ -213,17 +189,14 @@ namespace WebUI.Controllers
             // set the VM property to the new dictionary
             quizVM.QidGuess = valuePairs;
 
-            // Pass the object with the owner bound
             return  View("RenderSAQuiz",quizVM);
         }
-
-        // Adds the quiz to the database
+     
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        [ValidateAntiForgeryToken] // Adds the quiz to the database
         public async Task<IActionResult> FinalizeQuiz(QuizViewModel quizVM)
         {
-            // Populate a collection with the output from the linq statement and Maintain selected topic value
-            IEnumerable<Topic> AvailableTopics = await getAvailableTopics();
+            // Populate a collection with the output from the linq statement and Maintain selected topic 
             ViewData["TopicID"] = new SelectList(AvailableTopics, "TopicID", "Description", quizVM.TopicID);
 
             // Grade the quiz
@@ -231,11 +204,16 @@ namespace WebUI.Controllers
 
             // Create instance of an object to bind to the Quiz object
             List<QuizQuestionRelation> quizQuestions = new List<QuizQuestionRelation>();
-
-           
-          
             
-                
+            // Use the dictionary to populate the composite table 
+            foreach (var item in quizVM.QidGuess)
+            {
+                QuizQuestionRelation qqr = new QuizQuestionRelation
+                {
+                    QuestionID = item.Key
+                };
+                quizQuestions.Add(qqr);
+            }
 
             // Set object property values to the metadata values
             Quiz Quiz = new Quiz();
@@ -247,18 +225,17 @@ namespace WebUI.Controllers
 
             if (ModelState.IsValid)
             {
-                _context.Add(Quiz);
-                await _context.SaveChangesAsync();
+                _quizData.Add(Quiz);
+                
                 return RedirectToAction("Index", "UserContent");
             }
             return View(quizVM);
         }
 
-        
         // GET: Quizs
         public async Task<IActionResult> Index()
         {
-            var applicationDataContext = _context.Quizs.Include(q => q.Topic);
+            var applicationDataContext = _quizData.Items.Include(q => q.Topic);
             return View(await applicationDataContext.ToListAsync());
         }
         // GET: Quizs/Details/5
@@ -269,7 +246,7 @@ namespace WebUI.Controllers
                 return NotFound();
             }
 
-            var quiz = await _context.Quizs
+            var quiz = await _quizData.Items
                 .Include(q => q.Topic)
                 .FirstOrDefaultAsync(m => m.QuizID == id);
             if (quiz == null)
@@ -286,16 +263,15 @@ namespace WebUI.Controllers
                 return NotFound();
             }
 
-            var quiz = await _context.Quizs.FindAsync(id);
+            var quiz = await _quizData.FindAsync(id);
             if (quiz == null)
             {
                 return NotFound();
             }
-            ViewData["TopicID"] = new SelectList(_context.Topics, "TopicID", "TopicID", quiz.TopicID);
+            ViewData["TopicID"] = new SelectList(_quizData.Topics, "TopicID", "TopicID", quiz.TopicID);
             return View(quiz);
         }
-        // POST: Quizs/Edit/5
-        [HttpPost]
+        [HttpPost] // POST: Quizs/Edit/5
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("QuizID,Score,NumberOfQuestions,Owner,TopicID")] Quiz quiz)
         {
@@ -308,8 +284,8 @@ namespace WebUI.Controllers
             {
                 try
                 {
-                    _context.Update(quiz);
-                    await _context.SaveChangesAsync();
+                    _quizData.Update(quiz);
+                    
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -322,9 +298,9 @@ namespace WebUI.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "UserContent");
             }
-            ViewData["TopicID"] = new SelectList(_context.Topics, "TopicID", "TopicID", quiz.TopicID);
+            ViewData["TopicID"] = new SelectList(_quizData.Topics, "TopicID", "TopicID", quiz.TopicID);
             return View(quiz);
         }
         // GET: Quizs/Delete/5
@@ -335,7 +311,7 @@ namespace WebUI.Controllers
                 return NotFound();
             }
 
-            var quiz = await _context.Quizs
+            var quiz = await _quizData.Items
                 .Include(q => q.Topic)
                 .FirstOrDefaultAsync(m => m.QuizID == id);
             if (quiz == null)
@@ -345,19 +321,18 @@ namespace WebUI.Controllers
 
             return View(quiz);
         }
-        // POST: Quizs/Delete/5
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
+        [ValidateAntiForgeryToken] // POST: Quizs/Delete/5
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var quiz = await _context.Quizs.FindAsync(id);
-            _context.Quizs.Remove(quiz);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            var quiz = await _quizData.FindAsync(id);
+            _quizData.Remove(quiz);
+      
+            return RedirectToAction("Index", "UserContent");
         }
         private bool QuizExists(int id)
         {
-            return _context.Quizs.Any(e => e.QuizID == id);
+            return _quizData.Items.Any(e => e.QuizID == id);
         }
     }
 }

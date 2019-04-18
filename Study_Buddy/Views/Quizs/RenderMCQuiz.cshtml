@@ -1,22 +1,23 @@
 ﻿@model WebUI.ViewModels.QuizViewModel
+@using System.Linq
 @{
     ViewData["Title"] = "Render";
     Layout = "~/Views/Shared/_Layout.cshtml";
     int counter = 1;
+    List<string> tempOptions = new List<string>();
 }
 
 <h1 class="text-success text-center"> Good Luck!</h1>
-<h4 class="text-muted">Short Answer Quiz</h4>
+<h4 class="text-muted">Multiple Choice Quiz</h4>
 <hr />
 
 <form asp-action="FinalizeQuiz">
-    
     @foreach (var item in Model.Questions)
     {
     <div class="form-group">
         @counter .@Html.DisplayFor(i => item.Body)
         <div>
-            <input asp-for="QidGuess[item.QuestionID]" class="form-control" />
+
         </div>
     </div>
         counter++;
@@ -42,3 +43,4 @@
 
 
 }
+

@@ -12,7 +12,6 @@ namespace Domain.DataContexts
         public ApplicationDataContext(DbContextOptions<ApplicationDataContext> options) : base(options)
         {
         }
-        public ApplicationDataContext() { }
 
         public DbSet<Choice> Choices { get; set; }
         public DbSet<Quiz> Quizs { get; set; }

@@ -1,16 +1,19 @@
 ﻿using System;
+using System.Linq;
+using System.Threading.Tasks;
 using System.Collections.Generic;
 using Domain.Entities;
 using System.Text;
 
 namespace Domain.Abstract
 {
-    public interface IDataRepository
+    public interface IDataRepository<T>
     {
-        IEnumerable<Question> Questions { get; }
-        IEnumerable<Quiz> Quizzes { get; }
-        IEnumerable<Topic> Topics { get; }
-        IEnumerable<Choice> Choices { get; }
-        IEnumerable<QuizQuestionRelation> QQRs { get; }
+        IQueryable<T> Items { get; }
+        Task<T> FindAsync(int? Id);
+        void Add(T obj);
+        void Update(T obj);
+        void Remove(T obj);
+       
     }
 }

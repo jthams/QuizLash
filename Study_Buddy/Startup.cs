@@ -16,6 +16,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Domain.DataContexts;
 using Domain.Abstract;
+using Domain.Entities;
 using Domain.Concrete;
 using WebUI.Services;
 
@@ -37,9 +38,7 @@ namespace WebUI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //Obscures the password with user secrets 
-            //to protect the account in source control
-
+            //Obscures the password with user secrets
             var builder = new SqlConnectionStringBuilder(
             Configuration.GetConnectionString("UserAuthentication"));
             builder.Password = Configuration["dbPassword"];
@@ -82,7 +81,12 @@ namespace WebUI
 
            // Sets the properties of the <class> to the matching Configuration Key Values
             services.Configure<AuthMessageSenderOptions>(Configuration);
+
+            // Set dependancy injection values
             services.AddTransient<IEmailSender,EmailSender>();
+            services.AddScoped<IDataRepository<Question>, QuestionRepository>();
+            services.AddScoped<IDataRepository<Quiz>, QuizRepository>();
+            services.AddScoped<IUserDataRepository, UserDataRepository>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
             .AddSessionStateTempDataProvider();

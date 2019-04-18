@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Data;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
@@ -8,7 +9,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Domain.Entities;
-using Domain.DataContexts;
+using Domain.Abstract;
+using Domain.Concrete;
 using WebUI.ViewModels;
 
 
@@ -17,20 +19,19 @@ namespace WebUI.Controllers
     [Authorize]
     public class QuestionsController : Controller
     {
-        private readonly ApplicationDataContext _context;
+        private readonly QuestionRepository _questionData;
         private readonly UserManager<IdentityUser> _userManager;
 
-        public QuestionsController(ApplicationDataContext context,UserManager<IdentityUser> userManager)
+        public QuestionsController(IDataRepository<Question> QuestionData,UserManager<IdentityUser> userManager)
         {
-            _context = context;
+            _questionData = (QuestionRepository)QuestionData;
             _userManager = userManager;
         }
 
         // GET: Questions
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-           
-            return View(await _context.Questions.ToListAsync());
+            return View( _questionData.Items);
         }
 
         // GET: Questions/Details/5
@@ -41,7 +42,7 @@ namespace WebUI.Controllers
                 return NotFound();
             }
 
-            var question = await _context.Questions
+            var question = await _questionData.Items
                 .Include(q => q.Topic)
                 .FirstOrDefaultAsync(m => m.QuestionID == id);
             if (question == null)
@@ -56,7 +57,7 @@ namespace WebUI.Controllers
         public IActionResult Create()
         {
             // Get the list of topics for select topic option
-            ViewData["TopicID"] = new SelectList(_context.Topics, "TopicID", "Description");
+            ViewData["TopicID"] = new SelectList(_questionData.Topics, "TopicID", "Description");
 
             // Set the Creator of the question to the current user
             QuestionViewModel questionVM = new QuestionViewModel
@@ -72,7 +73,7 @@ namespace WebUI.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(QuestionViewModel questionVM)
+        public IActionResult Create(QuestionViewModel questionVM)
         {
             // Set the text for choices to a list of strings
             List<string> choicesText = new List<string>();
@@ -107,15 +108,14 @@ namespace WebUI.Controllers
             question.Choices = choices;
 
             if (ModelState.IsValid)
-            {   
+            {
                 // Add the new object to the database
-                _context.Add(question);
-                await _context.SaveChangesAsync();
+                _questionData.Add(question);
 
                 //Return to the users view content after the quiz is added
                 return RedirectToAction("Index", "UserContent");
             }
-            ViewData["TopicID"] = new SelectList(_context.Topics, "TopicID", "Description", questionVM.TopicID);
+            ViewData["TopicID"] = new SelectList(_questionData.Topics, "TopicID", "Description", questionVM.TopicID);
             return View(questionVM);
         }
 
@@ -127,12 +127,12 @@ namespace WebUI.Controllers
                 return NotFound();
             }
 
-            var question = await _context.Questions.FindAsync(id);
+            var question = await _questionData.FindAsync(id);
             if (question == null)
             {
                 return NotFound();
             }
-            ViewData["TopicID"] = new SelectList(_context.Topics, "TopicID", "TopicID", question.TopicID);
+            ViewData["TopicID"] = new SelectList(_questionData.Topics, "TopicID", "TopicID", question.TopicID);
             return View(question);
         }
 
@@ -152,8 +152,8 @@ namespace WebUI.Controllers
             {
                 try
                 {
-                    _context.Update(question);
-                    await _context.SaveChangesAsync();
+                    _questionData.Update(question);
+                    
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -166,9 +166,9 @@ namespace WebUI.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "UserContent");
             }
-            ViewData["TopicID"] = new SelectList(_context.Topics, "TopicID", "TopicID", question.TopicID);
+            ViewData["TopicID"] = new SelectList(_questionData.Topics, "TopicID", "TopicID", question.TopicID);
             return View(question);
         }
 
@@ -180,7 +180,7 @@ namespace WebUI.Controllers
                 return NotFound();
             }
 
-            var question = await _context.Questions
+            var question = await _questionData.Items
                 .Include(q => q.Topic)
                 .FirstOrDefaultAsync(m => m.QuestionID == id);
             if (question == null)
@@ -196,15 +196,14 @@ namespace WebUI.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var question = await _context.Questions.FindAsync(id);
-            _context.Questions.Remove(question);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            var question = await _questionData.FindAsync(id);
+            _questionData.Remove(question);
+            return RedirectToAction("Index", "UserContent");
         }
 
         private bool QuestionExists(int id)
         {
-            return _context.Questions.Any(e => e.QuestionID == id);
+            return _questionData.Items.Any(e => e.QuestionID == id);
         }
     }
 }
