@@ -1,5 +1,4 @@
 ﻿@model WebUI.ViewModels.UserContentViewModel
-@using Domain.Entities
 
 @{
     ViewData["Title"] = "UserIndex";
@@ -19,16 +18,16 @@
     <br />
     <div class="card">
         <div class="card-header">
-            <a class="collapsed card-link" data-toggle="collapse" href="#Quizzes">
+            <a class="card-link" data-toggle="collapse" href="#Quizzes">
                 <h6 class="text-center text-info"><b>Your Quizzes</b></h6>
             </a>
         </div>
-        <div id="Quizzes" class="collapse" data-parent="#accordion">
+        <div id="Quizzes" class="collapse show" data-parent="#accordion">
             <table class="table table-responsive-sm">
                 <thead>
                     <tr>
                         <th>
-                            QuizID
+                            Quiz ID
                         </th>
                         <th>
                             Topic
@@ -36,30 +35,34 @@
                         <th>
                             Score
                         </th>
-                        <th></th>
+                        <th>
+                            Topic Avg.
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (var item in Model.Quizzes)
                     {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.QuizID)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Topic.Description)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Score)
-                            </td>
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.QuizID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Topic.Description)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Score)%
+                        </td>
+                        <td>
+                            @Html.DisplayFor(Model => Model.TopicAverages[item.TopicID])%
+                        </td>
 
 
-                            <td>
-                                <a asp-action="Edit" asp-controller="Quizs" asp-route-id="@item.QuizID">Edit</a> |
-                                <a asp-action="Details" asp-controller="Quizs" asp-route-id="@item.QuizID">Details</a> |
-                                <a class="text-danger" asp-controller="Quizs" asp-action="Delete" asp-route-id="@item.QuizID">Delete</a>
-                            </td>
-                        </tr>
+                        <td>
+                            <a asp-action="Details" asp-controller="Quizs" asp-route-id="@item.QuizID">Details</a> |
+                            <a class="text-danger" asp-controller="Quizs" asp-action="Delete" asp-route-id="@item.QuizID">Delete</a>
+                        </td>
+                    </tr>
                     }
                 </tbody>
             </table>
@@ -72,43 +75,45 @@
                 <h6 class="text-center text-info"><b>Your Questions</b></h6>
             </a>
         </div>
-        <table class="table table-responsive-sm" id="Questions">
-            <thead>
-                <tr>
-                    <th>
-                        Body
-                    </th>
-                    <th>
-                        Answer
-                    </th>
-                    <th>
-                        Topic
-                    </th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody class="">
-                @foreach (var item in Model.Questions)
-                {
+        <div id="Questions" class="collapse" data-parent="#accordion">
+            <table class="table table-responsive-sm">
+                <thead>
                     <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Body)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Answer)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Topic.Description)
-                        </td>
-                        <td>
-                            <a asp-action="Edit" asp-controller="Questions" asp-route-id="@item.QuestionID">Edit</a> |
-                            <a asp-action="Details" asp-controller="Questions" asp-route-id="@item.QuestionID">Details</a> |
-                            <a class="text-danger" asp-controller="Questions" asp-action="Delete" asp-route-id="@item.QuestionID">Delete</a>
-                        </td>
+                        <th>
+                            Body
+                        </th>
+                        <th>
+                            Answer
+                        </th>
+                        <th>
+                            Topic
+                        </th>
+                        <th></th>
                     </tr>
-                }
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Questions)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Body)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Answer)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Topic.Description)
+                            </td>
+                            <td>
+                                <a asp-action="Edit" asp-controller="Questions" asp-route-id="@item.QuestionID">Edit</a> |
+                                <a asp-action="Details" asp-controller="Questions" asp-route-id="@item.QuestionID">Details</a> |
+                                <a class="text-danger" asp-controller="Questions" asp-action="Delete" asp-route-id="@item.QuestionID">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
     </div>
 
 </div>

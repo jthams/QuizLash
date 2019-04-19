@@ -39,18 +39,17 @@ namespace WebUI.Controllers
             }
         }
 
-        // GET: UserContent
+        // Display user specific content
         public ActionResult Index()
         {
             setTopicDictionary();
-            // Create a new object for the composite Model
-            UserContentViewModel UserModel = new UserContentViewModel();
+            UserContentViewModel UserModel = new UserContentViewModel
+            {
+                Quizzes = _userData.GetUserQuizzes(_currentUser),
+                Questions = _userData.GetUserQuestions(_currentUser),
+                TopicAverages = _userData.GetTopicPerformance(_currentUser)
+            };
 
-            // Set the model properties to the output of the helper methods
-            UserModel.Quizzes = _userData.GetUserQuizzes(_currentUser);
-            UserModel.Questions = _userData.GetUserQuestions(_currentUser);
-
-            // Return the data to the view to be displayed
             return View(UserModel);
         }
 

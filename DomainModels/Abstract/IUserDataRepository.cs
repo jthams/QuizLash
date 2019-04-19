@@ -12,5 +12,6 @@ namespace Domain.Abstract
         IEnumerable<Topic> Topics { get; }
         IEnumerable<Quiz> GetUserQuizzes(string userID);
         IEnumerable<Question> GetUserQuestions(string userID);
+        Dictionary<int, decimal> GetTopicPerformance(string UserId);
     }
 }

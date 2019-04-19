@@ -10,6 +10,6 @@ namespace WebUI.ViewModels
     {
         public IEnumerable<Question> Questions { get; set; }
         public IEnumerable<Quiz> Quizzes { get; set; }
-        public Dictionary<string,decimal> TopicAverages { get; set; }
+        public Dictionary<int, decimal> TopicAverages { get; set; }
     }
 }

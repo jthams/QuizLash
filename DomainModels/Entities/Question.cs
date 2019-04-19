@@ -14,10 +14,6 @@ namespace Domain.Entities
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int QuestionID { get; set; }
         public string Body { get; set; }
-
-        [NotMapped]
-        public string Guess { get; set; }
-
         public string Answer { get; set; }
 
         // One to many

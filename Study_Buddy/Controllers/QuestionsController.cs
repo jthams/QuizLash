@@ -28,6 +28,12 @@ namespace WebUI.Controllers
             _userManager = userManager;
         }
 
+        // Get the current user Id
+        private string _currentUser { get { return _userManager.GetUserId(User); } }
+
+        // Populate a collection with the output from DAL method
+        private IEnumerable<Topic> Topics { get { return _questionData.Topics; } }
+
         // GET: Questions
         public IActionResult Index()
         {
@@ -41,7 +47,6 @@ namespace WebUI.Controllers
             {
                 return NotFound();
             }
-
             var question = await _questionData.Items
                 .Include(q => q.Topic)
                 .FirstOrDefaultAsync(m => m.QuestionID == id);
@@ -57,65 +62,60 @@ namespace WebUI.Controllers
         public IActionResult Create()
         {
             // Get the list of topics for select topic option
-            ViewData["TopicID"] = new SelectList(_questionData.Topics, "TopicID", "Description");
+            ViewData["TopicID"] = new SelectList(Topics, "TopicID", "Description");
 
             // Set the Creator of the question to the current user
             QuestionViewModel questionVM = new QuestionViewModel
             {
-                Creator = _userManager.GetUserId(User)
+                Creator = _currentUser
             };
             
             return View(questionVM);
         }
 
-        // POST: Questions/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create(QuestionViewModel questionVM)
         {
+            ViewData["TopicID"] = new SelectList(Topics, "TopicID", "Description", questionVM.TopicID);
+            
             // Set the text for choices to a list of strings
-            List<string> choicesText = new List<string>();
-            choicesText.Add(questionVM.Choice1);
-            choicesText.Add(questionVM.Choice2);
-            choicesText.Add(questionVM.Choice3);
-
+            List<string> choicesText = new List<string>()
+            {
+                {questionVM.Choice1},
+                {questionVM.Choice2},
+                {questionVM.Choice3}
+            };
+           
             // A container for the choice objects
             List<Choice> choices = new List<Choice>();
-
-            // Iterate through the values from the view
             foreach (var item in choicesText)
             {
                 // Create the choice objects 
-                Choice choice = new Choice();
-                
-                // Set the choice text property to the values of the list of strings
-                choice.Text = item;
+                Choice choice = new Choice
+                {
+                    Text = item
+                };
                 choices.Add(choice);
             }
 
-            // Create a new entity object 
-            Question question = new Question();
-
-            // Set the entities properties to the values in the ViewModel
-            question.Creator = questionVM.Creator;
-            question.TopicID = questionVM.TopicID;
-            question.Body = questionVM.Body;
-            question.Answer = questionVM.Answer;
-
-            // Set Choices collection to the container created above
-            question.Choices = choices;
+            // Create a new entity object and set the entities properties to the values in the ViewModel
+            Question question = new Question
+            {
+                Creator = questionVM.Creator,
+                TopicID = questionVM.TopicID,
+                Body = questionVM.Body,
+                Answer = questionVM.Answer,
+                Choices = choices
+            };
 
             if (ModelState.IsValid)
             {
-                // Add the new object to the database
                 _questionData.Add(question);
 
-                //Return to the users view content after the quiz is added
                 return RedirectToAction("Index", "UserContent");
             }
-            ViewData["TopicID"] = new SelectList(_questionData.Topics, "TopicID", "Description", questionVM.TopicID);
+            
             return View(questionVM);
         }
 
@@ -132,17 +132,14 @@ namespace WebUI.Controllers
             {
                 return NotFound();
             }
-            ViewData["TopicID"] = new SelectList(_questionData.Topics, "TopicID", "TopicID", question.TopicID);
+            ViewData["TopicID"] = new SelectList(Topics, "TopicID", "TopicID", question.TopicID);
             return View(question);
         }
 
-        // POST: Questions/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("QuestionID,Body,Answer,TopicID,Creator")] Question question)
-        {
+        public IActionResult Edit(int id, [Bind("QuestionID,Body,Answer,TopicID,Creator")] Question question)
+        {   
             if (id != question.QuestionID)
             {
                 return NotFound();
@@ -166,9 +163,10 @@ namespace WebUI.Controllers
                         throw;
                     }
                 }
+                ViewData["TopicID"] = new SelectList(Topics, "TopicID", "TopicID", question.TopicID);
                 return RedirectToAction("Index", "UserContent");
             }
-            ViewData["TopicID"] = new SelectList(_questionData.Topics, "TopicID", "TopicID", question.TopicID);
+            
             return View(question);
         }
 

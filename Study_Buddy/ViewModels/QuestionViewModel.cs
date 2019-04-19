@@ -32,6 +32,5 @@ namespace WebUI.ViewModels
         public string Choice2 { get; set; }
         [Display(Name = "Option 4")]
         public string Choice3 { get; set; }
-        public ICollection<QuizQuestionRelation> QuizQuestionRelation { get; set; }
     }
 }

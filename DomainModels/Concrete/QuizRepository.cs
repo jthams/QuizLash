@@ -34,11 +34,13 @@ namespace Domain.Concrete
             _context.Add(quiz);
             _context.SaveChanges();
         }
+
         public void Update(Quiz quiz)
         {
             _context.Update(quiz);
             _context.SaveChanges();
         }
+
         public void Remove(Quiz quiz)
         {
             _context.Quizs.Remove(quiz);

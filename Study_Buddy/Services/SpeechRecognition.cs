@@ -8,6 +8,7 @@ namespace WebUI.Services
 {
     public class SpeechRecognition
     {
+        // THIS IS THE BASE CLASS FROM THE MS DOCS QUICKSTART AND IS NOT CURRENTLY IMPLEMENTED
         public static async Task RecognizeSpeechAsync()
         {
             // Creates an instance of a speech config with specified subscription key and service region.

@@ -16,7 +16,8 @@ namespace WebUI.Services
             Options = optionsAccessor.Value;
         }
 
-        public AuthMessageSenderOptions Options { get; } //set only via Secret Manager
+        // Set properties with secret manager
+        public AuthMessageSenderOptions Options { get; }
 
         public Task SendEmailAsync(string email, string subject, string message)
         {
@@ -33,10 +34,8 @@ namespace WebUI.Services
                 PlainTextContent = message,
                 HtmlContent = message
             };
-            msg.AddTo(new EmailAddress(email));
 
-            // Disable click tracking.
-            // See https://sendgrid.com/docs/User_Guide/Settings/tracking.html
+            msg.AddTo(new EmailAddress(email));
             msg.SetClickTracking(false, false);
 
             return client.SendEmailAsync(msg);
