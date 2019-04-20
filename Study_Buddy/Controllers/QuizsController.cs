@@ -19,15 +19,13 @@ namespace WebUI.Controllers
     {
         // Provide access to the data layer
         private readonly QuizRepository _quizData;
-        private readonly QuestionRepository _questionData;
 
         // Access the user information
         private readonly UserManager<IdentityUser> _userManager;
         
-        public QuizsController(IDataRepository<Quiz> QuizData, IDataRepository<Question> QuestionData, UserManager<IdentityUser> userManager)
+        public QuizsController(IDataRepository<Quiz> QuizData, UserManager<IdentityUser> userManager)
         {
             _quizData = (QuizRepository)QuizData;
-            _questionData = (QuestionRepository)QuestionData;
             _userManager = userManager;
         }
 
@@ -37,13 +35,13 @@ namespace WebUI.Controllers
         private string _currentUser { get { return _userManager.GetUserId(User); } }
 
         // Populate a collection with the output from DAL method
-        private IEnumerable<Topic> _availableTopics { get { return _questionData.QuestionTopics(); } }
+        private IEnumerable<Topic> _availableTopics { get { return _quizData.QuestionTopics(); } }
         
         // Create distinct collection of questions with the length of numberOfQuestions and the topic of the quiz
         private List<Question> getUniqueQuestions(QuizViewModel quiz)
         {
             Random rand = new Random();
-            List<Question> questionPool = _questionData.SelectQuestionsForTopic(quiz.TopicID).ToList();
+            List<Question> questionPool =_quizData.SelectQuestionsForTopic(quiz.TopicID).ToList();
             var uniqueQuestions = questionPool.OrderBy(x => rand.Next()).Take(quiz.NumberOfQuestions).ToList();
 
             return uniqueQuestions;
@@ -52,7 +50,7 @@ namespace WebUI.Controllers
         // return a collection of unique questions that the user 
         private List<Question> getUsersQuestions(QuizViewModel quiz)
         {
-            List<Question> questionPool = _questionData.SelectQuestionsForTopic(quiz.TopicID).ToList();
+            List<Question> questionPool =_quizData.SelectQuestionsForTopic(quiz.TopicID).ToList();
             List<Question> UsersQuestions = questionPool.Where(q => q.Creator == _currentUser).ToList();
 
             return UsersQuestions;
@@ -61,9 +59,9 @@ namespace WebUI.Controllers
         // Grading method for short answer quizzes
         private decimal GradeSAQuiz(QuizViewModel quiz)
         {
-            List<Question> questionPool = _questionData.SelectQuestionsForTopic(quiz.TopicID).ToList();
+            List<Question> questionPool =_quizData.SelectQuestionsForTopic(quiz.TopicID).ToList();
             decimal score = 0;
-            decimal questionValue = 100 / quiz.NumberOfQuestions;
+            decimal questionValue = 100 / quiz.QidGuess.Count; 
 
             // TODO: add more inclusive grading logic including accounting for acronyms
             foreach (var item in questionPool)

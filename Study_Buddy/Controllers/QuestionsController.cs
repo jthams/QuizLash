@@ -109,7 +109,8 @@ namespace WebUI.Controllers
                 return NotFound();
             }
             var question = await _questionData.Items
-                .Include(q => q.Topic.Description)
+                .Include(q => q.Topic)
+            
                 .FirstOrDefaultAsync(m => m.QuestionID == id);
             if (question == null)
             {

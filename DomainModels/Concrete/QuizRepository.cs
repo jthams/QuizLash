@@ -9,22 +9,22 @@ using Domain.DataContexts;
 
 namespace Domain.Concrete
 {
-    public class QuizRepository : IDataRepository<Quiz>
+    public class QuizRepository : QuestionRepository, IDataRepository<Quiz>
     {
         private readonly ApplicationDataContext _context;
 
-        public IQueryable<Quiz> Items { get { return _context.Quizs; } }
+        new public IQueryable<Quiz> Items { get { return _context.Quizs; } }
 
-        public IEnumerable<Topic> Topics { get { return _context.Topics; } }
+        public IQueryable<Question> GetQuestions => base.Items;
 
-        public IEnumerable<Question> Questions { get { return _context.Questions; } }
+        new public IEnumerable<Topic> Topics { get { return _context.Topics; } }
 
-        public QuizRepository(ApplicationDataContext Context)
+        public QuizRepository(ApplicationDataContext Context) : base(Context)
         {
             _context = Context;
         }
 
-        public async Task<Quiz> FindAsync(int? Id)
+        new public async Task<Quiz> FindAsync(int? Id)
         {
             return await _context.Quizs.FindAsync(Id);
         }

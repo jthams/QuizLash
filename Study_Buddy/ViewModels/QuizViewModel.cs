@@ -47,6 +47,7 @@ namespace WebUI.ViewModels
         public List<Question> Questions { get; set; }
 
         // Dictionary for grading SA quizzes
+        [Required]
         public Dictionary<int, string> QidGuess { get; set; }
 
     }

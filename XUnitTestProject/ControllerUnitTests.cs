@@ -91,7 +91,7 @@ namespace XTestProject
         {
             var mockRepo = new Mock<IDataRepository<Question>>().SetupAllProperties();
 
-            return new Mock<IDataRepository<Question>>(mockRepo.Object as QuestionRepository);
+            return new Mock<IDataRepository<Question>>(mockRepo.Object as Mock<QuestionRepository>);
         }
         public static Mock<IDataRepository<Quiz>> GetMockQuizRepoStub()
         {

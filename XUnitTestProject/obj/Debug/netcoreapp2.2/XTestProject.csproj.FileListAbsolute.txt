@@ -19,3 +19,6 @@ C:\Users\hamel\source\Repos\jthams\StudyBuddy\XUnitTestProject\obj\Debug\netcore
 C:\Users\hamel\source\Repos\jthams\StudyBuddy\XUnitTestProject\obj\Debug\netcoreapp2.2\XTestProject.csproj.CopyComplete
 C:\Users\hamel\source\Repos\jthams\StudyBuddy\XUnitTestProject\obj\Debug\netcoreapp2.2\XTestProject.dll
 C:\Users\hamel\source\Repos\jthams\StudyBuddy\XUnitTestProject\obj\Debug\netcoreapp2.2\XTestProject.pdb
+C:\Users\hamel\Source\Repos\jthams\StudyBuddy\XUnitTestProject\bin\Debug\netcoreapp2.2\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+C:\Users\hamel\Source\Repos\jthams\StudyBuddy\XUnitTestProject\bin\Debug\netcoreapp2.2\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+C:\Users\hamel\Source\Repos\jthams\StudyBuddy\XUnitTestProject\bin\Debug\netcoreapp2.2\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll

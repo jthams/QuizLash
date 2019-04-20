@@ -10,7 +10,7 @@ using Domain.DataContexts;
 
 namespace Domain.Concrete
 {
-    public class QuestionRepository : IDataRepository<Question>
+    public class QuestionRepository : IDataRepository<Question>, ITopicRepository
     {
         private readonly ApplicationDataContext _context;
 

@@ -5,23 +5,23 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Set your options</h1>
+<h2 class="text-primary text-center">Set your options</h2>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="TopicID" class="control-label"></label>
+                <label asp-for="TopicID" class="control-label font-weight-bold"></label>
                 <select asp-for="TopicID" class="form-control" asp-items="ViewBag.TopicID"></select>
             </div>
             <div class="form-group">
-                <label asp-for="NumberOfQuestions" class="control-label"></label>
+                <label asp-for="NumberOfQuestions" class="control-label font-weight-bolder span6"></label>
                 <input asp-for="NumberOfQuestions" class="form-control" />
                 <span asp-validation-for="NumberOfQuestions" class="text-danger"></span>
             </div>
             <div class="form-group form-check">
-                <label class="form-check-label">
+                <label class="form-check-label font-weight-bold">
                     <input class="form-check-input" asp-for="PrivateSource" /> @Html.DisplayNameFor(model => model.PrivateSource)
                 </label>
             </div>
@@ -38,6 +38,6 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index" asp-controller="UserContent">Back to List</a>
 </div>
 
