@@ -12,3 +12,13 @@ C:\Users\hamel\source\Repos\jthams\StudyBuddy\XUnitTestProject\obj\Debug\netcore
 C:\Users\hamel\source\Repos\jthams\StudyBuddy\XUnitTestProject\obj\Debug\netcoreapp2.2\XUnitTestProject.AssemblyInfo.cs
 C:\Users\hamel\source\Repos\jthams\StudyBuddy\XUnitTestProject\obj\Debug\netcoreapp2.2\XUnitTestProject.dll
 C:\Users\hamel\source\Repos\jthams\StudyBuddy\XUnitTestProject\obj\Debug\netcoreapp2.2\XUnitTestProject.pdb
+C:\Users\hamel\source\Repos\jthams\StudyBuddy\XUnitTestProject\bin\Debug\netcoreapp2.2\WebUI.Views.dll
+C:\Users\hamel\source\Repos\jthams\StudyBuddy\XUnitTestProject\bin\Debug\netcoreapp2.2\WebUI.Views.pdb
+C:\Users\hamel\source\Repos\jthams\StudyBuddy\XUnitTestProject\bin\Debug\netcoreapp2.2\Domain.dll
+C:\Users\hamel\source\Repos\jthams\StudyBuddy\XUnitTestProject\bin\Debug\netcoreapp2.2\WebUI.dll
+C:\Users\hamel\source\Repos\jthams\StudyBuddy\XUnitTestProject\bin\Debug\netcoreapp2.2\Domain.pdb
+C:\Users\hamel\source\Repos\jthams\StudyBuddy\XUnitTestProject\bin\Debug\netcoreapp2.2\WebUI.pdb
+C:\Users\hamel\source\Repos\jthams\StudyBuddy\XUnitTestProject\obj\Debug\netcoreapp2.2\XUnitTestProject.csproj.CopyComplete
+C:\Users\hamel\source\Repos\jthams\StudyBuddy\XUnitTestProject\bin\Debug\netcoreapp2.2\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+C:\Users\hamel\source\Repos\jthams\StudyBuddy\XUnitTestProject\bin\Debug\netcoreapp2.2\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+C:\Users\hamel\source\Repos\jthams\StudyBuddy\XUnitTestProject\bin\Debug\netcoreapp2.2\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll

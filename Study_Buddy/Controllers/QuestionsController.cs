@@ -34,30 +34,7 @@ namespace WebUI.Controllers
         // Populate a collection with the output from DAL method
         private IEnumerable<Topic> Topics { get { return _questionData.Topics; } }
 
-        // GET: Questions
-        public IActionResult Index()
-        {
-            return View( _questionData.Items);
-        }
-
-        // GET: Questions/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-            var question = await _questionData.Items
-                .Include(q => q.Topic)
-                .FirstOrDefaultAsync(m => m.QuestionID == id);
-            if (question == null)
-            {
-                return NotFound();
-            }
-
-            return View(question);
-        }
-
+        
         // GET: Questions/Create
         public IActionResult Create()
         {
@@ -118,6 +95,29 @@ namespace WebUI.Controllers
             
             return View(questionVM);
         }
+        // GET: Questions
+        public IActionResult Index()
+        {
+            return View(_questionData.Items);
+        }
+
+        // GET: Questions/Details/5
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var question = await _questionData.Items
+                .Include(q => q.Topic.Description)
+                .FirstOrDefaultAsync(m => m.QuestionID == id);
+            if (question == null)
+            {
+                return NotFound();
+            }
+
+            return View(question);
+        }
 
         // GET: Questions/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -132,7 +132,7 @@ namespace WebUI.Controllers
             {
                 return NotFound();
             }
-            ViewData["TopicID"] = new SelectList(Topics, "TopicID", "TopicID", question.TopicID);
+            ViewData["TopicID"] = new SelectList(Topics, "TopicID", "Description", question.TopicID);
             return View(question);
         }
 
@@ -163,7 +163,7 @@ namespace WebUI.Controllers
                         throw;
                     }
                 }
-                ViewData["TopicID"] = new SelectList(Topics, "TopicID", "TopicID", question.TopicID);
+                ViewData["TopicID"] = new SelectList(Topics, "TopicID", "Description", question.TopicID);
                 return RedirectToAction("Index", "UserContent");
             }
             

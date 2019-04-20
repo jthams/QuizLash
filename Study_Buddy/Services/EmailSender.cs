@@ -16,7 +16,8 @@ namespace WebUI.Services
             Options = optionsAccessor.Value;
         }
 
-        // Set properties with secret manager
+        
+        // Properties are set with Configuration from secret manager
         public AuthMessageSenderOptions Options { get; }
 
         public Task SendEmailAsync(string email, string subject, string message)

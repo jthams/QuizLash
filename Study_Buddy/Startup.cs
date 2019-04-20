@@ -1,23 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Data.SqlClient;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
-using Microsoft.AspNetCore.Identity.UI.Services;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Domain.DataContexts;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Domain.Abstract;
 using Domain.Entities;
 using Domain.Concrete;
+using Domain.DataContexts;
 using WebUI.Services;
 
 
@@ -87,7 +83,7 @@ namespace WebUI
             services.AddScoped<IDataRepository<Question>, QuestionRepository>();
             services.AddScoped<IDataRepository<Quiz>, QuizRepository>();
             services.AddScoped<IUserDataRepository, UserDataRepository>();
-
+           
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
             .AddSessionStateTempDataProvider();
             services.AddSession();
@@ -117,8 +113,13 @@ namespace WebUI
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    name: "areas",
+                    template: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+
+                routes.MapRoute(
+                        name: "default",
+                        template: "{controller=Home}/{action=Index}/{id?}");
+          
             });
         }
     }
