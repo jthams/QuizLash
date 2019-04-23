@@ -219,8 +219,18 @@ namespace WebUI.Controllers
             {
                 return NotFound();
             }
-            return View(quiz);
+            QuizViewModel QVM = new QuizViewModel
+            {
+                QuizID = quiz.QuizID,
+                NumberOfQuestions = quiz.NumberOfQuestions,
+                TopicDescription = quiz.Topic.Description,
+                Score = quiz.Score,
+                Questions = _quizData.QuizQuestions(quiz.QuizID).ToList()
+            };
+
+            return View(QVM);
         }
+        
         // GET: Quizs/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {

@@ -28,13 +28,21 @@ namespace Domain.DataContexts
                 .HasOne(qqr => qqr.Question)
                 .WithMany(q => q.QuizQuestionRelation)
                 .HasForeignKey(qqr => qqr.QuestionID)
-                .OnDelete(DeleteBehavior.ClientSetNull);
+                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<QuizQuestionRelation>()
                 .HasOne(qqr => qqr.Quiz)
                 .WithMany(q => q.QuizQuestionRelation)
                 .HasForeignKey(qqr => qqr.QuizID)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Question>( b =>
+            {
+                b.HasOne("Domain.Entities.Topic", "Topic")
+                    .WithMany("Questions")
+                    .HasForeignKey("TopicID")
+                    .OnDelete(DeleteBehavior.Restrict);
+            });
 
             modelBuilder.Entity<Choice>().ToTable("Choices");
             modelBuilder.Entity<Topic>().ToTable("Topics");

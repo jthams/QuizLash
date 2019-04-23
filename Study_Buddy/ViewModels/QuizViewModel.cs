@@ -35,6 +35,8 @@ namespace WebUI.ViewModels
         [Display(Name = "What topic will this cover?")]
         public int TopicID { get; set; }
 
+        public string TopicDescription { get; set; }
+
         [Required]
         [Display(Name = "How many items would you like?")]
         public int NumberOfQuestions { get; set; }

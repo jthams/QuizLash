@@ -12,6 +12,7 @@ namespace Domain.Entities
         public Quiz Quiz { get; set; }
 
         // Many to many
+        
         public int? QuestionID { get; set; }
         public Question Question { get; set; }
 

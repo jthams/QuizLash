@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace WebUI.ViewModels
 {
-    public class QuestionViewModel
+    public class QuestionInputViewModel
     {
         public int QuestionID { get; set; }
         

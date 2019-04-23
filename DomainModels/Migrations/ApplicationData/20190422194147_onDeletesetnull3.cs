@@ -2,7 +2,7 @@
 
 namespace Domain.Migrations
 {
-    public partial class changedQuizDeleteBehavior2 : Migration
+    public partial class onDeletesetnull3 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

@@ -46,5 +46,15 @@ namespace Domain.Concrete
             _context.Quizs.Remove(quiz);
             _context.SaveChanges();
         }
+
+        public IEnumerable<Question> QuizQuestions(int id)
+        {
+            var Qids = _context.QuizQuestionRelation.Where(x => x.QuizID == id).Select(x => x.QuestionID);
+            IEnumerable<Question> quizQuestions = Qids.Join(_context.Questions,
+                                                    i => i.Value,
+                                                    q => q.QuestionID,
+                                                    (i, q) => q);
+            return quizQuestions;
+        }
     }
 }

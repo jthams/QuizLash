@@ -42,7 +42,7 @@ namespace WebUI.Controllers
             ViewData["TopicID"] = new SelectList(Topics, "TopicID", "Description");
 
             // Set the Creator of the question to the current user
-            QuestionViewModel questionVM = new QuestionViewModel
+            QuestionInputViewModel questionVM = new QuestionInputViewModel
             {
                 Creator = _currentUser
             };
@@ -52,7 +52,7 @@ namespace WebUI.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(QuestionViewModel questionVM)
+        public IActionResult Create(QuestionInputViewModel questionVM)
         {
             ViewData["TopicID"] = new SelectList(Topics, "TopicID", "Description", questionVM.TopicID);
             

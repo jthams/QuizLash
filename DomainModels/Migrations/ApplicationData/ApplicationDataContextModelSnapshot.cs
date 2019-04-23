@@ -121,7 +121,7 @@ namespace Domain.Migrations
                     b.HasOne("Domain.Entities.Topic", "Topic")
                         .WithMany("Questions")
                         .HasForeignKey("TopicID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("Domain.Entities.Quiz", b =>
@@ -136,12 +136,13 @@ namespace Domain.Migrations
                 {
                     b.HasOne("Domain.Entities.Question", "Question")
                         .WithMany("QuizQuestionRelation")
-                        .HasForeignKey("QuestionID");
+                        .HasForeignKey("QuestionID")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("Domain.Entities.Quiz", "Quiz")
                         .WithMany("QuizQuestionRelation")
                         .HasForeignKey("QuizID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 #pragma warning restore 612, 618
         }
