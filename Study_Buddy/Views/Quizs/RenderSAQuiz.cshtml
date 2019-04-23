@@ -9,13 +9,13 @@
 <h4 class="text-muted">Short Answer Quiz</h4>
 <hr />
 
-<form asp-action="FinalizeQuiz">
+<form asp-action="FinalizeQuiz"autocomplete="off">
     @foreach (var item in Model.Questions)
     {
         <div class="form-group">
             @counter .@Html.DisplayFor(i => item.Body)
             <div>
-                <input asp-for="QidGuess[item.QuestionID]" class="form-control" required/>
+                <input asp-for="QidGuess[item.QuestionID]" class="form-control" autocomplete="off" required/>
             </div>
         </div>
         counter++;
