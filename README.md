@@ -99,4 +99,28 @@ The intended purpose of this application is to implement and familiarize myself 
  <i><b>Classes for this database can be found in the Areas/Identity folder</b></i>
  <img src="https://theblobthestorageaccount.blob.core.windows.net/myblob/IdentityDatabaseDiagram.PNG" width="75%" height="75%" title="Authentication Data">
  
- 
+<h1>Test Plan</h1>
+
+<i><b>Unit tests for contoller logic are located in the xUnitTest project above</b></i>
+
+<h3>Upcoming Tests</h3>
+<p>Unit Tests</p>
+<ul>
+  <li>Helper methods for quizsController.cs</li>
+  <li>Helper methods for questionsController.cs</li>
+  <li>Helper methods for Concrete classes in the Domain project</li>
+</ul>
+<p>Integration Tests</p>
+<ul>
+  <li>Integration testing for quizsController.cs with dependancy injection</li>
+  <li>Integration testing for questionsController.cs with dependancy injection</li>
+  <li>Integration testing for Concrete classes in the Domain project</li>
+  <li>Integration testing for Interface implementation classes in the Domain project</li>
+  <li>Integration testing for Filter methods of Concrete classes in the Domain project</li>
+</ul>
+<p>Load Tests</p>
+<ul>
+  <li>Load tests for Azure SQL Server</li>
+  <li>Test auto-scaling for the host app service</li>
+</ul>
+
