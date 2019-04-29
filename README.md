@@ -161,7 +161,7 @@ The intended purpose of this application is to implement and familiarize myself 
   <tr>
     <td>2.3</td>
     <td>Allow them to choose between studying their own material or all material</td>
-    <td>Inspection</td>
+    <td>Demonstration</td>
     <td>Verify that the take from only my questions switch displays different data then when it is not selected</td>
     <td>Passing</td>
     <td>04/13/2019</td>
