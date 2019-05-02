@@ -18,6 +18,8 @@ namespace Domain.Concrete
 
         public IEnumerable<Topic> Topics { get { return _context.Topics; } }
 
+        public IEnumerable<Choice> Choices { get { return _context.Choices; } }
+
         public QuestionRepository(ApplicationDataContext Context)
         {
             _context = Context;
@@ -68,5 +70,7 @@ namespace Domain.Concrete
 
             return questionPool.Join(_context.Choices, q => q.QuestionID, c => c.QuestionID, (q, c) => q);
         }
+
+        
     }
 }

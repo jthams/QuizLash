@@ -10,14 +10,15 @@
 
 <hr class="text-center" />
 
-<br />
-<div class="container">
-    <a class="btn btn-outline-info" asp-controller="Questions" asp-action="Create"><b>Create a new question</b></a>
-    <a class="btn btn-outline-info" asp-controller="Quizs" asp-action="CreateFlashCard"><b>Start with flashcards</b></a>
-    <a class="btn btn-outline-info" asp-controller="Quizs" asp-action="CreateQuiz"><b>Begin a new quiz</b></a>
-</div>
+
+    
 <br />  
 <div class="container" id="accordion">
+    <div class="btn-group" style="position:center">
+        <a class="btn btn-outline-info" asp-controller="Questions" asp-action="Create"><b>Create a new question</b></a>
+        <a class="btn btn-outline-info" asp-controller="Quizs" asp-action="CreateFlashCard"><b>Start with flashcards</b></a>
+        <a class="btn btn-outline-info" asp-controller="Quizs" asp-action="CreateQuiz"><b>Begin a new quiz</b></a>
+    </div>
     <div class="card">
         <div class="card-header">
             <a class="card-link" data-toggle="collapse" href="#Quizzes">
@@ -45,25 +46,25 @@
                 <tbody>
                     @foreach (var item in Model.Quizzes)
                     {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.QuizID)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Topic.Description)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Score)%
-                            </td>
-                            <td>
-                                @Html.DisplayFor(Model => Model.TopicAverages[item.TopicID])%
-                            </td>
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.QuizID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Topic.Description)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Score)%
+                        </td>
+                        <td>
+                            @Html.DisplayFor(Model => Model.TopicAverages[item.TopicID])%
+                        </td>
 
 
-                            <td>
-                                <a class="btn btn-outline-secondary" asp-action="Details" asp-controller="Quizs" asp-route-id="@item.QuizID">Details</a>
-                            </td>
-                        </tr>
+                        <td>
+                            <a class="btn btn-outline-secondary" asp-action="Details" asp-controller="Quizs" asp-route-id="@item.QuizID">Details</a>
+                        </td>
+                    </tr>
                     }
                 </tbody>
             </table>
@@ -95,22 +96,22 @@
                 <tbody>
                     @foreach (var item in Model.Questions)
                     {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Body)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Answer)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Topic.Description)
-                            </td>
-                            <td>
-                                <a asp-action="Edit" asp-controller="Questions" asp-route-id="@item.QuestionID">Edit</a> |
-                                <a asp-action="Details" asp-controller="Questions" asp-route-id="@item.QuestionID">Details</a> |
-                                <a class="text-danger" asp-controller="Questions" asp-action="Delete" asp-route-id="@item.QuestionID">Delete</a>
-                            </td>
-                        </tr>
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Body)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Answer)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Topic.Description)
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-controller="Questions" asp-route-id="@item.QuestionID">Edit</a> |
+                            <a asp-action="Details" asp-controller="Questions" asp-route-id="@item.QuestionID">Details</a> |
+                            <a class="text-danger" asp-controller="Questions" asp-action="Delete" asp-route-id="@item.QuestionID">Delete</a>
+                        </td>
+                    </tr>
                     }
                 </tbody>
             </table>

@@ -5,9 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Setup a new quiz</h1>
-
-<h4></h4>
+<h1 class="text-center">Setup a new quiz</h1>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -24,7 +22,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Type" class="control-label"></label>
-                <select asp-for="Type" asp-items="Model.Types" class="form-control disabled"></select>
+                <select asp-for="Type" asp-items="Model.Types" class="form-control"></select>
                 <span asp-validation-for="Type" class="text-danger"></span>
             </div>
             <div class="form-group" style="display: none;">

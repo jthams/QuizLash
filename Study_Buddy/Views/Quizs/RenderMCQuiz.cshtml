@@ -1,46 +1,63 @@
 ﻿@model WebUI.ViewModels.QuizViewModel
-@using System.Linq
 @{
     ViewData["Title"] = "Render";
     Layout = "~/Views/Shared/_Layout.cshtml";
     int counter = 1;
-    List<string> tempOptions = new List<string>();
+
+
 }
 
-<h1 class="text-success text-center"> Good Luck!</h1>
-<h4 class="text-muted">Multiple Choice Quiz</h4>
+<h1 class="text-muted text-center">Multiple Choice Quiz</h1>
 <hr />
 
 <form asp-action="FinalizeQuiz">
     @foreach (var item in Model.Questions)
     {
-    <div class="form-group">
-        @counter .@Html.DisplayFor(i => item.Body)
-        <div>
+        var sel = Model.Selections.Where(x => x.QuestionId == item.QuestionID).First();
 
+        <div class="jumbotron shadow">
+            <div class="container-fluid">
+                <div class="form-group">
+                    <h4 class="text-primary font-weight-bold"> @counter .@Html.DisplayFor(i => item.Body)</h4>
+                    <hr />
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="radio" class="form-check-input" asp-for="@Model.QidGuess[item.QuestionID]" value="@sel.Choice1.ToString()" />@sel.Choice1
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="radio" class="form-check-input" asp-for="QidGuess[item.QuestionID]" value="@sel.Choice2.ToString()" />@sel.Choice2
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="radio" class="form-check-input" asp-for="@Model.QidGuess[item.QuestionID]" value="@sel.Choice3.ToString()" />@sel.Choice3
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="radio" class="form-check-input" asp-for="@Model.QidGuess[item.QuestionID]" value="@sel.Choice4.ToString()" />@sel.Choice4
+                        </label>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
+
         counter++;
     }
-    <div class="form-group" style="display: none;">
-        <label asp-for="TopicID" class="control-label"></label>
-        <select asp-for="TopicID" class="form-control" asp-items="ViewBag.TopicID"></select>
-    </div>
-    <div class="form-group" style="display: none;">
-        <label asp-for="NumberOfQuestions" class="control-label"></label>
-        <input asp-for="NumberOfQuestions" class="form-control" />
-    </div>
-    <div class="form-group" style="display: none;">
-        <label asp-for="Owner" class="control-label"></label>
-        <input asp-for="Owner" class="form-control" />
-    </div>
+
+    <input type="hidden" asp-for="Type" />
+    <input type="hidden" asp-for="TopicID" />
+    <input type="hidden" asp-for="NumberOfQuestions" />
+    <input type="hidden" asp-for="Owner" />
     <div class="form-group">
-        <input type="submit" value="Submit" class="btn-bar btn-outline-success" />
+        <input type="submit" value="Submit" class="btn btn-outline-success btn-lg btn-block" />
     </div>
 </form>
 @section Scripts{
 
-
+    
 
 }
 

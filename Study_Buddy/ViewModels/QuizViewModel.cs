@@ -20,14 +20,13 @@ namespace WebUI.ViewModels
 
         [Required]
         public string Owner { get; set; }
-        
-        [Display(Name ="What type of questions would you like")]
+
+        [Display(Name = "What type of questions would you like")]
         public string Type { get; set; }
 
         public List<SelectListItem> Types { get; } = new List<SelectListItem>
         {
             new SelectListItem { Value = "MC", Text = "Multiple Choice" },
-            new SelectListItem { Value = "TF", Text = "True or False" },
             new SelectListItem { Value = "SA", Text = "Short Answer"  }
         };
 
@@ -42,7 +41,7 @@ namespace WebUI.ViewModels
         public int NumberOfQuestions { get; set; }
 
         [Required]
-        [Display(Name ="Only take from my questions")]
+        [Display(Name = "Only take from my questions")]
         public bool PrivateSource { get; set; }
 
         // Collection of questions to display to the user
@@ -52,6 +51,18 @@ namespace WebUI.ViewModels
         [Required]
         public Dictionary<int, string> QidGuess { get; set; }
 
+        public List<MCSelection> Selections { get; set; }
+
+       
     }
+    public struct MCSelection
+    {
+        public int QuestionId { get; set; }
+        public string Choice1 { get; set; }
+        public string Choice2 { get; set; }
+        public string Choice3 { get; set; }
+        public string Choice4 { get; set; }
+    }
+
 
 }

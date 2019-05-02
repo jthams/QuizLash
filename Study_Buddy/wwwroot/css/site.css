@@ -6,75 +6,269 @@ for details on configuring this project to bundle and minify static web assets. 
 
 
 a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
+    white-space: normal;
+    text-align: center;
+    word-break: break-all;
 }
 
 
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
+
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 .border-top {
-  border-top: 1px solid #e5e5e5;
+    border-top: 1px solid #e5e5e5;
 }
+
 .border-bottom {
-  border-bottom: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
 }
 
 .box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
 }
 
 button.accept-policy {
-  font-size: 1rem;
-  line-height: inherit;
+    font-size: 1rem;
+    line-height: inherit;
 }
 
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
+    /* Margin bottom by footer height */
+    font-family: Arial, Helvetica, sans-serif;
+    margin-bottom: 60px;
+    
 }
+
 .footer {
-   margin-top:20px;
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  white-space: nowrap;
-  /* Set the fixed height of the footer here */
-  height: 60px;
-  line-height: 60px; /* Vertically center the text there */
+    margin-top: 20px;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    position:absolute;
+    /* Set the fixed height of the footer here */
+    height: 60px;
+    line-height: 60px; /* Vertically center the text there */
 }
-ui-menu{
-    display : inherit;
-    backface-visibility:visible;
-    background-color:inherit;
 
-
-}
-.ui-front
-.ui-widget-content{
-    backface-visibility:visible;
+ui-menu {
+    display: inherit;
+    backface-visibility: visible;
     background-color: inherit;
 }
+
+.ui-front
+.ui-widget-content {
+    backface-visibility: visible;
+    background-color: inherit;
+}
+
 .ui-autocomplete {
     background-color: inherit;
 }
-td{
-    word-wrap:inherit;
+
+td {
+    word-wrap: inherit;
+}
+
+.flip-card {
+    background-color: transparent;
+    display: flex;
+    height: 300px;
+    perspective: 1000px;
+}
+
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+.flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);
+    transform-style: preserve-3d;
+}
+
+.flip-card-front, .flip-card-back {
+    text-align: center;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+}
+
+.flip-card-front {
+    background-color: inherit;
+    color: cadetblue;
+    z-index: 2;
+}
+
+.flip-card-back {
+    background-color: #2980b9;
+    color: white;
+    transform: rotateY(180deg);
+    z-index: 1;
+}
+
+/* Login Settings */
+.SocialLogin {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* style the container */
+.container-SocialLogin {
+    position: relative;
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px 0 30px 0;
+}
+
+/* style inputs and link buttons */
+input-SocialLogin,
+.btn-SocialLogin {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 4px;
+    margin: 5px 0;
+    opacity: 0.85;
+    display: inline-block;
+    font-size: 17px;
+    line-height: 20px;
+    text-decoration: none; /* remove underline from anchors */
+}
+
+    input-SocialLogin:hover,
+    .btn-SocialLogin:hover {
+        opacity: 1;
+    }
+
+/* add appropriate colors to fb, twitter and google buttons */
+
+/* style the submit button */
+input-SocialLogin[type=submit] {
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+}
+
+    input-SocialLogin[type=submit]:hover {
+        background-color: #45a049;
+    }
+
+/* Two-column layout */
+.col-SocialLogin {
+    float: left;
+    width: 50%;
+    margin: auto;
+    padding: 0 50px;
+    margin-top: 6px;
+}
+
+/* Clear floats after the columns */
+.row-SocialLogin:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.hl {
+    display: block;
+    text-align: center;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+    .hl > span {
+        position: relative;
+        display: inline-block;
+    }
+
+        .hl > span:before,
+        .hl > span:after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            width: 9999px;
+            height: 1px;
+            background: rgba(0,0,0,0.2);
+        }
+
+        .hl > span:before {
+            right: 100%;
+            margin-right: 10px;
+        }
+
+        .hl > span:after {
+            left: 100%;
+            margin-left: 10px;
+        }
+
+
+/* vertical line */
+.vl-SocialLogin {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+    border: 2px solid #ddd;
+    height: 175px;
+}
+
+/* text inside the vertical line */
+.vl-innertext-SocialLogin {
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #f1f1f1;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    padding: 8px 10px;
+}
+
+/* hide some text on medium and large screens */
+.hide-md-lg-SocialLogin {
+    display: none;
+}
+
+/* bottom container */
+.bottom-container-SocialLogin {
+    text-align: center;
+    background-color: #666;
+    border-radius: 0px 0px 4px 4px;
+}
+
+/* Responsive layout - when the screen is less than 650px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 650px) {
+    .col-SocialLogin {
+        width: 100%;
+        margin-top: 0;
+    }
+    /* hide the vertical line */
+    .vl-SocialLogin {
+        display: none;
+    }
+    /* show the hidden text on small screens */
+    .hide-md-lg-SocialLogin {
+        display: block;
+        text-align: center;
+    }
 }

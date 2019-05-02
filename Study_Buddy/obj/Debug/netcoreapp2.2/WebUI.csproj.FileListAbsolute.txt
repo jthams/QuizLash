@@ -1,14 +1,14 @@
+C:\Users\hamel\source\Repos\jthams\StudyBuddy\Study_Buddy\bin\Debug\netcoreapp2.2\WebUI.dll
+C:\Users\hamel\source\Repos\jthams\StudyBuddy\Study_Buddy\bin\Debug\netcoreapp2.2\WebUI.Views.dll
+C:\Users\hamel\source\Repos\jthams\StudyBuddy\Study_Buddy\bin\Debug\netcoreapp2.2\Domain.dll
 C:\Users\hamel\source\Repos\jthams\StudyBuddy\Study_Buddy\bin\Debug\netcoreapp2.2\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
 C:\Users\hamel\source\Repos\jthams\StudyBuddy\Study_Buddy\bin\Debug\netcoreapp2.2\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
 C:\Users\hamel\source\Repos\jthams\StudyBuddy\Study_Buddy\bin\Debug\netcoreapp2.2\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
 C:\Users\hamel\source\Repos\jthams\StudyBuddy\Study_Buddy\bin\Debug\netcoreapp2.2\WebUI.deps.json
 C:\Users\hamel\source\Repos\jthams\StudyBuddy\Study_Buddy\bin\Debug\netcoreapp2.2\WebUI.runtimeconfig.json
 C:\Users\hamel\source\Repos\jthams\StudyBuddy\Study_Buddy\bin\Debug\netcoreapp2.2\WebUI.runtimeconfig.dev.json
-C:\Users\hamel\source\Repos\jthams\StudyBuddy\Study_Buddy\bin\Debug\netcoreapp2.2\WebUI.dll
 C:\Users\hamel\source\Repos\jthams\StudyBuddy\Study_Buddy\bin\Debug\netcoreapp2.2\WebUI.pdb
-C:\Users\hamel\source\Repos\jthams\StudyBuddy\Study_Buddy\bin\Debug\netcoreapp2.2\WebUI.Views.dll
 C:\Users\hamel\source\Repos\jthams\StudyBuddy\Study_Buddy\bin\Debug\netcoreapp2.2\WebUI.Views.pdb
-C:\Users\hamel\source\Repos\jthams\StudyBuddy\Study_Buddy\bin\Debug\netcoreapp2.2\Domain.dll
 C:\Users\hamel\source\Repos\jthams\StudyBuddy\Study_Buddy\bin\Debug\netcoreapp2.2\Domain.pdb
 C:\Users\hamel\source\Repos\jthams\StudyBuddy\Study_Buddy\obj\Debug\netcoreapp2.2\WebUI.csprojAssemblyReference.cache
 C:\Users\hamel\source\Repos\jthams\StudyBuddy\Study_Buddy\obj\Debug\netcoreapp2.2\WebUI.csproj.CoreCompileInputs.cache
@@ -82,3 +82,4 @@ C:\Users\hamel\source\Repos\jthams\StudyBuddy\Study_Buddy\obj\Debug\netcoreapp2.
 C:\Users\hamel\source\Repos\jthams\StudyBuddy\Study_Buddy\obj\Debug\netcoreapp2.2\WebUI.csproj.CopyComplete
 C:\Users\hamel\source\Repos\jthams\StudyBuddy\Study_Buddy\obj\Debug\netcoreapp2.2\WebUI.dll
 C:\Users\hamel\source\Repos\jthams\StudyBuddy\Study_Buddy\obj\Debug\netcoreapp2.2\WebUI.pdb
+C:\Users\hamel\source\Repos\jthams\StudyBuddy\Study_Buddy\obj\Debug\netcoreapp2.2\Razor\Views\Shared\_LoginForm.g.cshtml.cs

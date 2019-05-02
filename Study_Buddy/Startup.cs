@@ -71,6 +71,23 @@ namespace WebUI
                 .AddDefaultUI(UIFramework.Bootstrap4)
                 .AddEntityFrameworkStores<UserAuthenticationDbContext>();
 
+            services.AddAuthentication()
+            .AddFacebook(Options =>
+            {
+                Options.AppId = Configuration["Authentication:Facebook:AppId"];
+                Options.AppSecret = Configuration["Authentication:Facebook:AppSecret"];
+            })
+            /*.AddMicrosoftAccount(Options =>
+            {
+                Options.ClientId = Configuration["Authentication:Microsoft:ClientId"];
+                Options.ClientSecret = Configuration["Authentication:Microsoft:ClientSecret"];
+            })*/
+            .AddGoogle(Options =>
+            {
+                Options.ClientId = Configuration["Authentication:Google:ClientId"];
+                Options.ClientSecret = Configuration["Authentication:Google:ClientSecret"];
+            });
+
             // Changes the security token lifespan to 3 hours to protect accounts 
             services.Configure<DataProtectionTokenProviderOptions>(o =>
                o.TokenLifespan = TimeSpan.FromHours(3));

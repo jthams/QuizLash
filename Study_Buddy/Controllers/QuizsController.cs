@@ -47,7 +47,7 @@ namespace WebUI.Controllers
             return uniqueQuestions;
         }
 
-        // return a collection of unique questions that the user 
+        // Return a collection of unique questions that the user 
         private List<Question> getUsersQuestions(QuizViewModel quiz)
         {
             List<Question> questionPool =_quizData.SelectQuestionsForTopic(quiz.TopicID).ToList();
@@ -55,9 +55,106 @@ namespace WebUI.Controllers
 
             return UsersQuestions;
         }
+
+        // Set the collection for questions in the quizVM
+        public QuizViewModel SetQuestionsFlashCards(QuizViewModel quizVM)
+        {
+            // Set the displayed questions based on the boolean from the user
+            if (quizVM.PrivateSource)
+            {
+                quizVM.Questions = getUsersQuestions(quizVM);
+            }
+            else
+            {
+                quizVM.Questions = getUniqueQuestions(quizVM);
+            }
+
+            return quizVM;
+        }
+        // Set Multiple Choice Questions
+        public QuizViewModel SetQuestionsMCQuiz(QuizViewModel quizVM)
+        {
+            // List to set the view model property to
+            List<MCSelection> selections = new List<MCSelection>();
+            Dictionary<int, string> valuePairs = new Dictionary<int, string>();
+
+            // Set the displayed questions based on the boolean from the user
+            if (quizVM.PrivateSource)
+            {
+                quizVM.Questions = getUsersQuestions(quizVM);
+                foreach (var item in quizVM.Questions)
+                {
+                    valuePairs.Add(item.QuestionID, null);
+                    var textVal = MCRandomAppearance(item).ToArray();
+                    selections.Add
+                        (
+                            new MCSelection
+                            {
+                                QuestionId = item.QuestionID,
+                                Choice1 = textVal[0],
+                                Choice2 = textVal[1],
+                                Choice3 = textVal[2],
+                                Choice4 = textVal[3]
+                            }
+                        );
+                }
+            }
+            else
+            {
+                quizVM.Questions = getUniqueQuestions(quizVM);
+                foreach (var item in quizVM.Questions)
+                {
+                    valuePairs.Add(item.QuestionID, null);
+                    var textVal = MCRandomAppearance(item).ToArray();
+                    selections.Add
+                        (
+                            new MCSelection
+                            {
+                                QuestionId = item.QuestionID,
+                                Choice1 = textVal[0],
+                                Choice2 = textVal[1],
+                                Choice3 = textVal[2],
+                                Choice4 = textVal[3]
+                            }
+                        );
+                }
+            }
+            quizVM.QidGuess = valuePairs;
+            quizVM.Selections = selections;
+
+            return quizVM;
+        }
+        // Set short answer questions
+        public QuizViewModel SetQuestionsSAQuiz(QuizViewModel quizVM)
+        {
+            // Create a dictionary to help grade the quiz on server side
+            Dictionary<int, string> valuePairs = new Dictionary<int, string>();
+
+            // Set the displayed questions based on the boolean from the user
+            // Populate the keys of the dictionary with the appropriate QuestionIDs
+            if (quizVM.PrivateSource)
+            {
+                quizVM.Questions = getUsersQuestions(quizVM);
+                foreach (var item in quizVM.Questions)
+                {
+                    valuePairs.Add(item.QuestionID, null);
+                }
+            }
+            else
+            {
+                quizVM.Questions = getUniqueQuestions(quizVM);
+                foreach (var item in quizVM.Questions)
+                {
+                    valuePairs.Add(item.QuestionID, null);
+                }
+            }
+            // set the VM property to the new dictionary
+            quizVM.QidGuess = valuePairs;
+
+            return quizVM;
+        }
         
-        // Grading method for short answer quizzes
-        private decimal GradeSAQuiz(QuizViewModel quiz)
+        private decimal GradeQuiz(QuizViewModel quiz)
         {
             List<Question> questionPool =_quizData.SelectQuestionsForTopic(quiz.TopicID).ToList();
             decimal score = 0;
@@ -77,7 +174,23 @@ namespace WebUI.Controllers
 
             return score;
         }
-        
+        // Create the options for a MC Question
+        private IEnumerable<string> MCRandomAppearance(Question question)
+        {
+            List<string> randChoices = new List<string>();
+            randChoices.Add(question.Answer);
+
+            List<string> choiceText = _quizData.Choices.Where(c => c.QuestionID == question.QuestionID).Select(c => c.Text).ToList();
+            foreach (var item in choiceText)
+            {
+                randChoices.Add(item);
+            }
+
+            IEnumerable<string> output = randChoices.OrderBy(x => x.Length).ToList();
+
+            return output;
+        }
+
         //*********************** END OF HELPER METHODS SECTION ***********************
 
         [HttpGet] // GET: Flashcard / Create
@@ -94,25 +207,20 @@ namespace WebUI.Controllers
         public IActionResult CreateFlashcard(QuizViewModel quizVM)
         {
             ViewData["TopicID"] = new SelectList(_availableTopics, "TopicID", "Description", quizVM.TopicID);
-            var uniqueQuestions = getUniqueQuestions(quizVM);
-            var usersQuestions =  getUsersQuestions(quizVM);
 
-            // Set the displayed questions based on the boolean from the user
-            if (quizVM.PrivateSource)
-            {
-                quizVM.Questions = usersQuestions;
-            }
-            else
-            {
-                quizVM.Questions = uniqueQuestions;
-            }
-            return View("RenderFlashCard",quizVM);
+            QuizViewModel QuizVM = SetQuestionsFlashCards(quizVM);
+
+            return View("RenderFlashCard",QuizVM);
         }
+
+       
 
         [HttpGet]// GET: Quizs/Create
         public IActionResult CreateQuiz()
         {
+
             ViewData["TopicID"] = new SelectList(_availableTopics, "TopicID", "Description");
+            
             QuizViewModel quizVM = new QuizViewModel();
 
             // Set the Owner to the current user
@@ -126,36 +234,22 @@ namespace WebUI.Controllers
         {
             // Maintain selection state
             ViewData["TopicID"] = new SelectList(_availableTopics, "TopicID", "Description",quizVM.TopicID);
-
-            // Create a dictionary to help grade the quiz on server side
-            Dictionary<int, string> valuePairs = new Dictionary<int, string>();
-
-            // Use helper method to populate the questions
-            var uniqueQuestions = getUniqueQuestions(quizVM);
-            var usersQuestions = getUsersQuestions(quizVM);
-
-            // Set the displayed questions based on the boolean from the user
-            // Populate the keys of the dictionary with the appropriate QuestionIDs
-            if (quizVM.PrivateSource)
+            switch (quizVM.Type)
             {
-                quizVM.Questions = usersQuestions;
-                foreach (var item in usersQuestions)
-                {
-                    valuePairs.Add(item.QuestionID,null);
-                }
-            }
-            else
-            {
-                quizVM.Questions = uniqueQuestions;
-                foreach (var item in uniqueQuestions)
-                {
-                    valuePairs.Add(item.QuestionID, null);
-                }
-            }
-            // set the VM property to the new dictionary
-            quizVM.QidGuess = valuePairs;
+                case "MC":
+                    QuizViewModel QuizVmMC = SetQuestionsMCQuiz(quizVM);
+                    return View("RenderMCQuiz", QuizVmMC);
+                    
+                case "SA":
+                    QuizViewModel QuizVmSA = SetQuestionsSAQuiz(quizVM);
+                    return View("RenderSAQuiz", QuizVmSA);
 
-            return  View("RenderSAQuiz",quizVM);
+                case "TF":
+                    QuizViewModel QuizVmTF = SetQuestionsSAQuiz(quizVM);
+                    return View("RenderSAQuiz", QuizVmTF);
+            }
+
+            return  View();
         }
      
         [HttpPost]
@@ -163,7 +257,7 @@ namespace WebUI.Controllers
         public IActionResult FinalizeQuiz(QuizViewModel quizVM)
         {
             ViewData["TopicID"] = new SelectList(_availableTopics, "TopicID", "Description", quizVM.TopicID);
-            decimal score = GradeSAQuiz(quizVM);
+            decimal score = GradeQuiz(quizVM);
 
             // Create a collection to bind the composite table
             List<QuizQuestionRelation> quizQuestions = new List<QuizQuestionRelation>();

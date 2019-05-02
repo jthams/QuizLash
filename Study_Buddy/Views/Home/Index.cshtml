@@ -1,63 +1,96 @@
-﻿@{
+﻿
+@{
     ViewData["Title"] = "Home Page";
 }
-
+<head>
+    <link rel="stylesheet" href="~/lib/bootstrap-social/assets/css/font-awesome.css" />
+</head>
 <div class="text-center">
-    <header class="display-4">Welcome To Study Buddy</header>
+    <h1 class="display-4">Welcome To Study Buddy</h1>
     <i>Create your own questions to personalize your study time</i>
 </div>
 <hr />
-
+<p style="padding-top: 40px"></p>
 <body>
-    <div class="card">
-        <div class="card-header text-center">
-            <b class="">Study options</b>
+    
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-6">
+                <div>
+                    <h5 class="text-primary">Start Learning Today</h5>
+                    <hr />
+                </div>
+                <div>
+                    <p class="text-lg-left text-secondary">
+                        With no limits on what material you can create your learning experience is completely up to you.
+                        Enter your study material and review it with flashcards or test your knowledge of a subject with short answer and multiple-choice quizzes.
+                    </p>
+                </div>
+                <div>
+                    <button type="button" class="btn btn btn-outline-primary btn-lg btn-block" data-toggle="modal" data-target="#loginmodal">Start</button>
+                </div>
+            </div>
         </div>
-        <div class="card-body">
-            <b class="text-info">Currently you may</b>
-            <ol>
-                <li>Create your own questions</li>
-                <li>Study either, your own questions or any that match the chosen topic</li>
-            </ol>
-            <b class="text-info">Study formats available</b>
-            <ol>
-                <li>Flash Cards</li>
-                <li>Short Answer Quizzes</li>
-            </ol>
-            <b class="text-info">Future available formats</b>
-                <ol>
-                    <li>Multiple choice quizzes</li>
-                    <li>Language support for speech based studying</li>
-                </ol>
-</div>
     </div>
-    <div class="card-deck justify-content-around">
-        <div class="card">
-            <div class="card-header">
-                <b>Getting Started</b>
-            </div>
-            <div class="card-body">
-                <b class="text-info">Start studying in three easy steps</b>
-                    <ol>
-                        <li>Register an account.</li>
-                        <li>Check your email to confirm your account</li>
-                        <li>Click the "Material" tab on the top right and start entering your questions</li>
-                    </ol>
-                    <a class="btn btn-primary border-white stretched-link" asp-area="Identity" asp-page="/Account/Register">Let us begin</a>
-</div>
-        </div>
+    <div class="modal fade" id="loginmodal">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                    <button type="button" class="close align-self-end" data-dismiss="modal">&times;</button>
 
-        <div class="card">
-            <div class="card-header">
-                <b>Development Steps</b>
+                    <div class="modal-body">
+                        <div class="hl">
+                            <span><b>Login/Register with:</b></span>
+                        </div>
+                        <p></p>
+                        <form action="/" method="post">
+                            <div class="row text-white">
+                                <div class="col">
+                                    <a class="btn btn-block btn-social btn-facebook">
+                                        <span class="fa fa-facebook"></span> Facebook
+                                    </a>
+                                </div>
+                                <div class="col">
+                                    <a class="btn btn-block btn-social btn-google">
+                                        <span class="fa fa-google-plus"></span> Google
+                                    </a>
+                                </div>
+
+                            </div>
+                        </form>
+                        <p></p>
+                        <div class="hl">
+                            <span><b>Or use a local account</b></span>
+                        </div>
+                        <form method="post">
+                            @Html.AntiForgeryToken()
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input type="email" class="form-control" id="email" />
+                            </div>
+                            <div class="form-group">
+                                <label>Password</label>
+                                <input type="password" class="form-control" id="password" />
+                            </div>
+                            <div class="form-group">
+                                <button id="login" type="button" class="btn btn-outline-secondary btn-block">Log in</button>
+                            </div>
+                        </form>
+                        <p></p>
+                        <div class="row justify-content-center">
+                            <div class="col">
+                                <a class="text-black-50" asp-area="Identity" asp-page="/Account/Register">Create Account</a>
+                            </div>
+                            <div class="col">
+                                <a class="text-black-50" id="forgot-password" asp-area="Identity" asp-page="/Account/ForgotPassword">Forgot Password</a>
+                            </div>
+                        </div>
+                    </div>
             </div>
-            <div class="card-body">
-                <p class="card-text">
-                    For more information about this project please visit the About page.<br />
-                    If you are interested in more detailed information please visit my Github profile.
-                </p>
-                <a href="https://github.com/jthams/" class="btn btn-primary border-white stretched-link">To Github</a>
-            </div>
+
         </div>
     </div>
 </body>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
