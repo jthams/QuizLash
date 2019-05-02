@@ -1,7 +1,7 @@
 # StudyBuddy
 An ASP.Net Core 2.2 Web Application, which utilizes various Azure services to create an interactive speech based approach to studying
 
-Live production version of this application can be found on my custom domain <a href="http://studybuddy.hamelot.net/">here</a>.
+Live production version of this application can be found <a href="https://studybuddydevv2.azurewebsites.net">here</a>.
 
 The intended purpose of this application is to implement and familiarize myself with as many Azure services as possible without over engineering the application or bogging users down with unnecessary features.
 
@@ -99,4 +99,166 @@ The intended purpose of this application is to implement and familiarize myself 
  <i><b>Classes for this database can be found in the Areas/Identity folder</b></i>
  <img src="https://theblobthestorageaccount.blob.core.windows.net/myblob/IdentityDatabaseDiagram.PNG" width="75%" height="75%" title="Authentication Data">
  
- 
+<h1>Test Plan</h1>
+
+<table>
+  <caption>Testing Report</caption>
+  <tr>
+    <th>Requirement ID</th>
+    <th>Requirement Description</th>
+    <th>Test Method</th>
+    <th>Test Procedure</th>
+    <th>Current Status</th>
+    <th>Timestamp</th>
+  </tr>
+  <tr>
+    <td>1.1</td>
+    <td>Secure user passwords</td>
+    <td>Inspection</td>
+    <td>Click "Login", enter email and password, query identityuser table in SQL DB, verify value is hashed</td>
+    <td>Passing</td>
+    <td>03/13/2019</td>
+  </tr>
+  <tr>
+    <td>1.2</td>
+    <td>Allow multi-factor authentication</td>
+    <td>Demonstration</td>
+    <td>Click "Login", enter email and password, click "Hello [yourUsername]!", click "Two Factor Authentication", click "Setup authenticator app", scan QR code, enter numerical code, click "verify"</td>
+    <td>Passing</td>
+    <td>03/14/2019</td>
+  </tr>
+  <tr>
+    <td>1.3</td>
+    <td>Confirm accounts via email</td>
+    <td>Demonstration</td>
+    <td>Click "Register", enter email and password, check email, click the return URL, brought back to your profile page</td>
+    <td>Passing</td>
+    <td>03/14/2019</td>
+  </tr>
+  <tr>
+    <td>1.4</td>
+    <td>Encrypt user data at rest</td>
+    <td>Inspection</td>
+    <td>Login to host SQL server on azure, verify encryption is selected</td>
+    <td>Passing</td>
+    <td>03/10/2019</td>
+  </tr><tr>
+    <td>2.1</td>
+    <td>Create view forms for user specific questions</td>
+    <td>Integration</td>
+    <td>Test Filter from Domain interfaces</td>
+    <td>Not Implemented</td>
+    <td>04/29/2019</td>
+  </tr>
+  <tr>
+    <td>2.2</td>
+    <td>Have access to CRUD operations for their created content</td>
+    <td>Demonstration</td>
+    <td>Login, click "Material", click "Create a new question", Complete form, click "Create", Verify it exists on the material page, click "Edit", verify view exists</td>
+    <td>Passing</td>
+    <td>04/01/2019</td>
+  </tr>
+  <tr>
+    <td>2.3</td>
+    <td>Allow them to choose between studying their own material or all material</td>
+    <td>Demonstration</td>
+    <td>Verify that the take from only my questions switch displays different data then when it is not selected</td>
+    <td>Passing</td>
+    <td>04/13/2019</td>
+  </tr>
+  <tr>
+    <td>3.1</td>
+    <td>Create view for flashcards</td>
+    <td>Inspection</td>
+    <td>Login, Click "Material", Click "Start with Flashcards", complete setup form, verify flashcards are populating</td>
+    <td>Passing</td>
+    <td>04/10/2019</td>
+  </tr>
+  <tr>
+    <td>3.2</td>
+    <td>Create view for short answer quizzes</td>
+    <td>Inspection</td>
+    <td>Login, Click "Material", Click "Start a new quiz", complete setup form and select "Short Answer" under the "Type" dropdown, verify view format matches the type</td>
+    <td>Passing</td>
+    <td>04/15/2019</td>
+  </tr>
+  <tr>
+    <td>3.3</td>
+    <td>Create view for multiple choice quizzes</td>
+    <td>Inspection</td>
+    <td>Login, Click "Material", Click "Start a new quiz", complete setup form and select "Multiple Choice" under the "Type" dropdown, verify view format matches the type</td>
+    <td>Not Implemented</td>
+    <td>04/29/2019</td>
+  </tr>
+  <tr>
+    <td>3.4</td>
+    <td>Create view for true or false quizzes</td>
+    <td>Inspection</td>
+    <td>Login, Click "Material", Click "Start a new quiz", complete setup form and select "True or False" under the "Type" dropdown, verify view format matches the type</td>
+    <td>Not Implemented</td>
+    <td>04/29/2019</td>
+  </tr>
+  <tr>
+    <td>4.1</td>
+    <td>Grading method for short answer quizzes</td>
+    <td>Unit Test</td>
+    <td>Mock data for input dictionary and questions repository</td>
+    <td>Not Implemented</td>
+    <td>04/29/2019</td>
+  </tr>
+  <tr>
+    <td>4.2</td>
+    <td>Grading method for multiple choice quizzes</td>
+    <td>Unit Test</td>
+    <td>Mock data for selected input and questions repository</td>
+    <td>Not Implemented</td>
+    <td>04/29/2019</td>
+  </tr>
+  <tr>
+    <td>4.3</td>
+    <td>Grading method for true or false quizzes</td>
+    <td>Unit Test</td>
+    <td>Mock data for selected input and questions repository</td>
+    <td>Not Implemented</td>
+    <td>04/29/2019</td>
+  </tr>
+  <tr>
+    <td>5.1</td>
+    <td>Query database to average previous quiz scores for a given topic</td>
+    <td>Inspection</td>
+    <td>Current aggregate method returns correct decimal value</td>
+    <td>Passing</td>
+    <td>04/19/2019</td>
+  </tr>
+  <tr>
+    <td>5.2</td>
+    <td>Display the averages for all topics for quizzes they have taken in the user content index</td>
+    <td>Inspection</td>
+    <td>Displays the correct averages for all topics for quizzes they have taken in the quizs table for the topic of that quiz</td>
+    <td>Passing</td>
+    <td>04/19/2019</td>
+  </tr>
+  <tr>
+    <td>6.1</td>
+    <td>Text to speech API</td>
+    <td>Integration</td>
+    <td>Ensure text to speech recognizes question body values on the quiz view</td>
+    <td>Not Implemented</td>
+    <td>04/29/2019</td>
+  </tr><tr>
+    <td>6.2</td>
+    <td>Speech to text API</td>
+    <td>Integration</td>
+    <td>Ensure Speech to text fills input forms where appropriate</td>
+    <td>Not Implemented</td>
+    <td>04/29/2019</td>
+  </tr><tr>
+    <td>6.3</td>
+    <td>Integrate above services with Microsoft LUIS</td>
+    <td>Integration</td>
+    <td>Ensure complete integration from voice input from user and data read back by the text to speech api</td>
+    <td>Not Implemented</td>
+    <td>04/29/2019</td>
+  </tr>
+  
+</table>
