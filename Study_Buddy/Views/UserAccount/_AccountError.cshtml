@@ -1,0 +1,26 @@
+﻿@model WebUI.ViewModels.UserAccountViewModel
+
+@{
+    ViewData["Title"] = "_AccountError";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="alert-danger text-center font-weight-bold">Error</h1>
+
+<p class="text-danger font-weight-bold">
+    Something Went Wrong
+</p>
+
+<ol>
+    @foreach(var item in Model.Errors){
+    <li>@Html.DisplayFor(modelItem => item.Code): @Html.DisplayFor(modelItem => item.Description)</li>
+    }
+
+    @if(Model.ErrorMessage != null)
+    {
+    <li>@Html.DisplayFor(m => m.ErrorMessage)</li>
+    }
+
+
+</ol>
+

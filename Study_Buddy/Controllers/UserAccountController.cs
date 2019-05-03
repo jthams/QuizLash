@@ -71,6 +71,9 @@ namespace WebUI.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Register([Bind("Email, Password")] UserAccountViewModel Input)
         {
+            UserAccountViewModel model = new UserAccountViewModel();
+            List<IdentityError> InputErrors = new List<IdentityError>();
+
             var user = new IdentityUser { UserName = Input.Email, Email = Input.Email };
             var result = await _userManager.CreateAsync(user, Input.Password);
             if (result.Succeeded)
@@ -81,11 +84,11 @@ namespace WebUI.Controllers
             }
             foreach (var error in result.Errors)
             {
-                ModelState.AddModelError(string.Empty, error.Description);
+                InputErrors.Add(error);
             }
-
+            model.Errors = InputErrors;
             // If we got this far, something failed, redisplay form
-            return PartialView("_RegisterForm");
+            return View("_AccountError", model);
         }
 
         [HttpGet]
@@ -123,10 +126,8 @@ namespace WebUI.Controllers
             else
             {
                 ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-                return View();
+                return PartialView("_LoginForm");
             }
-
-            return View();
         }
 
         [HttpGet]
@@ -140,7 +141,8 @@ namespace WebUI.Controllers
         public IActionResult ExternalLogin(string provider, string returnUrl = null)
         {
             // Request a redirect to the external login provider.
-            var redirectUrl = Url.Page("./ExternalLogin", pageHandler: "Callback", values: new { returnUrl });
+            //var redirectUrl = Url.Page("./ExternalLogin", pageHandler: "Callback", values: new { returnUrl });
+            var redirectUrl = Url.Action("ExternalCallback","UserAccount", values: new { returnUrl });
             var properties = _signInManager.ConfigureExternalAuthenticationProperties(provider, redirectUrl);
             return new ChallengeResult(provider, properties);
         }
@@ -153,13 +155,13 @@ namespace WebUI.Controllers
             if (remoteError != null)
             {
                 model.ErrorMessage = $"Error from external provider: {remoteError}";
-                return RedirectToPage("./Login", new { ReturnUrl = returnUrl });
+                return View("/_AccountError", model);
             }
             var info = await _signInManager.GetExternalLoginInfoAsync();
             if (info == null)
             {
                 model.ErrorMessage = "Error loading external login information.";
-                return RedirectToPage("./Login", new { ReturnUrl = returnUrl });
+                return View("/_AccountError", model);
             }
 
             // Sign in the user with this external login provider if the user already has a login.
@@ -167,11 +169,11 @@ namespace WebUI.Controllers
             if (result.Succeeded)
             {
                 _logger.LogInformation("{Name} logged in with {LoginProvider} provider.", info.Principal.Identity.Name, info.LoginProvider);
-                return LocalRedirect(returnUrl);
+                return View("Index", model);
             }
             if (result.IsLockedOut)
             {
-                return RedirectToPage("./Lockout");
+                return LocalRedirect("/Identity/Account/Lockout");
             }
             else
             {
@@ -188,13 +190,16 @@ namespace WebUI.Controllers
         [HttpPost]
         public async Task<IActionResult> ExternalCallback(UserAccountViewModel model)
         {
+            List<IdentityError> InputErrors = new List<IdentityError>();
+            UserAccountViewModel modelErrors = new UserAccountViewModel();
 
             // Get the information about the user from the external login provider
             var info = await _signInManager.GetExternalLoginInfoAsync();
+            model.LoginProvider = info.LoginProvider;
             if (info == null)
             {
                 model.ErrorMessage = "Error loading external login information during confirmation.";
-                return View();
+                return View("_AccountError",model);
             }
             var user = new IdentityUser { UserName = model.Email, Email = model.Email };
             var result = await _userManager.CreateAsync(user);
@@ -205,17 +210,16 @@ namespace WebUI.Controllers
                 {
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     _logger.LogInformation("User created an account using {Name} provider.", info.LoginProvider);
-                    return View();
+                    return View("Index", model);
                 }
             }
             foreach (var error in result.Errors)
             {
-                ModelState.AddModelError(string.Empty, error.Description);
+                InputErrors.Add(error);
             }
+            modelErrors.Errors = InputErrors;
 
-
-            model.LoginProvider = info.LoginProvider;
-            return View();
+            return View("_AccountError", modelErrors);
         }
     }
 }
