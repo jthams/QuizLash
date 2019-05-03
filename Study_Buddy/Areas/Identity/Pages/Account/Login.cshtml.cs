@@ -9,10 +9,12 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using WebUI.ViewModels;
 
 
 namespace WebUI.Areas.Identity.Pages.Account
 {
+
     [AllowAnonymous]
     public class LoginModel : PageModel
     {
@@ -37,11 +39,11 @@ namespace WebUI.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required]
+            
             [EmailAddress]
             public string Email { get; set; }
 
-            [Required]
+            
             [DataType(DataType.Password)]
             public string Password { get; set; }
 
@@ -68,37 +70,33 @@ namespace WebUI.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
+            
             returnUrl = returnUrl ?? Url.Content("~/");
 
-            if (ModelState.IsValid)
+            var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: true);
+
+            if (result.Succeeded)
             {
-                // This doesn't count login failures towards account lockout
-                // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-                var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: true);
-
-                if (result.Succeeded)
-                {
-                    _logger.LogInformation("User logged in.");
-                    return LocalRedirect(returnUrl);
-                }
-                if (result.RequiresTwoFactor)
-                {
-                    return RedirectToPage("./LoginWith2fa", new { ReturnUrl = returnUrl, RememberMe = Input.RememberMe });
-                }
-                if (result.IsLockedOut)
-                {
-                    _logger.LogWarning("User account locked out.");
-                    return RedirectToPage("./Lockout");
-                }
-                else
-                {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt. You must confirm your Email address to login");
-                    return Page();
-                }
+                _logger.LogInformation("User logged in.");
+                return LocalRedirect("/UserContent/Index");
             }
-
-            // If we got this far, something failed, redisplay form
-            return Page();
+            if (result.RequiresTwoFactor)
+            {
+                return RedirectToPage("./LoginWith2fa", new { ReturnUrl = returnUrl, RememberMe = Input.RememberMe });
+            }
+            if (result.IsLockedOut)
+            {
+                _logger.LogWarning("User account locked out.");
+                return RedirectToPage("./Lockout");
+            }
+            else
+            {
+                ModelState.AddModelError(string.Empty, "Invalid login attempt. You must confirm your Email address to login");
+                return Page();
+            }
         }
+
+
+       
     }
 }

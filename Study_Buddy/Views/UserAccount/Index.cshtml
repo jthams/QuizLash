@@ -1,4 +1,4 @@
-﻿@model WebUI.ViewModels.UserContentViewModel
+﻿@model WebUI.ViewModels.UserAccountViewModel
 
 @{
     ViewData["Title"] = "UserIndex";
@@ -44,28 +44,32 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var item in Model.Quizzes)
+                    @if (Model.Quizzes != null)
                     {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.QuizID)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Topic.Description)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Score)%
-                        </td>
-                        <td>
-                            @Html.DisplayFor(Model => Model.TopicAverages[item.TopicID])%
-                        </td>
+                        @foreach (var item in Model.Quizzes)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.QuizID)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Topic.Description)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Score)%
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(Model => Model.TopicAverages[item.TopicID])%
+                                </td>
 
 
-                        <td>
-                            <a class="btn btn-outline-secondary" asp-action="Details" asp-controller="Quizs" asp-route-id="@item.QuizID">Details</a>
-                        </td>
-                    </tr>
+                                <td>
+                                    <a class="btn btn-outline-secondary" asp-action="Details" asp-controller="Quizs" asp-route-id="@item.QuizID">Details</a>
+                                </td>
+                            </tr>
+                        }
                     }
+
                 </tbody>
             </table>
         </div>
@@ -94,24 +98,27 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var item in Model.Questions)
+                    @if (Model.Questions != null)
                     {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Body)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Answer)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Topic.Description)
-                        </td>
-                        <td>
-                            <a asp-action="Edit" asp-controller="Questions" asp-route-id="@item.QuestionID">Edit</a> |
-                            <a asp-action="Details" asp-controller="Questions" asp-route-id="@item.QuestionID">Details</a> |
-                            <a class="text-danger" asp-controller="Questions" asp-action="Delete" asp-route-id="@item.QuestionID">Delete</a>
-                        </td>
-                    </tr>
+                        @foreach (var item in Model.Questions)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Body)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Answer)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Topic.Description)
+                                </td>
+                                <td>
+                                    <a asp-action="Edit" asp-controller="Questions" asp-route-id="@item.QuestionID">Edit</a> |
+                                    <a asp-action="Details" asp-controller="Questions" asp-route-id="@item.QuestionID">Details</a> |
+                                    <a class="text-danger" asp-controller="Questions" asp-action="Delete" asp-route-id="@item.QuestionID">Delete</a>
+                                </td>
+                            </tr>
+                        }
                     }
                 </tbody>
             </table>

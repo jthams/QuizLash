@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -64,10 +65,7 @@ namespace WebUI
             options.UseSqlServer(_ApplicationDataConnection));
 
             // Requires the user to confirm their email to login to the app.
-            services.AddDefaultIdentity<IdentityUser>(config =>
-            {
-                config.SignIn.RequireConfirmedEmail = true;
-            })
+            services.AddDefaultIdentity<IdentityUser>()
                 .AddDefaultUI(UIFramework.Bootstrap4)
                 .AddEntityFrameworkStores<UserAuthenticationDbContext>();
 
@@ -104,6 +102,8 @@ namespace WebUI
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
             .AddSessionStateTempDataProvider();
             services.AddSession();
+            services.AddAntiforgery(o => o.HeaderName = "XSRF-TOKEN");
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

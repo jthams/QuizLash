@@ -109,14 +109,14 @@ namespace XTestProject
                 var mockUserManager = GetMockUserManager();
                 var mockUserDataRepository = GetMockUserRepoStub();
 
-                var controller = new UserContentController(GetMockUserRepoStub().Object, GetMockUserManager().Object);
+                var controller = new UserAccountController(GetMockUserRepoStub().Object, GetMockUserManager().Object,null,null);
 
                 // Act
                 var result =  controller.Index();
 
                 // Assert
                 var viewResult = Assert.IsType<ViewResult>(result);
-                var model = Assert.IsAssignableFrom<UserContentViewModel>(
+                var model = Assert.IsAssignableFrom<UserAccountViewModel>(
                     viewResult.ViewData.Model);
             }
         }
