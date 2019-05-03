@@ -286,7 +286,7 @@ namespace WebUI.Controllers
             {
                 _quizData.Add(Quiz);
                 
-                return RedirectToAction("Index", "UserContent");
+                return RedirectToAction("Index", "UserAccount");
             }
 
             return View(quizVM);
@@ -371,7 +371,7 @@ namespace WebUI.Controllers
                     }
                 }
 
-                return RedirectToAction("Index", "UserContent");
+                return RedirectToAction("Index", "UserAccount");
             }
             
             return View(quiz);
@@ -402,7 +402,7 @@ namespace WebUI.Controllers
             var quiz = await _quizData.FindAsync(id);
             _quizData.Remove(quiz);
       
-            return RedirectToAction("Index", "UserContent");
+            return RedirectToAction("Index", "UserAccount");
         }
         private bool QuizExists(int id)
         {

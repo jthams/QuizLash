@@ -90,7 +90,7 @@ namespace WebUI.Controllers
             {
                 _questionData.Add(question);
 
-                return RedirectToAction("Index", "UserContent");
+                return RedirectToAction("Index", "UserAccount");
             }
             
             return View(questionVM);
@@ -165,7 +165,7 @@ namespace WebUI.Controllers
                     }
                 }
                 ViewData["TopicID"] = new SelectList(Topics, "TopicID", "Description", question.TopicID);
-                return RedirectToAction("Index", "UserContent");
+                return RedirectToAction("Index", "UserAccount");
             }
             
             return View(question);
@@ -197,7 +197,7 @@ namespace WebUI.Controllers
         {
             var question = await _questionData.FindAsync(id);
             _questionData.Remove(question);
-            return RedirectToAction("Index", "UserContent");
+            return RedirectToAction("Index", "UserAccount");
         }
 
         private bool QuestionExists(int id)

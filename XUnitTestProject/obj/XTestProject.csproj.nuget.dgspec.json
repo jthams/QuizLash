@@ -1,24 +1,26 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\hamel\\source\\Repos\\jthams\\StudyBuddy\\XUnitTestProject\\XTestProject.csproj": {}
+    "C:\\Users\\hamel\\Source\\Repos\\jthams\\StudyBuddy\\XUnitTestProject\\XTestProject.csproj": {}
   },
   "projects": {
-    "C:\\Users\\hamel\\source\\Repos\\jthams\\StudyBuddy\\DomainModels\\Domain.csproj": {
+    "C:\\Users\\hamel\\Source\\Repos\\jthams\\StudyBuddy\\DomainModels\\Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\hamel\\source\\Repos\\jthams\\StudyBuddy\\DomainModels\\Domain.csproj",
+        "projectUniqueName": "C:\\Users\\hamel\\Source\\Repos\\jthams\\StudyBuddy\\DomainModels\\Domain.csproj",
         "projectName": "Domain",
-        "projectPath": "C:\\Users\\hamel\\source\\Repos\\jthams\\StudyBuddy\\DomainModels\\Domain.csproj",
+        "projectPath": "C:\\Users\\hamel\\Source\\Repos\\jthams\\StudyBuddy\\DomainModels\\Domain.csproj",
         "packagesPath": "C:\\Users\\hamel\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\hamel\\source\\Repos\\jthams\\StudyBuddy\\DomainModels\\obj\\",
+        "outputPath": "C:\\Users\\hamel\\Source\\Repos\\jthams\\StudyBuddy\\DomainModels\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
+          "C:\\ProgramData\\Xamarin\\NuGet\\",
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
           "C:\\Users\\hamel\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp2.2"
@@ -104,21 +106,23 @@
         }
       }
     },
-    "C:\\Users\\hamel\\source\\Repos\\jthams\\StudyBuddy\\Study_Buddy\\WebUI.csproj": {
+    "C:\\Users\\hamel\\Source\\Repos\\jthams\\StudyBuddy\\Study_Buddy\\WebUI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\hamel\\source\\Repos\\jthams\\StudyBuddy\\Study_Buddy\\WebUI.csproj",
+        "projectUniqueName": "C:\\Users\\hamel\\Source\\Repos\\jthams\\StudyBuddy\\Study_Buddy\\WebUI.csproj",
         "projectName": "WebUI",
-        "projectPath": "C:\\Users\\hamel\\source\\Repos\\jthams\\StudyBuddy\\Study_Buddy\\WebUI.csproj",
+        "projectPath": "C:\\Users\\hamel\\Source\\Repos\\jthams\\StudyBuddy\\Study_Buddy\\WebUI.csproj",
         "packagesPath": "C:\\Users\\hamel\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\hamel\\source\\Repos\\jthams\\StudyBuddy\\Study_Buddy\\obj\\",
+        "outputPath": "C:\\Users\\hamel\\Source\\Repos\\jthams\\StudyBuddy\\Study_Buddy\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
+          "C:\\ProgramData\\Xamarin\\NuGet\\",
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
           "C:\\Users\\hamel\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp2.2"
@@ -130,8 +134,8 @@
         "frameworks": {
           "netcoreapp2.2": {
             "projectReferences": {
-              "C:\\Users\\hamel\\source\\Repos\\jthams\\StudyBuddy\\DomainModels\\Domain.csproj": {
-                "projectPath": "C:\\Users\\hamel\\source\\Repos\\jthams\\StudyBuddy\\DomainModels\\Domain.csproj"
+              "C:\\Users\\hamel\\Source\\Repos\\jthams\\StudyBuddy\\DomainModels\\Domain.csproj": {
+                "projectPath": "C:\\Users\\hamel\\Source\\Repos\\jthams\\StudyBuddy\\DomainModels\\Domain.csproj"
               }
             }
           }
@@ -247,21 +251,23 @@
         }
       }
     },
-    "C:\\Users\\hamel\\source\\Repos\\jthams\\StudyBuddy\\XUnitTestProject\\XTestProject.csproj": {
+    "C:\\Users\\hamel\\Source\\Repos\\jthams\\StudyBuddy\\XUnitTestProject\\XTestProject.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\hamel\\source\\Repos\\jthams\\StudyBuddy\\XUnitTestProject\\XTestProject.csproj",
+        "projectUniqueName": "C:\\Users\\hamel\\Source\\Repos\\jthams\\StudyBuddy\\XUnitTestProject\\XTestProject.csproj",
         "projectName": "XTestProject",
-        "projectPath": "C:\\Users\\hamel\\source\\Repos\\jthams\\StudyBuddy\\XUnitTestProject\\XTestProject.csproj",
+        "projectPath": "C:\\Users\\hamel\\Source\\Repos\\jthams\\StudyBuddy\\XUnitTestProject\\XTestProject.csproj",
         "packagesPath": "C:\\Users\\hamel\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\hamel\\source\\Repos\\jthams\\StudyBuddy\\XUnitTestProject\\obj\\",
+        "outputPath": "C:\\Users\\hamel\\Source\\Repos\\jthams\\StudyBuddy\\XUnitTestProject\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
+          "C:\\ProgramData\\Xamarin\\NuGet\\",
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
           "C:\\Users\\hamel\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp2.2"
@@ -273,11 +279,11 @@
         "frameworks": {
           "netcoreapp2.2": {
             "projectReferences": {
-              "C:\\Users\\hamel\\source\\Repos\\jthams\\StudyBuddy\\DomainModels\\Domain.csproj": {
-                "projectPath": "C:\\Users\\hamel\\source\\Repos\\jthams\\StudyBuddy\\DomainModels\\Domain.csproj"
+              "C:\\Users\\hamel\\Source\\Repos\\jthams\\StudyBuddy\\DomainModels\\Domain.csproj": {
+                "projectPath": "C:\\Users\\hamel\\Source\\Repos\\jthams\\StudyBuddy\\DomainModels\\Domain.csproj"
               },
-              "C:\\Users\\hamel\\source\\Repos\\jthams\\StudyBuddy\\Study_Buddy\\WebUI.csproj": {
-                "projectPath": "C:\\Users\\hamel\\source\\Repos\\jthams\\StudyBuddy\\Study_Buddy\\WebUI.csproj"
+              "C:\\Users\\hamel\\Source\\Repos\\jthams\\StudyBuddy\\Study_Buddy\\WebUI.csproj": {
+                "projectPath": "C:\\Users\\hamel\\Source\\Repos\\jthams\\StudyBuddy\\Study_Buddy\\WebUI.csproj"
               }
             }
           }

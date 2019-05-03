@@ -78,7 +78,7 @@ namespace WebUI.Areas.Identity.Pages.Account
             if (result.Succeeded)
             {
                 _logger.LogInformation("User logged in.");
-                return LocalRedirect("/UserContent/Index");
+                return LocalRedirect("/UserAccount/Index");
             }
             if (result.RequiresTwoFactor)
             {

@@ -52,7 +52,8 @@ body {
     /* Margin bottom by footer height */
     font-family: Arial, Helvetica, sans-serif;
     margin-bottom: 60px;
-    
+    background-image: url(https://theblobthestorageaccount.blob.core.windows.net/myblob/White-Abstract.jpg);
+    background-size: cover;
 }
 
 .footer {
@@ -64,6 +65,12 @@ body {
     /* Set the fixed height of the footer here */
     height: 60px;
     line-height: 60px; /* Vertically center the text there */
+}
+
+logo {
+    background-image: url(https://theblobthestorageaccount.blob.core.windows.net/myblob/logo.png);
+    background-size:contain;
+    background-position:inherit;
 }
 
 ui-menu {
