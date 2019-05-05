@@ -10,8 +10,10 @@
         <link rel="stylesheet" href="~/lib/jquery-ui-bootstrap/css/custom-theme/jquery-ui-1.9.2.custom.css" />
         <link rel="stylesheet" href="~/lib/bootstrap-social/assets/css/bootstrap-social.css" />
         <link rel="stylesheet" href="~/lib/bootstrap-social/assets/css/font-awesome.css" />
+
         <link rel="stylesheet" href="~/css/site.css" />
     </environment>
+
     <environment exclude="Development">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
               asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
@@ -19,30 +21,19 @@
               crossorigin="anonymous"
               integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" />
     </environment>
+
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
+
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <img src="https://theblobthestorageaccount.blob.core.windows.net/myblob/favicon.png" class="icon-2x icon-align-left">  <a asp-controller="home" asp-action="index"></a></>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <partial name="_LoginPartial" />
-                    <ul class="navbar-nav flex-grow-1">
-
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="About">About</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
+        <nav class="navbar mb-3">
+            <div class="btn-navbar btn-lg">
+                <a style="color: #38675d" href="javascript:void(0);" class="icon" onclick="openNav()">
+                    <i class="fa fa-bars fa-3x active "></i>
+                </a>
             </div>
         </nav>
     </header>
@@ -56,11 +47,27 @@
 
 
 
-    <footer class="border-top footer text-muted">
-        <div class="container flex-column">
-            &copy; 2019 - Study Buddy - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    <footer class="footer text-muted">
+        <div class="container">
+            &copy; 2019 - QuizLash - <a  asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
+
+    <!-- The overlay -->
+    <div id="myNav" class="overlay">
+
+        <!-- Button to close the overlay navigation -->
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+
+        <!-- Overlay content -->
+        <div class="overlay-content">
+            <a asp-controller="Home" asp-action="Index">Home</a>
+            <a asp-controller="Home" asp-action="About">About</a>
+            <a asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+
+    </div>
+
 
     <environment include="Development">
 

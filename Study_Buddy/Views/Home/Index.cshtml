@@ -4,31 +4,21 @@
 }
 <head>
     <link rel="stylesheet" href="~/lib/bootstrap-social/assets/css/font-awesome.css" />
-    
 </head>
-<div class="text-center">
-    <h1 style="font-family: Georgia" class="font-weight-light">Welcome to Cram King</h1>
-    <i>Create your own questions to personalize your study time</i>
-</div>
-<hr />
-<p style="padding-top: 40px"></p>
 <body>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-sm-6">
-                <div>
-                    <h5 class="text-primary">Start Learning Today</h5>
-                    <hr />
-                </div>
-                <div>
-                    <p class="text-lg-left text-secondary">
-                        With no limits on what material you can create your learning experience is completely up to you.
-                        Enter your study material and review it with flashcards or test your knowledge of a subject with short answer and multiple-choice quizzes.
-                    </p>
-                </div>
-                <div>
-                    <button type="button" class="btn btn-outline-primary btn-lg btn-block" data-toggle="modal" data-target="#loginmodal">Start</button>
-                </div>
+            <div class="col-sm-1">
+            </div>
+            <div class="col-sm-4">
+                <img class="img-fluid" src="https://theblobthestorageaccount.blob.core.windows.net/myblob/logo_transparent-pain.png" alt="QuizLash" />
+            </div>
+        </div>
+        <div class="row"><p></p></div>
+        <div class="row">
+            <div class="col-sm-6"></div>
+            <div class="col">
+                <button class="btn btn-lg" data-toggle="modal" data-target="#loginmodal"><display class="display-1 nav-text">Lets Begin</display></button>
             </div>
         </div>
     </div>
@@ -41,7 +31,7 @@
                         <span><b>Login/Register with:</b></span>
                     </div>
                     <p></p>
-                    <partial name="_ExternalLoginForm"/>
+                    <partial name="_ExternalLoginForm" />
                     <p></p>
                     <div class="hl">
                         <span><b>Or use a local account</b></span>
@@ -65,7 +55,7 @@
             <div class="modal-content">
                 <button type="button" class="close align-self-end" data-dismiss="modal">&times;</button>
                 <div class="modal-body">
-                    <partial name="_RegisterForm"/>
+                    <partial name="_RegisterForm" />
                 </div>
             </div>
         </div>
