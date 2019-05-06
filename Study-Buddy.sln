@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.489
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28803.202
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebUI", "Study_Buddy\WebUI.csproj", "{8C2D1B63-AC99-468C-80CA-06EFF35164D6}"
 EndProject
@@ -12,6 +12,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XTestProject", "XUnitTestPr
 		{47E76309-B3F5-4562-A643-43EC34202205} = {47E76309-B3F5-4562-A643-43EC34202205}
 		{8C2D1B63-AC99-468C-80CA-06EFF35164D6} = {8C2D1B63-AC99-468C-80CA-06EFF35164D6}
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Speech", "Speech\Speech.csproj", "{54E34E91-6608-4135-8A14-CD336DBAA82F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,6 +33,10 @@ Global
 		{B59F15EC-ADD1-4930-8CE4-712DD63C5895}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B59F15EC-ADD1-4930-8CE4-712DD63C5895}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B59F15EC-ADD1-4930-8CE4-712DD63C5895}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54E34E91-6608-4135-8A14-CD336DBAA82F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54E34E91-6608-4135-8A14-CD336DBAA82F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54E34E91-6608-4135-8A14-CD336DBAA82F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54E34E91-6608-4135-8A14-CD336DBAA82F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

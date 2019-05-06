@@ -1,10 +1,6 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
 
-
-
-
-
 a.navbar-brand {
     white-space: normal;
     text-align: center;
@@ -50,7 +46,7 @@ html {
 
 body {
     /* Margin bottom by footer height */
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Oswald', sans-serif;
     margin-bottom: 60px;
     background-image: url(https://theblobthestorageaccount.blob.core.windows.net/myblob/DackendBackground2.jpg);
     /* Full height */
@@ -63,21 +59,18 @@ body {
 
 .nav-text {
     font-family: 'Lobster', cursive;
-    text-shadow: inherit;
     color: #38675d;
-    text-shadow: inherit;
-    text-decoration: double;
-    text-decoration-style: wavy;
-    text-decoration-color: #909f12;
-    border-bottom-style: ridge;
-
+    text-shadow: 2px 3px #909f12;
+    border-bottom-width: thick;
+    border-bottom-style: double;
+    border-bottom-color: #909f12;
     display: block;
 }
+
     .nav-text:hover {
         color: #909f12;
+        text-shadow: 2px 3px #38675d;
         border-bottom-color: #38675d;
-        
-        border-top: thick;
     }
 
 
@@ -91,7 +84,21 @@ body {
     height: 60px;
     line-height: 60px; /* Vertically center the text there */
 }
+.rounded{
+    border-radius: 25px;
+}
 
+.retro {
+    font-family: 'Lobster', cursive;
+    text-align: center end;
+    color: black;
+    text-shadow: white;
+}
+
+    .retro:hover {
+        color: #e5e5e5;
+        text-shadow: 1px 2px black;
+    }
 
 
 ui-menu {
@@ -313,6 +320,7 @@ input-SocialLogin,
     background-color: rgba(0,0,0, 0.9); /* Black w/opacity */
     overflow-x: hidden; /* Disable horizontal scroll */
     transition: 0.5s; /* 0.5 second transition effect to slide in or slide down the overlay (height or width, depending on reveal) */
+  
 }
 
 /* Position the content inside the overlay */
