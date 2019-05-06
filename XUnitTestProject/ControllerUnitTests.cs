@@ -100,10 +100,10 @@ namespace XTestProject
 
             return mockRepo;
         }
-        public class UserContentTests
+        public class UserAccountTests
         {
             [Fact]
-            public void Index_ReturnsAViewResult_WithAUserContentVM()
+            public void Index_ReturnsAViewResult_WithAUserAccountVM()
             {
                 // Arrange
                 var mockUserManager = GetMockUserManager();
