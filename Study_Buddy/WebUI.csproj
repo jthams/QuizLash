@@ -11,16 +11,12 @@
   <ItemGroup>
     <Compile Remove="Areas\Questions\**" />
     <Compile Remove="Areas\Quizzes\**" />
-    <Compile Remove="wwwroot\NewFolder\**" />
     <Content Remove="Areas\Questions\**" />
     <Content Remove="Areas\Quizzes\**" />
-    <Content Remove="wwwroot\NewFolder\**" />
     <EmbeddedResource Remove="Areas\Questions\**" />
     <EmbeddedResource Remove="Areas\Quizzes\**" />
-    <EmbeddedResource Remove="wwwroot\NewFolder\**" />
     <None Remove="Areas\Questions\**" />
     <None Remove="Areas\Quizzes\**" />
-    <None Remove="wwwroot\NewFolder\**" />
   </ItemGroup>
 
 
@@ -35,7 +31,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.Azure.KeyVault" Version="3.0.3" />
     <PackageReference Include="Microsoft.Azure.Services.AppAuthentication" Version="1.0.3" />
-    <PackageReference Include="Microsoft.CognitiveServices.Speech" Version="1.4.0" />
+    <PackageReference Include="Microsoft.CognitiveServices.Speech" Version="1.5.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.4" />
     <PackageReference Include="Microsoft.Extensions.Configuration.AzureKeyVault" Version="2.2.0" />
@@ -57,5 +53,22 @@
   <ItemGroup>
     <WCFMetadata Include="Connected Services" />
   </ItemGroup>
+
+
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+    <TypeScriptTarget>ES5</TypeScriptTarget>
+    <TypeScriptJSXEmit>React</TypeScriptJSXEmit>
+    <TypeScriptModuleKind />
+    <TypeScriptCompileOnSaveEnabled>True</TypeScriptCompileOnSaveEnabled>
+    <TypeScriptNoImplicitAny>False</TypeScriptNoImplicitAny>
+    <TypeScriptRemoveComments>False</TypeScriptRemoveComments>
+    <TypeScriptOutFile />
+    <TypeScriptOutDir />
+    <TypeScriptGeneratesDeclarations>False</TypeScriptGeneratesDeclarations>
+    <TypeScriptNoEmitOnError>True</TypeScriptNoEmitOnError>
+    <TypeScriptSourceMap>True</TypeScriptSourceMap>
+    <TypeScriptMapRoot />
+    <TypeScriptSourceRoot />
+  </PropertyGroup>
 
 </Project>

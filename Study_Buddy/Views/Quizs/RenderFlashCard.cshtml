@@ -6,24 +6,29 @@
     int counter = 1;
 
 }
+    <head>
+        <style>
+            .card{
+                border: none;
+                background: none;
+            }
+        </style>
+    </head>
 
-<h1 class="text-info text-center">Start studying</h1>
-
-
-<hr />
-<div class="row">
-    <div class="col-md-6">
+<div class="d-flex justify-content-center">
+    <div class="col-md-4">
+        <h1 style="pointer-events: none;" class="nav-text text-center">Start studying</h1>
+        <p class="pt-3"></p>
         <div class="card">
             @foreach (var item in Model.Questions)
             {
-
                 <div class="flip-card">
                     <div class="flip-card-inner">
                         <div class="flip-card-front">
-                            <h1 class="text-center">@Html.DisplayFor(i => item.Body)</h1>
+                            <h4 class="card-text text-wrap">@Html.DisplayFor(i => item.Body)</h4>
                         </div>
                         <div class="flip-card-back">
-                            <h1 class="text-center">@Html.DisplayFor(i => item.Answer)</h1>
+                            <h4 class="card-text text-wrap">@Html.DisplayFor(i => item.Answer)</h4>
                         </div>
                     </div>
                 </div>

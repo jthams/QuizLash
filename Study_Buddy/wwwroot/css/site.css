@@ -49,12 +49,17 @@ body {
     font-family: 'Oswald', sans-serif;
     margin-bottom: 60px;
     background-image: url(https://theblobthestorageaccount.blob.core.windows.net/myblob/DackendBackground2.jpg);
-    /* Full height */
     height: 100%;
-    /* Center and scale the image nicely */
+    background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+}
+
+.parallax {
+    /* Full height */
+    /* Center and scale the image nicely */
+    
 }
 
 .nav-text {
@@ -73,6 +78,27 @@ body {
         border-bottom-color: #38675d;
     }
 
+.modal-content{
+    background: inherit;
+    color: whitesmoke;
+    border: none;
+}
+
+.quizlash {
+    color: #fff;
+    background-color: #38675d;
+    border-color: rgba(0,0,0,0.2);
+    position: relative;
+}
+
+.quizlash-icon {
+    z-index: 3;
+    display: flex;
+    flex-direction: row;
+    content: icon;
+    icon: auto;
+    background-image: url('../images/quizlashicon.png');
+}
 
 .footer {
     margin-top: 20px;
@@ -84,15 +110,13 @@ body {
     height: 60px;
     line-height: 60px; /* Vertically center the text there */
 }
-.rounded{
-    border-radius: 25px;
-}
 
 .retro {
     font-family: 'Lobster', cursive;
     text-align: center end;
     color: black;
-    text-shadow: white;
+    text-shadow: 1px 2px white;
+    cursor: pointer;
 }
 
     .retro:hover {
@@ -100,6 +124,9 @@ body {
         text-shadow: 1px 2px black;
     }
 
+.qgreen {
+    color: #38675d;
+}
 
 ui-menu {
     display: inherit;
@@ -152,78 +179,16 @@ td {
 }
 
 .flip-card-front {
-    background-color: inherit;
-    color: cadetblue;
+    background-color: #38675d;
+    color: #909f12;
     z-index: 2;
 }
 
 .flip-card-back {
-    background-color: #2980b9;
-    color: white;
+    background-color: #909f12;
+    color: #38675d;
     transform: rotateY(180deg);
     z-index: 1;
-}
-
-/* Login Settings */
-.SocialLogin {
-    font-family: Arial, Helvetica, sans-serif;
-}
-
-/* style the container */
-.container-SocialLogin {
-    position: relative;
-    border-radius: 5px;
-    background-color: #f2f2f2;
-    padding: 20px 0 30px 0;
-}
-
-/* style inputs and link buttons */
-input-SocialLogin,
-.btn-SocialLogin {
-    width: 100%;
-    padding: 12px;
-    border: none;
-    border-radius: 4px;
-    margin: 5px 0;
-    opacity: 0.85;
-    display: inline-block;
-    font-size: 17px;
-    line-height: 20px;
-    text-decoration: none; /* remove underline from anchors */
-}
-
-    input-SocialLogin:hover,
-    .btn-SocialLogin:hover {
-        opacity: 1;
-    }
-
-    /* add appropriate colors to fb, twitter and google buttons */
-
-    /* style the submit button */
-    input-SocialLogin[type=submit] {
-        background-color: #4CAF50;
-        color: white;
-        cursor: pointer;
-    }
-
-        input-SocialLogin[type=submit]:hover {
-            background-color: #45a049;
-        }
-
-/* Two-column layout */
-.col-SocialLogin {
-    float: left;
-    width: 50%;
-    margin: auto;
-    padding: 0 50px;
-    margin-top: 6px;
-}
-
-/* Clear floats after the columns */
-.row-SocialLogin:after {
-    content: "";
-    display: table;
-    clear: both;
 }
 
 .hl {
@@ -258,55 +223,6 @@ input-SocialLogin,
             margin-left: 10px;
         }
 
-
-/* vertical line */
-.vl-SocialLogin {
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%);
-    border: 2px solid #ddd;
-    height: 175px;
-}
-
-/* text inside the vertical line */
-.vl-innertext-SocialLogin {
-    position: absolute;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    background-color: #f1f1f1;
-    border: 1px solid #ccc;
-    border-radius: 50%;
-    padding: 8px 10px;
-}
-
-/* hide some text on medium and large screens */
-.hide-md-lg-SocialLogin {
-    display: none;
-}
-
-/* bottom container */
-.bottom-container-SocialLogin {
-    text-align: center;
-    background-color: #666;
-    border-radius: 0px 0px 4px 4px;
-}
-
-/* Responsive layout - when the screen is less than 650px wide, make the two columns stack on top of each other instead of next to each other */
-@media screen and (max-width: 650px) {
-    .col-SocialLogin {
-        width: 100%;
-        margin-top: 0;
-    }
-    /* hide the vertical line */
-    .vl-SocialLogin {
-        display: none;
-    }
-    /* show the hidden text on small screens */
-    .hide-md-lg-SocialLogin {
-        display: block;
-        text-align: center;
-    }
-}
 /* The Overlay (background) */
 .overlay {
     /* Height & width depends on how you want to reveal the overlay */
@@ -367,3 +283,39 @@ input-SocialLogin,
         right: 35px;
     }
 }
+
+.dot {
+    box-shadow: inherit;
+    height: 215px;
+    width: 215px;
+    background-color: #909f12;
+    border-radius: 50%;
+    border-color: #1f5348;
+    border-width: 2px;
+    display: inline-block;
+    text-align: center;
+    align-content: center;
+    cursor: pointer;
+    font-size: larger;
+    color: #1f5348;
+    text-shadow: 1px 2px #6d7a01;
+    text-align: center;
+}
+    .dot:hover {
+        background-color: #38675d;
+        border-color: #909f12;
+        color: #909f12;
+    }
+
+.dot-text {
+    position: relative;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+.card-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+    

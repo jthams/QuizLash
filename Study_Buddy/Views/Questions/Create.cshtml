@@ -4,56 +4,71 @@
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<head>
+    <style>
+        nav-text{
+            pointer-events: none;
+        }
+    </style>
+</head>
 
-<h1>Create a new question</h1>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group" style="display: none;">
-                <label asp-for="Creator" class="control-label"></label>
-                <input asp-for="Creator" class="form-control" />
-            </div>
-            <div class="form-group">
-                <label asp-for="TopicID" class="control-label"></label>
-                <select asp-for="TopicID" class="form-control" asp-items="ViewBag.TopicID"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="Body" class="control-label"></label>
-                <input asp-for="Body" class="form-control" />
-                <span asp-validation-for="Body" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Answer" class="control-label"></label>
-                <input asp-for="Answer" class="form-control" />
-                <span asp-validation-for="Answer" class="text-danger"></span>
-            </div>
-            <div><i>**Multiple choice options (Not required)</i></div>
-            <br />
-            <div class="form-group">
-                <label asp-for="Choice1" class="control-label"></label>
-                <input asp-for="Choice1" class="form-control" />
-                <span asp-validation-for="Choice1" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Choice2" class="control-label"></label>
-                <input asp-for="Choice2" class="form-control" />
-                <span asp-validation-for="Choice2" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Choice3" class="control-label"></label>
-                <input asp-for="Choice3" class="form-control" />
-                <span asp-validation-for="Choice3" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Submit" class="btn btn-outline-success" />
-            </div>
-        </form>
+
+<p class="pt-1"></p>
+<body>
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h1 class="nav-text text-center">Create a new question</h1>
+        </div>
     </div>
-</div>
+    <div class="d-flex justify-content-center">
+        <div class="col-md-6">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group" style="display: none;">
+                    <label asp-for="Creator" class="control-label"></label>
+                    <input asp-for="Creator" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="TopicID" class="control-label"></label>
+                    <select asp-for="TopicID" class="form-control" asp-items="ViewBag.TopicID"></select>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Body" class="control-label"></label>
+                    <input asp-for="Body" class="form-control" />
+                    <span asp-validation-for="Body" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Answer" class="control-label"></label>
+                    <input asp-for="Answer" class="form-control" />
+                    <span asp-validation-for="Answer" class="text-danger"></span>
+                </div>
+                <div><i>**Multiple choice options (Not required)</i></div>
+                <br />
+                <div class="form-group">
+                    <label asp-for="Choice1" class="control-label"></label>
+                    <input asp-for="Choice1" class="form-control" />
+                    <span asp-validation-for="Choice1" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Choice2" class="control-label"></label>
+                    <input asp-for="Choice2" class="form-control" />
+                    <span asp-validation-for="Choice2" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Choice3" class="control-label"></label>
+                    <input asp-for="Choice3" class="form-control" />
+                    <span asp-validation-for="Choice3" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Submit" class="btn btn-lg btn-bar btn-outline-light text-center" />
+                </div>
+            </form>
+        </div>
+    </div>
 
-<div>
-    <a asp-controller="UserAccount" asp-action="Index">Back to List</a>
-</div>
+    <div>
+        <a asp-controller="UserAccount" asp-action="Index">Back to List</a>
+    </div>
+</body>
+
 

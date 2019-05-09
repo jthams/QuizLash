@@ -1,4 +1,6 @@
-﻿
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+
 @{
     ViewData["Title"] = "Home Page";
 }
@@ -11,41 +13,63 @@
             <div class="col-sm-1">
             </div>
             <div class="col-sm-4">
-                <img class="img-fluid" src="https://theblobthestorageaccount.blob.core.windows.net/myblob/logo_transparent-pain.png" alt="QuizLash" />
+                <img class="img-fluid img-circle" src="https://theblobthestorageaccount.blob.core.windows.net/myblob/logo_transparent-pain.png" alt="QuizLash" />
             </div>
         </div>
-        <div class="row"><p></p></div>
-        <div class="row">
-            <div class="col-sm-6"></div>
-            <div class="col">
-                <button class="btn btn-lg" data-toggle="modal" data-target="#loginmodal"><display class="display-1 nav-text">Let's Begin</display></button>
+        @if (SignInManager.IsSignedIn(User))
+        {
+            <div class="row">
+                <div class="col-sm-6"></div>
+                <div class="col">
+                    <a class="btn btn-lg" asp-controller="UserAccount" asp-action="Index"><display class="display-1 nav-text">Let's Begin</display></a>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="row">
+                <div class="col-sm-6"></div>
+                <div class="col">
+                    <button class="btn btn-lg" data-toggle="modal" data-target="#loginmodal"><display class="display-1 nav-text">Let's Begin</display></button>
+                </div>
+            </div>
+        }
+
+    </div>
+    <div class="modal fade" id="loginmodal">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <form asp-controller="UserAccount" asp-action="ExternalLogin" method="post">
+                        <div class="row text-white text-lg-center">
+                            <button type="submit" class="btn btn-block btn-social btn-facebook" name="provider" value="Facebook" title="login using your Facebook account">
+                                <span class="fa fa-facebook"></span> Login with Facebook
+                            </button>
+                        </div>
+                        <p></p>
+                        <div class="row text-white text-lg-center">
+                            <button type="submit" class="btn btn-block btn-social btn-google" name="provider" value="Google" title="login using your Google account">
+                                <span class="fa fa-google"></span> Login with Google
+                            </button>
+                        </div>
+                        <p></p>
+                    </form>
+                    <div class="row text-white text-lg-center">
+                        <button type="button" class="btn btn-block btn-social quizlash" title="login using your QuizLash account" data-toggle="modal" data-target="#localLogin" data-dismiss="modal">
+                            <span style="font-family: lobster">Q</span> Login to QuizLash
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <div class="modal fade rounded" id="loginmodal">
+    <div class="modal fade" id="localLogin">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <button type="button" class="close align-self-end" data-dismiss="modal">&times;</button>
                 <div class="modal-body">
-                    <div class="hl">
-                        <span><b>Login/Register with:</b></span>
-                    </div>
-                    <p></p>
-                    <partial name="_ExternalLoginForm" />
-                    <p></p>
-                    <div class="hl">
-                        <span><b>Or use a local account</b></span>
-                    </div>
                     <partial name="_LoginForm" />
-                    <p></p>
-                    <div class="row justify-content-center">
-                        <div class="col">
-                            <button class="text-black-50" data-toggle="modal" data-target="#registermodal" data-dismiss="modal">Create Account</button>
-                        </div>
-                        <div class="col">
-                            <button class="text-black-50" id="forgot-password" asp-area="Identity" asp-page="/Account/ForgotPassword">Forgot Password</button>
-                        </div>
-                    </div>
+                    <a class="btn form-inline text-muted" data-toggle="modal" data-target="#registermodal" data-dismiss="modal">Register</a>
+                    <a class="btn form-inline text-white text-muted" id="forgot-password" asp-area="Identity" asp-page="/Account/ForgotPassword">Forgot password</a>
                 </div>
             </div>
         </div>
@@ -53,9 +77,19 @@
     <div class="modal fade" id="registermodal">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <button type="button" class="close align-self-end" data-dismiss="modal">&times;</button>
                 <div class="modal-body">
                     <partial name="_RegisterForm" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="signedin">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <p>
+                        You are already signed in, click the bars in the top left corner to navigate the site.
+                    </p>
                 </div>
             </div>
         </div>

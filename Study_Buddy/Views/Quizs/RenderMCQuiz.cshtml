@@ -6,55 +6,69 @@
 
 
 }
+<head>
+    <style>
+        .card{
+            background-color: #38675d;
+            color: #909f12;
+        }
+        .nav-text{
+            pointer-events: none;
+        }
+    </style>
+</head>
+<h1 class="nav-text text-center">Multiple Choice Quiz</h1>
+<p class="pt-2"></p>
+<body>
+    <div class="d-flex justify-content-center">
+        <div class="col-sm-8">
+            <form asp-action="FinalizeQuiz">
+                @foreach (var item in Model.Questions)
+                {
+                    var sel = Model.Selections.Where(x => x.QuestionId == item.QuestionID).First();
+                    <div class="card shadow p-1">
+                        <div class="container-fluid">
+                            <div class="form-group">
+                                <h4 style="font-family: lobster" class="font-weight-bold"> @counter .@Html.DisplayFor(i => item.Body)</h4>
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                        <input type="radio" class="form-check-input" asp-for="@Model.QidGuess[item.QuestionID]" value="@sel.Choice1.ToString()" />@sel.Choice1
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                        <input type="radio" class="form-check-input" asp-for="QidGuess[item.QuestionID]" value="@sel.Choice2.ToString()" />@sel.Choice2
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                        <input type="radio" class="form-check-input" asp-for="@Model.QidGuess[item.QuestionID]" value="@sel.Choice3.ToString()" />@sel.Choice3
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                        <input type="radio" class="form-check-input" asp-for="@Model.QidGuess[item.QuestionID]" value="@sel.Choice4.ToString()" />@sel.Choice4
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="p-2"></p>
+                    counter++;
+                }
 
-<h1 class="text-muted text-center">Multiple Choice Quiz</h1>
-<hr />
-
-<form asp-action="FinalizeQuiz">
-    @foreach (var item in Model.Questions)
-    {
-        var sel = Model.Selections.Where(x => x.QuestionId == item.QuestionID).First();
-
-        <div class="jumbotron shadow">
-            <div class="container-fluid">
+                <input type="hidden" asp-for="Type" />
+                <input type="hidden" asp-for="TopicID" />
+                <input type="hidden" asp-for="NumberOfQuestions" />
+                <input type="hidden" asp-for="Owner" />
                 <div class="form-group">
-                    <h4 class="text-primary font-weight-bold"> @counter .@Html.DisplayFor(i => item.Body)</h4>
-                    <hr />
-                    <div class="form-check">
-                        <label class="form-check-label">
-                            <input type="radio" class="form-check-input" asp-for="@Model.QidGuess[item.QuestionID]" value="@sel.Choice1.ToString()" />@sel.Choice1
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <label class="form-check-label">
-                            <input type="radio" class="form-check-input" asp-for="QidGuess[item.QuestionID]" value="@sel.Choice2.ToString()" />@sel.Choice2
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <label class="form-check-label">
-                            <input type="radio" class="form-check-input" asp-for="@Model.QidGuess[item.QuestionID]" value="@sel.Choice3.ToString()" />@sel.Choice3
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <label class="form-check-label">
-                            <input type="radio" class="form-check-input" asp-for="@Model.QidGuess[item.QuestionID]" value="@sel.Choice4.ToString()" />@sel.Choice4
-                        </label>
-                    </div>
+                    <input type="submit" value="Submit" class="btn btn-outline-light btn-lg btn-block" />
                 </div>
-            </div>
+            </form>
         </div>
-
-        counter++;
-    }
-
-    <input type="hidden" asp-for="Type" />
-    <input type="hidden" asp-for="TopicID" />
-    <input type="hidden" asp-for="NumberOfQuestions" />
-    <input type="hidden" asp-for="Owner" />
-    <div class="form-group">
-        <input type="submit" value="Submit" class="btn btn-outline-success btn-lg btn-block" />
     </div>
-</form>
+</body>
+
 @section Scripts{
 
     

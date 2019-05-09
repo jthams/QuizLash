@@ -1799,7 +1799,7 @@
           "lib/netstandard1.3/Microsoft.CodeAnalysis.Workspaces.dll": {}
         }
       },
-      "Microsoft.CognitiveServices.Speech/1.4.0": {
+      "Microsoft.CognitiveServices.Speech/1.5.0": {
         "type": "package",
         "compile": {
           "lib/netstandard2.0/Microsoft.CognitiveServices.Speech.csharp.dll": {}
@@ -6668,10 +6668,10 @@
         "microsoft.codeanalysis.workspaces.common.nuspec"
       ]
     },
-    "Microsoft.CognitiveServices.Speech/1.4.0": {
-      "sha512": "ip0yL18lgmZyyEzfX88UHlWcogouvjkXCgIsRa2NeEZsGQLbHXs9IFrUSzjACm4mVhMxEENQS7u9syX6yI3Nug==",
+    "Microsoft.CognitiveServices.Speech/1.5.0": {
+      "sha512": "0QfToYsoXCIHY5ee0rEOQvMV4NklP7LKQXGu+EoZBEQPtSbdVUvjN+HrWNRLL2+mPNInZvzZhGqAHToJeTfaww==",
       "type": "package",
-      "path": "microsoft.cognitiveservices.speech/1.4.0",
+      "path": "microsoft.cognitiveservices.speech/1.5.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -6682,11 +6682,15 @@
         "build/native/Win32/Release/Microsoft.CognitiveServices.Speech.core.lib",
         "build/native/Win32/Release/Microsoft.CognitiveServices.Speech.extension.kws.dll",
         "build/native/include/c_api/speechapi_c.h",
+        "build/native/include/c_api/speechapi_c_activity.h",
         "build/native/include/c_api/speechapi_c_audio_config.h",
         "build/native/include/c_api/speechapi_c_audio_stream.h",
         "build/native/include/c_api/speechapi_c_audio_stream_format.h",
+        "build/native/include/c_api/speechapi_c_bot_connector_config.h",
         "build/native/include/c_api/speechapi_c_common.h",
         "build/native/include/c_api/speechapi_c_connection.h",
+        "build/native/include/c_api/speechapi_c_conversation_transcriber.h",
+        "build/native/include/c_api/speechapi_c_conversation_transcription_result.h",
         "build/native/include/c_api/speechapi_c_error.h",
         "build/native/include/c_api/speechapi_c_factory.h",
         "build/native/include/c_api/speechapi_c_grammar.h",
@@ -6695,23 +6699,32 @@
         "build/native/include/c_api/speechapi_c_intent_trigger.h",
         "build/native/include/c_api/speechapi_c_keyword_recognition_model.h",
         "build/native/include/c_api/speechapi_c_language_understanding_model.h",
+        "build/native/include/c_api/speechapi_c_participant.h",
         "build/native/include/c_api/speechapi_c_property_bag.h",
         "build/native/include/c_api/speechapi_c_recognizer.h",
         "build/native/include/c_api/speechapi_c_result.h",
         "build/native/include/c_api/speechapi_c_session.h",
+        "build/native/include/c_api/speechapi_c_speech_bot_connector.h",
         "build/native/include/c_api/speechapi_c_speech_config.h",
         "build/native/include/c_api/speechapi_c_synthesizer.h",
         "build/native/include/c_api/speechapi_c_translation_recognizer.h",
         "build/native/include/c_api/speechapi_c_translation_result.h",
+        "build/native/include/c_api/speechapi_c_user.h",
         "build/native/include/c_api/spxdebug.h",
         "build/native/include/c_api/spxerror.h",
         "build/native/include/cxx_api/speechapi_cxx.h",
         "build/native/include/cxx_api/speechapi_cxx_audio_config.h",
         "build/native/include/cxx_api/speechapi_cxx_audio_stream.h",
         "build/native/include/cxx_api/speechapi_cxx_audio_stream_format.h",
+        "build/native/include/cxx_api/speechapi_cxx_bot_connector_activity.h",
+        "build/native/include/cxx_api/speechapi_cxx_bot_connector_config.h",
+        "build/native/include/cxx_api/speechapi_cxx_bot_connector_eventargs.h",
         "build/native/include/cxx_api/speechapi_cxx_common.h",
         "build/native/include/cxx_api/speechapi_cxx_connection.h",
         "build/native/include/cxx_api/speechapi_cxx_connection_eventargs.h",
+        "build/native/include/cxx_api/speechapi_cxx_conversation_transcriber.h",
+        "build/native/include/cxx_api/speechapi_cxx_conversation_transcription_eventargs.h",
+        "build/native/include/cxx_api/speechapi_cxx_conversation_transcription_result.h",
         "build/native/include/cxx_api/speechapi_cxx_enums.h",
         "build/native/include/cxx_api/speechapi_cxx_eventargs.h",
         "build/native/include/cxx_api/speechapi_cxx_eventsignal.h",
@@ -6723,6 +6736,7 @@
         "build/native/include/cxx_api/speechapi_cxx_intent_trigger.h",
         "build/native/include/cxx_api/speechapi_cxx_keyword_recognition_model.h",
         "build/native/include/cxx_api/speechapi_cxx_language_understanding_model.h",
+        "build/native/include/cxx_api/speechapi_cxx_participant.h",
         "build/native/include/cxx_api/speechapi_cxx_phrase_list_grammar.h",
         "build/native/include/cxx_api/speechapi_cxx_properties.h",
         "build/native/include/cxx_api/speechapi_cxx_recognition_async_recognizer.h",
@@ -6733,6 +6747,7 @@
         "build/native/include/cxx_api/speechapi_cxx_session.h",
         "build/native/include/cxx_api/speechapi_cxx_session_eventargs.h",
         "build/native/include/cxx_api/speechapi_cxx_smart_handle.h",
+        "build/native/include/cxx_api/speechapi_cxx_speech_bot_connector.h",
         "build/native/include/cxx_api/speechapi_cxx_speech_config.h",
         "build/native/include/cxx_api/speechapi_cxx_speech_recognition_eventargs.h",
         "build/native/include/cxx_api/speechapi_cxx_speech_recognition_result.h",
@@ -6745,6 +6760,8 @@
         "build/native/include/cxx_api/speechapi_cxx_translation_eventargs.h",
         "build/native/include/cxx_api/speechapi_cxx_translation_recognizer.h",
         "build/native/include/cxx_api/speechapi_cxx_translation_result.h",
+        "build/native/include/cxx_api/speechapi_cxx_user.h",
+        "build/native/include/cxx_api/speechapi_cxx_utils.h",
         "build/native/x64/Release/Microsoft.CognitiveServices.Speech.core.dll",
         "build/native/x64/Release/Microsoft.CognitiveServices.Speech.core.lib",
         "build/native/x64/Release/Microsoft.CognitiveServices.Speech.extension.kws.dll",
@@ -6755,7 +6772,7 @@
         "lib/netstandard2.0/Microsoft.CognitiveServices.Speech.csharp.xml",
         "lib/uap10.0/Microsoft.CognitiveServices.Speech.csharp.dll",
         "lib/uap10.0/Microsoft.CognitiveServices.Speech.csharp.xml",
-        "microsoft.cognitiveservices.speech.1.4.0.nupkg.sha512",
+        "microsoft.cognitiveservices.speech.1.5.0.nupkg.sha512",
         "microsoft.cognitiveservices.speech.nuspec",
         "runtimes/linux-x64/lib/netstandard2.0/Microsoft.CognitiveServices.Speech.csharp.dll",
         "runtimes/linux-x64/lib/netstandard2.0/Microsoft.CognitiveServices.Speech.csharp.xml",
@@ -14150,7 +14167,7 @@
       "Microsoft.AspNetCore.Razor.Design >= 2.2.0",
       "Microsoft.Azure.KeyVault >= 3.0.3",
       "Microsoft.Azure.Services.AppAuthentication >= 1.0.3",
-      "Microsoft.CognitiveServices.Speech >= 1.4.0",
+      "Microsoft.CognitiveServices.Speech >= 1.5.0",
       "Microsoft.EntityFrameworkCore >= 2.2.4",
       "Microsoft.EntityFrameworkCore.SqlServer >= 2.2.4",
       "Microsoft.Extensions.Configuration.AzureKeyVault >= 2.2.0",
@@ -14260,7 +14277,7 @@
           },
           "Microsoft.CognitiveServices.Speech": {
             "target": "Package",
-            "version": "[1.4.0, )"
+            "version": "[1.5.0, )"
           },
           "Microsoft.EntityFrameworkCore": {
             "target": "Package",

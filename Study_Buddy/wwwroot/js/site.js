@@ -4,25 +4,12 @@
 // Write your JavaScript code.
 
 /* Open when someone clicks on the element */
-function openNav() {
-    var overlay = document.getElementById("myNav");
-    if (overlay.style.width === "50%") {
-        overlay.style.width = "0%";
-    } else {
-        overlay.style.display = "50%"
+function toggleNav() {
+    var width = document.getElementById("myNav").style.width;
+    if (width === "50%") {
+        document.getElementById("myNav").style.width = "0%";
+    } 
+    else {
+        document.getElementById("myNav").style.width = "50%";
     }
 }
-
-/* Close when someone clicks on the "x" symbol inside the overlay */
-function closeNav() {
-    document.getElementById("myNav").style.width = "0%";
-}
-
-/*function openNav() {
-    var overlay = document.getElementById("myNav");
-    if (overlay.style.width === "50%") {
-        overlay.style.width = "0%";
-    } else {
-        overlay.style.display = "50%"
-    }
-}*/

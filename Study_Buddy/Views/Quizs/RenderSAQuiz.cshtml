@@ -5,29 +5,31 @@
     int counter = 1;
 }
 
-<h1 class="text-success text-center"> Good Luck!</h1>
-<h4 class="text-muted">Short Answer Quiz</h4>
-<hr />
-
-<form asp-action="FinalizeQuiz"autocomplete="off">
-    @foreach (var item in Model.Questions)
-    {
-        <div class="form-group">
-            @counter .@Html.DisplayFor(i => item.Body)
-            <div>
-                <input asp-for="QidGuess[item.QuestionID]" class="form-control" autocomplete="off" required/>
-            </div>
+    <h1 class="nav-text text-center">Short Answer Quiz</h1>
+    <p class="pt-2"></p>
+    <div class="d-flex justify-content-center">
+        <div class="col-sm-6">
+            <form asp-action="FinalizeQuiz" autocomplete="off">
+                @foreach (var item in Model.Questions)
+                {
+                    <div class="form-group">
+                        @counter .@Html.DisplayFor(i => item.Body)
+                        <div>
+                            <input asp-for="QidGuess[item.QuestionID]" class="form-control" autocomplete="off" required />
+                        </div>
+                    </div>
+                    counter++;
+                }
+                <input type="hidden" asp-for="TopicID" />
+                <input type="hidden" asp-for="NumberOfQuestions" />
+                <input type="hidden" asp-for="Questions" />
+                <input type="hidden" asp-for="Owner" />
+                <div class="form-group">
+                    <input type="submit" value="Submit" class="btn btn-outline-secondary" />
+                </div>
+            </form>
         </div>
-        counter++;
-    }
-        <input type="hidden" asp-for="TopicID"/>
-        <input type="hidden" asp-for="NumberOfQuestions"/>
-        <input type="hidden" asp-for="Questions" />
-        <input type="hidden" asp-for="Owner"/>
-    <div class="form-group">
-        <input type="submit" value="Submit" class="btn btn-outline-success" />
     </div>
-</form>
 @section Scripts{
 
 

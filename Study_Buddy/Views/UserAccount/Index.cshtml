@@ -1,128 +1,141 @@
 ﻿@model WebUI.ViewModels.UserAccountViewModel
 
+
 @{
     ViewData["Title"] = "UserIndex";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h1 class="text-center">Study Material</h1>
-<h4 class="text-center text-secondary"><i>This page contains the questions you have created and the quizzes you have taken</i></h4>
-
-<hr class="text-center" />
-
-
-    
-<br />  
-<div class="container" id="accordion">
-    <div class="btn-group" style="position:center">
-        <a class="btn btn-outline-info" asp-controller="Questions" asp-action="Create"><b>Create a new question</b></a>
-        <a class="btn btn-outline-info" asp-controller="Quizs" asp-action="CreateFlashCard"><b>Start with flashcards</b></a>
-        <a class="btn btn-outline-info" asp-controller="Quizs" asp-action="CreateQuiz"><b>Begin a new quiz</b></a>
+<style>
+    #headText {
+        pointer-events: none;
+    }
+</style>
+<div class="row">
+    <div class="col-sm-4"></div>
+    <div class="col-sm-4 text-center">
+        <h1 id="headText" class="nav-text text-center">Study Material</h1>
+        <h4 class="text-center text-secondary">The questions you have created and the quizzes you have taken</h4>
     </div>
-    <div class="card">
-        <div class="card-header">
-            <a class="card-link" data-toggle="collapse" href="#Quizzes">
-                <h6 class="text-center text-info"><b>Your Quizzes</b></h6>
-            </a>
-        </div>
-        <div id="Quizzes" class="collapse show" data-parent="#accordion">
-            <table class="table table-responsive-sm">
-                <thead>
-                    <tr>
-                        <th>
-                            Quiz ID
-                        </th>
-                        <th>
-                            Topic
-                        </th>
-                        <th>
-                            Score
-                        </th>
-                        <th>
-                            Topic Avg.
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @if (Model.Quizzes != null)
-                    {
-                        @foreach (var item in Model.Quizzes)
-                        {
-                            <tr>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.QuizID)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Topic.Description)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Score)%
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(Model => Model.TopicAverages[item.TopicID])%
-                                </td>
-
-
-                                <td>
-                                    <a class="btn btn-outline-secondary" asp-action="Details" asp-controller="Quizs" asp-route-id="@item.QuizID">Details</a>
-                                </td>
-                            </tr>
-                        }
-                    }
-
-                </tbody>
-            </table>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="card-header">
-            <a class="collapsed card-link" data-toggle="collapse" href="#Questions">
-                <h6 class="text-center text-info"><b>Your Questions</b></h6>
-            </a>
-        </div>
-        <div id="Questions" class="collapse" data-parent="#accordion">
-            <table class="table table-responsive-sm">
-                <thead>
-                    <tr>
-                        <th>
-                            Body
-                        </th>
-                        <th>
-                            Answer
-                        </th>
-                        <th>
-                            Topic
-                        </th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @if (Model.Questions != null)
-                    {
-                        @foreach (var item in Model.Questions)
-                        {
-                            <tr>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Body)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Answer)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Topic.Description)
-                                </td>
-                                <td>
-                                    <a asp-action="Edit" asp-controller="Questions" asp-route-id="@item.QuestionID">Edit</a> |
-                                    <a asp-action="Details" asp-controller="Questions" asp-route-id="@item.QuestionID">Details</a> |
-                                    <a class="text-danger" asp-controller="Questions" asp-action="Delete" asp-route-id="@item.QuestionID">Delete</a>
-                                </td>
-                            </tr>
-                        }
-                    }
-                </tbody>
-            </table>
-        </div>
-    </div>
-
+    <div class="col-sm-4"></div>
 </div>
+<p class="pt-sm-4"></p>
+<body>
+    <div class="d-flex justify-content-around">
+        <a class="btn dot shadow-lg" asp-controller="Questions" asp-action="Create"><b class="dot-text">Create a new question</b></a>
+        <a class="btn dot shadow-lg" asp-controller="Quizs" asp-action="CreateFlashCard"><b class="dot-text">Start with flashcards</b></a>
+        <a class="btn dot shadow-lg" asp-controller="Quizs" asp-action="CreateQuiz"><b class="dot-text">Begin a new quiz</b></a>
+    </div>
+    <div class="row pt-3"></div>
+    <div class="d-flex justify-content-lg-center">
+        <button class="btn" data-toggle="modal" data-target="#quizmodal">
+            <h1 style="border-bottom:none" class="nav-text">Your Quizzes</h1>
+        </button>
+        <div class="col-sm-2"></div>
+        <button class="btn" data-toggle="modal" data-target="#questionmodal">
+            <h1 style="border-bottom:none" class="nav-text">Your Questions</h1>
+        </button>
+    </div>
+    <div class="modal fade" id="quizmodal">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <table class="table table-responsive text-white">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Quiz
+                                </th>
+                                <th>
+                                    Topic
+                                </th>
+                                <th>
+                                    Score
+                                </th>
+                                <th>
+                                    Topic Avg
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.Quizzes != null)
+                            {
+                                @foreach (var item in Model.Quizzes)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.QuizID)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Topic.Description)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Score)%
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(Model => Model.TopicAverages[item.TopicID])%
+                                        </td>
+
+
+                                        <td>
+                                            <a class="btn btn-outline-secondary" asp-action="Details" asp-controller="Quizs" asp-route-id="@item.QuizID">Details</a>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="questionmodal">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <table class="table table-responsive text-white">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Body
+                                </th>
+                                <th>
+                                    Answer
+                                </th>
+                                <th>
+                                    Topic
+                                </th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.Questions != null)
+                            {
+                                @foreach (var item in Model.Questions)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Body)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Answer)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Topic.Description)
+                                        </td>
+                                        <td>
+                                            <a asp-action="Edit" asp-controller="Questions" asp-route-id="@item.QuestionID">Edit</a>
+                                            <a asp-action="Details" asp-controller="Questions" asp-route-id="@item.QuestionID">Details</a>
+                                            <a class="text-danger" asp-controller="Questions" asp-action="Delete" asp-route-id="@item.QuestionID">Delete</a>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

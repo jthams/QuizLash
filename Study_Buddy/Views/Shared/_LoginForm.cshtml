@@ -2,12 +2,12 @@
 @*
     For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 *@
-    <head>
-        <script src="https://apis.google.com/js/platform.js" async defer></script>
-    </head>
+
+<head>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+</head>
 
 <form id="account" method="post" asp-controller="UserAccount" asp-action="Login">
-    <hr />
     <div asp-validation-summary="All" class="text-danger"></div>
     <div class="form-group">
         <label asp-for="Email"></label>
@@ -16,7 +16,7 @@
     </div>
     <div class="form-group">
         <label asp-for="Password"></label>
-        <input asp-for="Password" class="form-control" id="LogPassword" required/>
+        <input asp-for="Password" class="form-control" id="LogPassword" required />
         <span asp-validation-for="Password" class="text-danger"></span>
     </div>
     <div class="form-group">
@@ -28,7 +28,7 @@
         </div>
     </div>
     <div class="form-group">
-        <button type="submit" class="btn btn-primary">Log in</button>
+        <button type="submit" class="btn btn-md btn-block btn-outline-light">Log in</button>
     </div>
 </form>
 
