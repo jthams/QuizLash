@@ -6261,9 +6261,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\hamel\\source\\Repos\\jthams\\StudyBuddy\\Speech\\Speech.csproj",
-      "projectName": "Speech",
-      "projectPath": "C:\\Users\\hamel\\source\\Repos\\jthams\\StudyBuddy\\Speech\\Speech.csproj",
+      "projectUniqueName": "C:\\Users\\hamel\\source\\Repos\\jthams\\StudyBuddy\\Speech\\Speech2Text.csproj",
+      "projectName": "Speech2Text",
+      "projectPath": "C:\\Users\\hamel\\source\\Repos\\jthams\\StudyBuddy\\Speech\\Speech2Text.csproj",
       "packagesPath": "C:\\Users\\hamel\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\hamel\\source\\Repos\\jthams\\StudyBuddy\\Speech\\obj\\",
       "projectStyle": "PackageReference",

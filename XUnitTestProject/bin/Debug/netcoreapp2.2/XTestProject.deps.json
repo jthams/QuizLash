@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.2",
-    "signature": "f12949c345da3829b3b9749b61989820c66c1803"
+    "signature": "54cd1f61041f389d39cbdffbbab261a3b4368e23"
   },
   "compilationOptions": {},
   "targets": {
@@ -852,25 +852,25 @@
           }
         }
       },
-      "Microsoft.CognitiveServices.Speech/1.4.0": {
+      "Microsoft.CognitiveServices.Speech/1.5.0": {
         "runtime": {
           "lib/netstandard2.0/Microsoft.CognitiveServices.Speech.csharp.dll": {
-            "assemblyVersion": "1.4.0.28",
-            "fileVersion": "1.4.0.28"
+            "assemblyVersion": "1.5.0.28",
+            "fileVersion": "1.5.0.28"
           }
         },
         "runtimeTargets": {
           "runtimes/linux-x64/lib/netstandard2.0/Microsoft.CognitiveServices.Speech.csharp.dll": {
             "rid": "linux-x64",
             "assetType": "runtime",
-            "assemblyVersion": "1.4.0.28",
-            "fileVersion": "1.4.0.28"
+            "assemblyVersion": "1.5.0.28",
+            "fileVersion": "1.5.0.28"
           },
           "runtimes/osx-x64/lib/netstandard2.0/Microsoft.CognitiveServices.Speech.csharp.dll": {
             "rid": "osx-x64",
             "assetType": "runtime",
-            "assemblyVersion": "1.4.0.28",
-            "fileVersion": "1.4.0.28"
+            "assemblyVersion": "1.5.0.28",
+            "fileVersion": "1.5.0.28"
           },
           "runtimes/linux-x64/native/libMicrosoft.CognitiveServices.Speech.core.so": {
             "rid": "linux-x64",
@@ -895,22 +895,22 @@
           "runtimes/win-x64/native/Microsoft.CognitiveServices.Speech.core.dll": {
             "rid": "win-x64",
             "assetType": "native",
-            "fileVersion": "1.4.0.28"
+            "fileVersion": "1.5.0.28"
           },
           "runtimes/win-x64/native/Microsoft.CognitiveServices.Speech.extension.kws.dll": {
             "rid": "win-x64",
             "assetType": "native",
-            "fileVersion": "1.4.0.28"
+            "fileVersion": "1.5.0.28"
           },
           "runtimes/win-x86/native/Microsoft.CognitiveServices.Speech.core.dll": {
             "rid": "win-x86",
             "assetType": "native",
-            "fileVersion": "1.4.0.28"
+            "fileVersion": "1.5.0.28"
           },
           "runtimes/win-x86/native/Microsoft.CognitiveServices.Speech.extension.kws.dll": {
             "rid": "win-x86",
             "assetType": "native",
-            "fileVersion": "1.4.0.28"
+            "fileVersion": "1.5.0.28"
           }
         }
       },
@@ -3198,7 +3198,7 @@
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "2.2.0",
           "Microsoft.Azure.KeyVault": "3.0.3",
           "Microsoft.Azure.Services.AppAuthentication": "1.0.3",
-          "Microsoft.CognitiveServices.Speech": "1.4.0",
+          "Microsoft.CognitiveServices.Speech": "1.5.0",
           "Microsoft.EntityFrameworkCore": "2.2.4",
           "Microsoft.EntityFrameworkCore.SqlServer": "2.2.4",
           "Microsoft.Extensions.Configuration.AzureKeyVault": "2.2.0",
@@ -3661,12 +3661,12 @@
       "path": "microsoft.codecoverage/16.0.1",
       "hashPath": "microsoft.codecoverage.16.0.1.nupkg.sha512"
     },
-    "Microsoft.CognitiveServices.Speech/1.4.0": {
+    "Microsoft.CognitiveServices.Speech/1.5.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-ip0yL18lgmZyyEzfX88UHlWcogouvjkXCgIsRa2NeEZsGQLbHXs9IFrUSzjACm4mVhMxEENQS7u9syX6yI3Nug==",
-      "path": "microsoft.cognitiveservices.speech/1.4.0",
-      "hashPath": "microsoft.cognitiveservices.speech.1.4.0.nupkg.sha512"
+      "sha512": "sha512-0QfToYsoXCIHY5ee0rEOQvMV4NklP7LKQXGu+EoZBEQPtSbdVUvjN+HrWNRLL2+mPNInZvzZhGqAHToJeTfaww==",
+      "path": "microsoft.cognitiveservices.speech/1.5.0",
+      "hashPath": "microsoft.cognitiveservices.speech.1.5.0.nupkg.sha512"
     },
     "Microsoft.CSharp/4.5.0": {
       "type": "package",

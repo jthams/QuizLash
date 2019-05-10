@@ -72,8 +72,8 @@ namespace WebUI
             services.AddAuthentication()
             .AddFacebook(Options =>
             {
-                Options.AppId = Configuration["Authentication:Facebook:AppId"];
-                Options.AppSecret = Configuration["Authentication:Facebook:AppSecret"];
+                Options.AppId = Configuration["FacebookAppId"];
+                Options.AppSecret = Configuration["FacebookAppSecret"];
             })
             /*.AddMicrosoftAccount(Options =>
             {
@@ -82,8 +82,8 @@ namespace WebUI
             })*/
             .AddGoogle(Options =>
             {
-                Options.ClientId = Configuration["Authentication:Google:ClientId"];
-                Options.ClientSecret = Configuration["Authentication:Google:ClientSecret"];
+                Options.ClientId = Configuration["GoogleClientId"];
+                Options.ClientSecret = Configuration["GoogleClientSecret"];
             });
 
             // Changes the security token lifespan to 3 hours to protect accounts 

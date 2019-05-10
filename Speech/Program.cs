@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using Microsoft.CognitiveServices.Speech;
 
-namespace Speech
+namespace Speech2Text
 {
     class Program
     {
@@ -20,7 +20,7 @@ namespace Speech
             // Creates an instance of a speech config with specified subscription key and service region.
             // Replace with your own subscription key and service region (e.g., "westus").
 
-            var config = SpeechConfig.FromSubscription("key", "westus2");
+            var config = SpeechConfig.FromSubscription("3b8f9b00a3af43fdae0823bfd4af97c7", "westus2");
 
             // Creates a speech recognizer.
             using (var recognizer = new SpeechRecognizer(config))
