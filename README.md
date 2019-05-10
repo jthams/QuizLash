@@ -1,7 +1,7 @@
 # StudyBuddy
 An ASP.Net Core 2.2 Web Application, which utilizes various Azure services to create an interactive speech based approach to studying
 
-Live production version of this application can be found <a href="https://studybuddydevv2.azurewebsites.net">here</a>.
+Live production version of this application can be found <a href"https://quizlash.azurewebsites.net/">here</a>.
 
 The intended purpose of this application is to implement and familiarize myself with as many Azure services as possible without over engineering the application or bogging users down with unnecessary features.
 
