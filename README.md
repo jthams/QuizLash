@@ -1,7 +1,7 @@
-# StudyBuddy
+# QuizLash
 An ASP.Net Core 2.2 Web Application, which utilizes various Azure services to create an interactive speech based approach to studying
 
-Live production version of this application can be found <a href"https://quizlash.azurewebsites.net/">here</a>.
+Live production version of this application can be found <a href"https://quizlash.azurewebsites.net">here</a>.
 
 The intended purpose of this application is to implement and familiarize myself with as many Azure services as possible without over engineering the application or bogging users down with unnecessary features.
 
@@ -40,9 +40,15 @@ The intended purpose of this application is to implement and familiarize myself 
 </ol>
 <h5>6. Implement language understanding</h5>
 <ol>
-  <li>Text to speech API</li>
-  <li>Speech to text API</li>
-  <li>Integrate above services with Microsoft LUIS</li>
+  <li>Utterance Understanding</li>
+      
+  <li>Regional Language Support</li>
+      
+  <li>Intent Understanding</li>
+      
+  <li>Map all required intents</li>
+      
+  <li>Intent Execution</li>
 </ol>
 
 <h3>CURRENTLY IMPLEMENTED TECHNOLOGIES</h3>
@@ -240,25 +246,50 @@ The intended purpose of this application is to implement and familiarize myself 
   </tr>
   <tr>
     <td>6.1</td>
-    <td>Text to speech API</td>
-    <td>Integration</td>
-    <td>Ensure text to speech recognizes question body values on the quiz view</td>
-    <td>Not Implemented</td>
-    <td>04/29/2019</td>
-  </tr><tr>
-    <td>6.2</td>
-    <td>Speech to text API</td>
-    <td>Integration</td>
-    <td>Ensure Speech to text fills input forms where appropriate</td>
-    <td>Not Implemented</td>
-    <td>04/29/2019</td>
-  </tr><tr>
-    <td>6.3</td>
-    <td>Integrate above services with Microsoft LUIS</td>
-    <td>Integration</td>
-    <td>Ensure complete integration from voice input from user and data read back by the text to speech api</td>
-    <td>Not Implemented</td>
-    <td>04/29/2019</td>
+    <td>Recognive Utterances</td>
+    <td>Unit Tests</td>
+    <td>Ensure text to speech recognizes the given command</td>
+    <td>Passing</td>
+    <td>05/10/2019</td>
   </tr>
-  
+  <tr>
+    <td>6.1.1</td>
+    <td>Regional Language Support</td>
+    <td>Unit Tests</td>
+    <td>Ensure text to speech recognizes multiple languages</td>
+    <td>Passing</td>
+    <td>05/10/2019</td>
+  </tr>
+  <tr>
+    <td>6.2</td>
+    <td>Map Intent</td>
+    <td>Unit Tests</td>
+    <td>Ensure Speech to text understands the intent of the utterance</td>
+    <td>Passing</td>
+    <td>05/10/2019</td>
+  </tr>
+  <tr>
+    <td>6.2.1</td>
+    <td>Map all required intents</td>
+    <td>Unit Tests</td>
+    <td>Ensure Speech to text understands the intent of the custom utterances</td>
+    <td>Not Implemented</td>
+    <td>05/10/2019</td>
+  </tr>
+  <tr>
+    <td>6.3</td>
+    <td>Carry out the intent</td>
+    <td>Unit Testing</td>
+    <td>Ensure complete integration from voice input from user and data read back by the Assistant api</td>
+    <td>Passing</td>
+    <td>05/10/2019</td>
+  </tr>
+  <tr>
+    <td>6.3.1</td>
+    <td>Mapp Custom Intents</td>
+    <td>Unit Testing</td>
+    <td>Ensure complete integration and UI support</td>
+    <td>Not Implemented</td>
+    <td>05/10/2019</td>
+  </tr>
 </table>
