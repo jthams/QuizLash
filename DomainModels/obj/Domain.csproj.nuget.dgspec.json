@@ -1,24 +1,26 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\hamel\\source\\Repos\\jthams\\StudyBuddy\\DomainModels\\Domain.csproj": {}
+    "C:\\Users\\hamel\\Source\\Repos\\jthams\\QuizLash\\DomainModels\\Domain.csproj": {}
   },
   "projects": {
-    "C:\\Users\\hamel\\source\\Repos\\jthams\\StudyBuddy\\DomainModels\\Domain.csproj": {
+    "C:\\Users\\hamel\\Source\\Repos\\jthams\\QuizLash\\DomainModels\\Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\hamel\\source\\Repos\\jthams\\StudyBuddy\\DomainModels\\Domain.csproj",
+        "projectUniqueName": "C:\\Users\\hamel\\Source\\Repos\\jthams\\QuizLash\\DomainModels\\Domain.csproj",
         "projectName": "Domain",
-        "projectPath": "C:\\Users\\hamel\\source\\Repos\\jthams\\StudyBuddy\\DomainModels\\Domain.csproj",
+        "projectPath": "C:\\Users\\hamel\\Source\\Repos\\jthams\\QuizLash\\DomainModels\\Domain.csproj",
         "packagesPath": "C:\\Users\\hamel\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\hamel\\source\\Repos\\jthams\\StudyBuddy\\DomainModels\\obj\\",
+        "outputPath": "C:\\Users\\hamel\\Source\\Repos\\jthams\\QuizLash\\DomainModels\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
+          "C:\\ProgramData\\Xamarin\\NuGet\\",
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
           "C:\\Users\\hamel\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp2.2"
